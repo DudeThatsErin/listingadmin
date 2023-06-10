@@ -1,8 +1,8 @@
 # Listing Admin for PHP7 or 8 [Erin's Fork]
 This is the main repo for Listing Admin 1.1 for PHP8.
 
-The original author is Tess (website is not online anymore). Tess' ReadMe can be found [here]().
-The previous author is [Ekaterina](https://scripts.robotess.net/). Ekaterina's ReadMe can be found [here]().
+The original author is Tess (website is not online anymore). Tess' ReadMe can be found [here](https://github.com/DudeThatsErin/listingadmin/blob/main/old-readmes/Tess-Readme.md).
+The previous author is [Ekaterina](https://scripts.robotess.net/). Ekaterina's ReadMe can be found [here](https://github.com/DudeThatsErin/listingadmin/blob/main/old-readmes/Ekaterina-Readme.md).
 *Note: Ekaterina's version is not recommended for new installations. Mine **can** be used for new installations.*
 
 # Installation Instructions
