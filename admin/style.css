@@ -1,0 +1,968 @@
+/** 
+ * @author  Tess <treibend@gmail.com> 
+ * @package Listing Admin 
+ * @since   December 20th, 2012 
+ * @updated -- 
+ */
+body {
+    background-color: #ECECEC;
+    color: #707070;
+    font: 10.5pt "Lucida Sans Unicode", "Lucida Grande", "Trebuchet MS", Tahoma, sans-serif;
+    margin: 0 auto;
+    text-align: center;
+}
+
+p {
+    margin: 0 0 20px 0;
+}
+
+h1 {
+    display: none;
+}
+
+@font-family {
+    font-family: "Bebas Neue", serif;
+    src: url('textBebasNeue.otf');
+}
+
+h2 {
+    color: #B2BD8E;
+    font: 30pt "Bebas Neue", Arial, "Trebuchet MS", Tahoma, Verdana, sans-serif normal;
+    margin: 0;
+    text-transform: uppercase;
+}
+
+h2 span {
+    background: url(img/icons/add.png) 0 -10px no-repeat;
+    display: block;
+    float: right;
+    padding-left: 60px;
+}
+
+h2 span a {
+    border: 0;
+    color: #808080;
+    font-size: 28pt;
+    font-style: normal;
+}
+
+section#sidebar h2 {
+    font-size: 18pt;
+    text-align: right;
+    text-transform: lowercase;
+}
+
+h3 {
+    color: #CAD0B5;
+    font: 25pt "Bebas Neue", Arial, "Trebuchet MS", Tahoma, Verdana, sans-serif normal;
+    margin: 0 0 2px 0;
+    text-transform: lowercase;
+}
+
+h4 {
+    color: #909090;
+    font: 21pt "Bebas Neue", Arial, "Trebuchet MS", Tahoma, Verdana, sans-serif normal;
+    margin: 0;
+    text-transform: lowercase;
+}
+
+a {
+    border-bottom: 2px solid #816929;
+    color: #404040;
+    font-style: italic;
+    text-decoration: none;
+}
+
+a:hover {
+    border-bottom: 2px solid #6F8222;
+    color: #707070;
+}
+
+/** 
+ * Layout styles! 
+ */
+#container {
+    margin: auto;
+    text-align: left;
+    width: 90%;
+}
+
+header {
+    display: block;
+}
+
+#wrapper {
+    float: right;
+    margin: 0 0 0 220px;
+    width: 100%;
+}
+
+section#sidebar {
+    background: url(img/v6Bg.png) top left repeat;
+    border-radius: 0 0 15px 15px;
+    display: block;
+    float: left;
+    margin: 0 10px 0 0;
+    padding: 20px 10px 10px 10px;
+    text-align: center;
+    width: 180px;
+    -khtml-border-radius-bottomleft: 15px;
+    -khtml-border-radius-bottomright: 15px;
+    -khtml-border-radius-topleft: 0;
+    -khtml-border-radius-topright: 0;
+    -moz-border-radius: 0 0 15px 15px;
+    -webkit-border-radius: 0 0 15px 15px;
+}
+
+section#sidebar section#img {
+    background: url(img/v6Logo.png) bottom center no-repeat;
+    display: block;
+    height: 69px;
+    margin: 0 auto;
+    width: 169px;
+}
+
+section#sidebar nav {
+    display: block;
+    margin: 0 0 20px 0;
+    width: 180px;
+}
+
+section#gravatar {
+    display: block;
+    margin: 0 0 15px 0;
+    text-align: center;
+}
+
+section#gravatar img {
+    background-color: #B9BDA2;
+    border: 1px solid #ACB08D;
+    padding: 15px;
+}
+
+section#content {
+    display: block;
+    padding: 1% 1% 1% 220px;
+}
+
+section#content p {
+    line-height: 23pt;
+}
+
+p#clear,
+p.clear,
+section#clear,
+section.clear {
+    clear: both;
+    display: block;
+    margin: 0;
+}
+
+p#clearBottom,
+section#clearBottom,
+p.clearBottom,
+section.clearBottom {
+    clear: both;
+    display: block;
+    margin: 0 0 20px 0;
+}
+
+#feeds {
+    background: url(img/stats.png) top left repeat;
+    border-radius: 15px;
+    float: left;
+    margin: 10px 0 20px 0;
+    padding: 1%;
+    width: 98%;
+    -khtml-border-radius-bottomleft: 15px;
+    -khtml-border-radius-bottomright: 15px;
+    -khtml-border-radius-topleft: 15px;
+    -khtml-border-radius-topright: 15px;
+    -moz-border-radius: 15px;
+    -webkit-border-radius: 15px;
+}
+
+#bugfixfeeds {
+    float: left;
+    margin: 0 1% 0 0;
+    width: 49%;
+}
+
+#bugfixfeeds menu {
+    display: block;
+    margin: 0 0 5px 0;
+    padding: 0 0 0 20px;
+}
+
+#bugfixfeeds menu li {
+    list-style-type: lower-roman;
+    padding: 5px 0;
+}
+
+#lafeeds {
+    float: left;
+    margin: 0 2% 0 0;
+    width: 100%;
+}
+
+#lafeeds menu {
+    display: block;
+    margin: 0;
+    padding: 0;
+}
+
+#lafeeds menu li {
+    border-bottom: 1px solid #D0D0D0;
+    display: inline-block;
+    list-style-type: none;
+    margin: 0;
+    padding: 8px 0;
+    width: 48%;
+    vertical-align: top;
+}
+
+#lafeeds menu li#last {
+    border: 0;
+}
+
+#lafeeds menu li strong {
+    color: #404040;
+    font: normal 11pt "Trebuchet MS", Tahoma, Verdana, sans-serif;
+    text-transform: uppercase;
+}
+
+#install, #login {
+    margin: 10% auto 1% auto;
+    text-align: left;
+    width: 60%;
+}
+
+#install p, #login p {
+    line-height: 21pt;
+}
+
+section#login-logo {
+    background: url(img/header.png) bottom left no-repeat;
+    display: block;
+    float: left;
+    padding: 0 1% 80px 0;
+    text-align: right;
+    width: 49%;
+}
+
+section#login-form {
+    display: block;
+    float: right;
+    text-align: left;
+    width: 50%;
+}
+
+footer {
+    clear: both;
+    display: block;
+    width: 100%;
+}
+
+footer p {
+    text-align: center;
+}
+
+/** 
+ * Navigation 
+ */
+section#sidebar nav menu {
+    display: block;
+    margin: 0 0 25px 0;
+    padding: 0;
+}
+
+section#sidebar nav menu li {
+    display: block;
+    list-style-type: none;
+    margin: 0 0 1px 0;
+    padding: 2px 0;
+    text-align: left;
+}
+
+section#sidebar nav menu li span {
+    color: #929F92;
+    font: bold 14pt Delicious, "Trebuchet MS", Tahoma, Verdana, sans-serif;
+    width: auto;
+}
+
+section#sidebar nav menu li.addons:hover {
+}
+
+section#sidebar nav menu li menu {
+    display: block;
+    margin: -2px 0;
+    padding: 0 20px -25px 15px;
+}
+
+section#sidebar nav menu li menu li {
+    display: block;
+    margin: 0 0 1px 0;
+    padding: 4px 0;
+    text-align: left;
+}
+
+section#sidebar nav menu li.last,
+section#sidebar nav menu li menu li.last {
+    border: 0;
+}
+
+section#sidebar nav menu li menu li.lastSpace {
+    border: 0;
+    text-align: center;
+}
+
+section#sidebar nav menu li#c a {
+    color: #6D837F;
+}
+
+section#sidebar nav menu li a {
+    border: 0;
+    color: #8B8484;
+    font: bold 14pt Delicious, "Trebuchet MS", Tahoma, Verdana, sans-serif;
+    text-shadow: 1px 1px 1px #E7E7E7;
+    text-transform: uppercase;
+}
+
+section#sidebar nav menu li a:hover,
+section#sidebar nav menu li#c a:hover {
+    color: #425417;
+}
+
+/** 
+ * @category Navigation 
+ * @subcategory Listings, Updates 
+ */
+#mainContent,
+#updatesFloatLeft {
+    border-left: 1px solid #D0D0D0;
+    float: right;
+    margin: 0 0 0 1%;
+    padding: 0 0 0 2%;
+    width: 78%;
+}
+
+#menuRight,
+#updatesFloatRight {
+    float: left;
+    width: 18%;
+}
+
+#menuRight menu,
+#updatesFloatRight menu {
+    display: block;
+    margin: 0 0 20px 0;
+    padding: 0;
+}
+
+#menuRight menu li,
+#updatesFloatRight menu li {
+    border-bottom: 1px solid #D0D0D0;
+    font-family: "Trebuchet MS", Tahoma, Verdana, sans-serif;
+    list-style-type: none;
+    margin: 0;
+    padding: 8px 0;
+    text-align: left;
+}
+
+#menuRight menu li.last,
+#updatesFloatRight menu li.last {
+    border: 0;
+}
+
+#menuRight menu li a,
+#updatesFloatRight menu li a {
+    border: 0;
+    color: #505050;
+    font: normal 10.5pt "Trebuchet MS", Tahoma, Verdana, sans-serif;
+    text-transform: uppercase;
+}
+
+#menuRight menu li a:hover,
+#updatesFloatRight menu li a:hover {
+    color: #6F8222;
+}
+
+#menuRight menu li#current a {
+    text-decoration: underline;
+}
+
+/** 
+ * Forms 
+ */
+fieldset {
+    background-color: #DCDCDC;
+    border: 0;
+    border-radius: 15px;
+    margin: 0 0 20px 0;
+    padding: 1%;;
+    width: 98%;
+    -khtml-border-radius-bottomleft: 15px;
+    -khtml-border-radius-bottomright: 15px;
+    -khtml-border-radius-topleft: 15px;
+    -khtml-border-radius-topright: 15px;
+    -moz-border-radius: 15px;
+    -webkit-border-radius: 15px;
+}
+
+fieldset.lap-two {
+    float: left;
+    margin: 0 0.5% 20px 0;
+    width: 47.5%;
+}
+
+fieldset legend {
+    background-color: #909090;
+    border-radius: 15px;
+    color: #D0D0D0;
+    padding: 10px;
+    text-transform: uppercase;
+    -khtml-border-radius-bottomleft: 15px;
+    -khtml-border-radius-bottomright: 15px;
+    -khtml-border-radius-topleft: 15px;
+    -khtml-border-radius-topright: 15px;
+    -moz-border-radius: 15px;
+    -webkit-border-radius: 15px;
+}
+
+fieldset label {
+    float: left;
+    padding: 0 1% 0 0;
+    text-align: right;
+    width: 39%;
+}
+
+input, select, textarea {
+    background-color: #EAEAEA;
+    border: 0;
+    border-radius: 15px;
+    color: #909090;
+    font: 10pt Verdana, Tahoma, sans-serif;
+    -khtml-border-radius-bottomleft: 15px;
+    -khtml-border-radius-bottomright: 15px;
+    -khtml-border-radius-topleft: 15px;
+    -khtml-border-radius-topright: 15px;
+    -moz-border-radius: 15px;
+    -webkit-border-radius: 15px;
+}
+
+option {
+    padding: 2px 0;
+}
+
+.input1, .cps {
+    margin: 0 0 2px 0;
+    padding: 0.5%;
+    width: 59%;
+}
+
+.input2 {
+    padding: 4px;
+    width: auto;
+}
+
+.input3 {
+    border: 0;
+}
+
+input.input4 {
+    margin: 0 0 2px 0;
+    padding: 1%;
+    width: 98%;
+}
+
+select.input4 {
+    margin: 0 0 2px 0;
+    padding: 1.5% 1%;
+    width: 98%;
+}
+
+.input5 {
+    background-color: #B0B0B0;
+    color: #FFFFFF;
+    font: bold 10pt "Trebuchet MS", Tahoma, Verdana, sans-serif;
+    margin: 0 3px;
+    padding: 4px 7px;
+    text-transform: uppercase;
+}
+
+.input6 {
+    margin: 0 0 2px 0;
+    padding: 0.5%;
+    width: 49%;
+}
+
+/** 
+ * @category Index 
+ * @subcategory Statistics 
+ */
+#statistics {
+    background: url(img/header.png) bottom left no-repeat;
+    margin: 0 0 20px 0;
+    padding: 0;
+}
+
+#statistics section#stLeft, #statistics section#stRight {
+    display: block;
+    float: left;
+    width: 50%;
+}
+
+#statistics section#stTop {
+    display: block;
+    margin: 0 auto;
+}
+
+#statistics section#stTop table {
+    width: 100%;
+}
+
+@font-face {
+    font-family: "Bell Gothic";
+    src: url(textBellGothic.otf);
+}
+
+#statistics section#stTop table tbody tr td {
+    color: #7ea02e;
+    font: 20pt "Bell Gothic", "Palatino Linotype", "Times New Roman", Times, serif;
+    padding-left: 8.5%;
+}
+
+#statistics section#stLeft table,
+#statistics section#stRight table {
+    padding: 0.5% 1%;
+    width: 98%;
+}
+
+#statistics section#stLeft table tbody tr td.left,
+#statistics section#stRight table tbody tr td.left {
+    color: #909090;
+    padding: 0 20px 0 0;
+    text-align: right;
+}
+
+.addonStatistics p {
+    background: url(img/stats.png) top left repeat;
+    color: #606060;
+    font: 14pt "Palatino Linotype", "Times New Roman", Times, Georgia, serif;
+    margin: 0 0 1px 0;
+    padding: 5px 10px;
+}
+
+.addonStatistics p.last {
+    margin: 0 0 20px 0;
+}
+
+/** 
+ * @category Index 
+ * @subcategory Listings, Recent and Neglected   
+ */
+.floatLeft {
+    float: left;
+    margin: 0;
+    width: 50%;
+}
+
+.floatRight {
+    float: right;
+    width: 50%;
+}
+
+.floater menu {
+    display: block;
+    margin: 0 4px 20px 0;
+    padding: 0;
+}
+
+.floater menu li {
+    border-bottom: 1px solid #D0D0D0;
+    color: #909090;
+    display: block;
+    font: 10.5pt "Trebuchet MS", Tahoma, Verdana, sans-serif;
+    line-height: 21pt;
+    list-style-type: none;
+    padding: 5px 0;
+}
+
+.joined menu li {
+    background: url(img/recent.png) 0 -37px no-repeat;
+    padding: 10px 10px 10px 40px;
+}
+
+.listings menu li {
+    background: url(img/recent.png) 0 7px no-repeat;
+    padding: 10px 10px 10px 50px;
+}
+
+.joined menu li a,
+.listings menu li a {
+    border: 0;
+    color: #6F8222;
+    font: normal 10.5pt "Trebuchet MS", Tahoma, Verdana, sans-serif;
+    text-transform: uppercase;
+}
+
+.joined menu li a:hover,
+.listings menu li a:hover {
+    color: #808080;
+}
+
+.floater menu li.last {
+    border: 0;
+}
+
+/** 
+ * @category Tables 
+ * @subcategory Queries and Results
+ */
+.index, #index {
+    margin: 0 0 20px 0;
+    width: 100%;
+}
+
+.index tbody.collective,
+#index tbody.collective {
+    background-color: #F0F0F0;
+}
+
+.index thead th,
+#index thead th {
+    background-color: #E2E3D9; /*#e3e5d5;#e3e5d3;*/
+    border-radius: 15px;
+    font-style: normal;
+    padding: 5px;
+    -khtml-border-radius-bottomleft: 15px;
+    -khtml-border-radius-bottomright: 15px;
+    -khtml-border-radius-topleft: 15px;
+    -khtml-border-radius-topright: 15px;
+    -moz-border-radius: 15px;
+    -webkit-border-radius: 15px;
+}
+
+.index tbody tr td,
+#index tbody tr td {
+    line-height: 21pt;
+    padding: 5px 0;
+}
+
+.index thead tr th,
+#index thead tr th {
+    text-align: center;
+}
+
+/** 
+ * @category Tables 
+ * @subcategory Footer navigation 
+ */
+#index tfoot tr td.categories {
+    padding: 5px 0;
+    text-align: left;
+}
+
+#index tfoot tr td.categories span {
+    display: inline;
+    margin: 0 3px;
+    padding: 4px 7px;
+    width: auto;
+}
+
+#index tfoot tr td.categories span#all {
+    background-color: #B0B0B0;
+}
+
+#index tfoot tr td.categories span#forms {
+    background-color: #288BAF;
+}
+
+#index tfoot tr td.categories span#spam {
+    background-color: #D10000;
+}
+
+#index tfoot tr td.categories span#user {
+    background-color: #789521;
+}
+
+#index tfoot tr td.categories span a {
+    border: 0;
+    color: #FFFFFF;
+    font-size: 10pt;
+    font-style: normal;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+/** 
+ * @category Tables 
+ * @subcategory Template Statistics 
+ */
+.stats,
+.statsTemplates {
+    margin: 0 0 20px 0;
+    width: 100%;
+}
+
+.stats thead tr th,
+.statsTemplates thead tr th {
+    text-transform: uppercase;
+}
+
+.stats thead tr th.l,
+.statsTemplates thead tr th.l {
+    padding-right: 1%;
+    text-align: right;
+}
+
+.stats tbody tr td.t,
+.statsTemplates tbody tr td.t {
+    color: #404040;
+    font: bold 12pt Arial, Tahoma, Verdana, sans-serif;
+    line-height: 17pt;
+    padding: 5px 1% 5px 0;
+    text-align: right;
+    width: 29%;
+}
+
+.stats tbody tr td.d,
+.statsTemplates tbody tr td.d {
+    line-height: 17pt;
+}
+
+/** 
+ * @category Pagination 
+ */
+#pagination {
+    text-align: center;
+}
+
+#pagination span {
+    background-color: #CACACA;
+    color: #808080;
+    display: inline;
+    font-size: 10pt;
+    margin: 0 3px;
+    padding: 3px 8px;
+    text-transform: uppercase;
+}
+
+#pagination span#current {
+    font-weight: bold;
+}
+
+#pagination span a {
+    border: 0;
+    color: #7E6137;
+    font-style: normal;
+}
+
+#pagination span a:hover {
+    color: #303030;
+}
+
+/** 
+ * @category Miscellany  
+ */
+.nb {
+    margin: 0;
+}
+
+.tc, td.th {
+    text-align: center;
+}
+
+.tr {
+    text-align: right;
+}
+
+.nextStep {
+    background: url(img/installButton.png) center no-repeat;
+    font: 13.5pt "Palatino Linotype", Georgia, "Times New Roman", Times, serif;
+    height: 35px;
+    margin: 0 auto;
+    padding: 5px 0 0 10px;
+    text-align: center;
+    width: 220px;
+}
+
+.nextStep a {
+    border: 0;
+}
+
+/** 
+ * @category Miscellany  
+ * @subcategory Code highligting syntax~ 
+ */
+samp {
+    color: #303030;
+    font-size: 11pt;
+    font-weight: bold;
+    line-height: 21pt;
+}
+
+@font-face {
+    font-family: MonospaceTypewriter;
+    src: url("textMonospaceTypewriter.ttf");
+}
+
+code {
+    background-color: #DADADA;
+    border-radius: 15px;
+    color: #606060;
+    display: block;
+    font: 10pt MonospaceTypewriter, "Courier New", "Lucida Console", serif;
+    line-height: 17pt;
+    margin: 0 0 20px 0;
+    padding: 10px;
+    -khtml-border-radius-bottomleft: 15px;
+    -khtml-border-radius-bottomright: 15px;
+    -khtml-border-radius-topleft: 15px;
+    -khtml-border-radius-topright: 15px;
+    -moz-border-radius: 15px;
+    -webkit-border-radius: 15px;
+}
+
+/** 
+ * @category Miscellany 
+ * @subcategory Message and icon classes 
+ */
+.floatIcons img, .floatIcons a {
+    border: 0;
+}
+
+a.delete, a#delete {
+    background: url(img/icons/delete.png) top left no-repeat;
+    border: 0;
+    display: inline;
+    height: 30px;
+    margin: 2px auto;
+    text-align: center;
+    width: 30px;
+}
+
+a.edit, a#edit {
+    background: url(img/icons/edit.png) top left no-repeat;
+    border: 0;
+    display: inline;
+    height: 30px;
+    margin: 2px auto;
+    text-align: center;
+    width: 30px;
+}
+
+a.email, a#email {
+    background: url(img/icons/email.png) top left no-repeat;
+    border: 0;
+    display: inline;
+    height: 30px;
+    margin: 2px auto;
+    text-align: center;
+    width: 30px;
+}
+
+/** 
+ For "Back to PAGE" paragraphs:
+*/
+.backLink {
+    background-color: #D0D0D0;
+    border: 1px solid #C0C0C0;
+    margin: 0 0 12px 0;
+    padding: 2px 2px 2px 35px;
+}
+
+.backLink a {
+    border: 0;
+    color: #404040;
+    font-style: normal;
+    text-decoration: underline;
+}
+
+.backLink a:hover {
+    color: #000000;
+}
+
+/**  
+ For notes (can be marked with any error class, as "notes" differ): 
+*/
+.note {
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.noteButton {
+    background: #F0F0F0 url(img/icons/note.png) top left no-repeat;
+    border: 1px solid #D0D0D0;
+    margin: 0 0 12px 0;
+    padding: 2px 2px 2px 35px;
+}
+
+fieldset .noteButton {
+    background-color: #D0D0D0;
+    border-color: #C0C0C0;
+}
+
+/** 
+ For success messages: 
+*/
+.success {
+    color: #66CC00;
+}
+
+.successButton {
+    background: #F0F0F0 url(img/icons/success.png) top left no-repeat;
+    border: 1px solid #D0D0D0;
+    margin: 0 0 12px 0;
+    padding: 2px 2px 2px 50px;
+}
+
+/** 
+ For regular ole errors:
+*/
+.error {
+    color: #FF0000;
+}
+
+.php {
+    color: #FF9900;
+}
+
+.errorButton {
+    background: #F0F0F0 url(img/icons/error.png) top left no-repeat;
+    border: 1px solid #D0D0D0;
+    margin: 0 0 12px 0;
+    padding: 2px 2px 2px 50px;
+}
+
+/** 
+ For MySQL errors: 
+*/
+.db {
+    color: #505050;
+}
+
+.mysql {
+    color: #0000FF;
+}
+
+.dbButton, .mysqlButton {
+    background: #F0F0F0 url(img/icons/error_mysql.png) top left no-repeat;
+    border: 1px solid #D0D0D0;
+    margin: 0 0 12px 0;
+    padding: 2px 2px 2px 50px;
+}
+
+/** 
+ For Script errors: 
+*/
+.script {
+    color: #713E30;
+}
+
+.scriptButton {
+    background: #F0F0F0 url(img/icons/error_script.png) top left no-repeat;
+    border: 1px solid #D0D0D0;
+    margin: 0 0 12px 0;
+    padding: 2px 2px 2px 50px;
+}
