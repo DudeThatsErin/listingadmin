@@ -1,11 +1,12 @@
 <?php
-/** 
- * @copyright  2007 
- * @license    GPL Version 3; BSD Modified 
- * @author     Tess <theirrenegadexxx@gmail.com> 
- * @file       <lyrics.php> 
- * @since      September 2nd, 2010 
- * @version    1.0    
+/**
+ * @project          Listing Admin
+ * @copyright        2007
+ * @license          GPL Version 3; BSD Modified
+ * @author           Tess <theirrenegadexxx@gmail.com>
+ * @contributor      Ekaterina <scripts@robotess.net> http://scripts.robotess.net
+ * @contributor      Erin <dudethatserin@outlook.com> https://github.com/DudeThatsErin/listingadmin
+ * @version          Erin's Fork
  */
 $s = isset($_GET['g']) && $_GET['g'] == 'albums' ? 'Albums' : 'Songs';
 $w = isset($_GET['g']) ? $s : 'Lyrics';
@@ -40,24 +41,24 @@ if(isset($_GET['g']) && $_GET['g'] == 'albums') {
 <form action="lyrics.php" method="post">
 <fieldset>
  <legend>Details</legend>
- <p><label><strong>Album Name:</strong></label> 
+ <p><label><strong>Album Name:</strong></label>
  <input name="album" class="input1" type="text"></p>
- <p><label><strong>Artist:</strong></label> 
+ <p><label><strong>Artist:</strong></label>
  <input name="artist" class="input1" type="text"></p>
- <p><label><strong>Year:</strong></label> 
+ <p><label><strong>Year:</strong></label>
  <input name="year" class="input1" type="text"></p>
 </fieldset>
 
 <fieldset>
  <legend>Listing</legend>
  <p><label><strong>Listing:</strong></label> <select name="listing" class="input1">
-<?php 
+<?php
  $select = "SELECT * FROM `$_ST[main]` ORDER BY `subject` ASC";
  $true = $scorpions->query($select);
  if($true == false) {
   echo "  <option>No Listings Available</option>\n";
  }
-	
+
  else {
   while($getItem = $scorpions->obj($true)) {
    echo '  <option value="' . $getItem->id . '">' . $getItem->subject . "</option>\n";
@@ -70,26 +71,26 @@ if(isset($_GET['g']) && $_GET['g'] == 'albums') {
 <fieldset>
  <legend>Submit</legend>
  <p class="tc">
-  <input name="action" class="input2" type="submit" value="Add Album"> 
+  <input name="action" class="input2" type="submit" value="Add Album">
   <input class="input2" type="reset" value="Reset Form">
  </p>
 </fieldset>
 </form>
-<?php 
- } 
- 
+<?php
+ }
+
  elseif (isset($_GET['p']) && $_GET['p'] == 'old') {
   $id = $tigers->cleanMys($_GET['d']);
   if(empty($id) || !is_numeric($id)) {
-   $tigers->displayError('Script Error', 'Your ID is empty. This means you' . 
-	 ' selected an incorrect album or you\'re trying to access something that' . 
+   $tigers->displayError('Script Error', 'Your ID is empty. This means you' .
+	 ' selected an incorrect album or you\'re trying to access something that' .
 	 ' doesn\'t exist. Go back and try again.', false);
-  } 
- 
+  }
+
   $select = "SELECT * FROM `$_ST[lyrics_albums]` WHERE `aID` = '$id' LIMIT 1";
   $true = $scorpions->query($select);
   if($true == false) {
-   $tigers->displayError('Database Error', 'The script was unable to select that' . 
+   $tigers->displayError('Database Error', 'The script was unable to select that' .
    ' specific quote.', true, $select);
   }
   $getItem = $scorpions->obj($true);
@@ -99,30 +100,30 @@ if(isset($_GET['g']) && $_GET['g'] == 'albums') {
 
 <fieldset>
  <legend>Details</legend>
- <p><label><strong>Album Name:</strong></label> 
+ <p><label><strong>Album Name:</strong></label>
  <input name="album" class="input1" type="text" value="<?php echo $getItem->aName; ?>"></p>
- <p><label><strong>Artist:</strong></label> 
+ <p><label><strong>Artist:</strong></label>
  <input name="artist" class="input1" type="text" value="<?php echo $getItem->aArtist; ?>"></p>
- <p><label><strong>Year:</strong></label> 
+ <p><label><strong>Year:</strong></label>
  <input name="year" class="input1" type="text" value="<?php echo $getItem->aYear; ?>"></p>
 </fieldset>
 
 <fieldset>
  <legend>Listing</legend>
  <p><label><strong>Listing:</strong></label> <select name="listing" class="input1">
-<?php 
+<?php
  $select = "SELECT * FROM `$_ST[main]` ORDER BY `subject` ASC";
  $true = $scorpions->query($select);
  if($true == false) {
   echo "<option>No Listings Available</option>\n";
  }
-	
+
  else {
   while($getCat = $scorpions->obj($true)) {
    $cats = explode('!', $getItem->fNiq);
-   echo '<option value="' . $getCat->id . '"'; 
+   echo '<option value="' . $getCat->id . '"';
 	 if(in_array($getCat->id, $cats)) {
-	  echo ' selected="selected"'; 
+	  echo ' selected="selected"';
    }
    echo '>' . $getCat->subject . "</option>\n";
   }
@@ -134,32 +135,32 @@ if(isset($_GET['g']) && $_GET['g'] == 'albums') {
 <fieldset>
  <legend>Submit</legend>
  <p class="tc">
-  <input name="action" class="input2" type="submit" value="Edit Album"> 
+  <input name="action" class="input2" type="submit" value="Edit Album">
   <input class="input2" type="reset" value="Reset Form">
  </p>
 </fieldset>
 </form>
-<?php 
+<?php
  }
- 
+
  elseif (isset($_GET['p']) && $_GET['p'] == 'erase') {
   $id = $tigers->cleanMys($_GET['id']);
   if(empty($id) || !is_numeric($id)) {
-   $tigers->displayError('Script Error', 'Your ID is empty. This means you' . 
-	 ' selected an incorrect album or you\'re trying to access something that' . 
+   $tigers->displayError('Script Error', 'Your ID is empty. This means you' .
+	 ' selected an incorrect album or you\'re trying to access something that' .
 	 ' doesn\'t exist. Go back and try again.', false);
-  } 
- 
+  }
+
   $select = "SELECT * FROM `$_ST[lyrics_albums]` WHERE `aID` = '$id' LIMIT 1";
   $true = $scorpions->query($select);
   if($true == false) {
-   $tigers->displayError('Database Error', 'The script was unable to select that' . 
+   $tigers->displayError('Database Error', 'The script was unable to select that' .
    ' specific album.', true, $select);
   }
   $getItem = $scorpions->obj($true);
 ?>
-<p>You are about to delete the <strong><?php echo $getItem->aName; ?></strong> 
-album; please be aware that once you delete a album, it is gone forever. <em>This 
+<p>You are about to delete the <strong><?php echo $getItem->aName; ?></strong>
+album; please be aware that once you delete a album, it is gone forever. <em>This
 cannot be undone!</em> To proceed, click the "Delete Album" button.</p>
 
 <form action="lyrics.php" method="post">
@@ -171,15 +172,15 @@ cannot be undone!</em> To proceed, click the "Delete Album" button.</p>
  <p class="tc"><input name="action" class="input2" type="submit" value="Delete Album"></p>
 </fieldset>
 </form>
-<?php 
+<?php
  }
- 
+
  else {
-  $select = "SELECT * FROM `$_ST[lyrics_albums]` ORDER BY `aID` DESC LIMIT" . 
+  $select = "SELECT * FROM `$_ST[lyrics_albums]` ORDER BY `aID` DESC LIMIT" .
   " $start, $per_page";
   $true = $scorpions->query($select);
   if($true == false) {
-   $tigers->displayError('Database Error', 'The script was unable to select the' . 
+   $tigers->displayError('Database Error', 'The script was unable to select the' .
    ' lyrics from the database.', true, $select);
   }
   $count = $scorpions->total($true);
@@ -195,7 +196,7 @@ cannot be undone!</em> To proceed, click the "Delete Album" button.</p>
  <th>Listing</th>
  <th>Action</th>
 </tr></thead>
-<?php 
+<?php
    while($getItem = $scorpions->obj($true)) {
 ?>
 <tbody><tr>
@@ -206,14 +207,14 @@ cannot be undone!</em> To proceed, click the "Delete Album" button.</p>
  <td class="floatIcons tc">
   <a href="lyrics.php?g=albums&#38;p=old&#38;d=<?php echo $getItem->aID; ?>">
    <img src="img/icons/edit.png" alt="">
-  </a> 
+  </a>
   <a href="lyrics.php?g=albums&#38;p=erase&#38;d=<?php echo $getItem->aID; ?>">
    <img src="img/icons/delete.png" alt="">
   </a>
  </td>
 </tr></tbody>
-<?php 
-   } 
+<?php
+   }
    echo "</table>\n\n";
    echo '<p id="pagination">Pages: ';
    $total = is_countable($cheetahs->lyricsList('', 'albums')) ? count($cheetahs->lyricsList('', 'albums')) : 0;
@@ -231,7 +232,7 @@ cannot be undone!</em> To proceed, click the "Delete Album" button.</p>
    echo "\n<p class=\"tc\">Currently no albums!</p>\n";
   }
  }
-} 
+}
 
 elseif (isset($_GET['g']) && $_GET['g'] == 'songs') {
  if(isset($_GET['p']) && $_GET['p'] == 'new') {
@@ -239,17 +240,17 @@ elseif (isset($_GET['g']) && $_GET['g'] == 'songs') {
 <form action="lyrics.php" method="post">
 <fieldset>
  <legend>Details</legend>
- <p><label><strong>Song Name:</strong></label> 
+ <p><label><strong>Song Name:</strong></label>
  <input name="song" class="input1" type="text"></p>
- <p><label><strong>Album:</strong></label> 
+ <p><label><strong>Album:</strong></label>
  <select name="album" class="input1">
-<?php 
+<?php
  $select = "SELECT * FROM `$_ST[lyrics_albums]` ORDER BY `aName` ASC";
  $true = $scorpions->query($select);
  if($true == false) {
   echo "  <option>No Albums Available</option>\n";
  }
-	
+
  else {
   while($getItem = $scorpions->obj($true)) {
    echo '  <option value="' . $getItem->aID . '">' . $getItem->aName . "</option>\n";
@@ -265,13 +266,13 @@ elseif (isset($_GET['g']) && $_GET['g'] == 'songs') {
 <fieldset>
  <legend>Listing</legend>
  <p><label><strong>Listing:</strong></label> <select name="listing" class="input1">
-<?php 
+<?php
  $select = "SELECT * FROM `$_ST[main]` ORDER BY `subject` ASC";
  $true = $scorpions->query($select);
  if($true == false) {
   echo "  <option>No Listings Available</option>\n";
  }
-	
+
  else {
   while($getItem = $scorpions->obj($true)) {
    echo '  <option value="' . $getItem->id . '">' . $getItem->subject . "</option>\n";
@@ -284,26 +285,26 @@ elseif (isset($_GET['g']) && $_GET['g'] == 'songs') {
 <fieldset>
  <legend>Submit</legend>
  <p class="tc">
-  <input name="action" class="input2" type="submit" value="Add Song"> 
+  <input name="action" class="input2" type="submit" value="Add Song">
   <input class="input2" type="reset" value="Reset Form">
  </p>
 </fieldset>
 </form>
-<?php 
- } 
- 
+<?php
+ }
+
  elseif (isset($_GET['p']) && $_GET['p'] == 'old') {
   $id = $tigers->cleanMys($_GET['d']);
   if(empty($id) || !is_numeric($id)) {
-   $tigers->displayError('Script Error', 'Your ID is empty. This means you' . 
-	 ' selected an incorrect song or you\'re trying to access something that' . 
+   $tigers->displayError('Script Error', 'Your ID is empty. This means you' .
+	 ' selected an incorrect song or you\'re trying to access something that' .
 	 ' doesn\'t exist. Go back and try again.', false);
-  } 
- 
+  }
+
   $select = "SELECT * FROM `$_ST[lyrics]` WHERE `lyID` = '$id' LIMIT 1";
   $true = $scorpions->query($select);
   if($true == false) {
-   $tigers->displayError('Database Error', 'The script was unable to select that' . 
+   $tigers->displayError('Database Error', 'The script was unable to select that' .
    ' specific lyric.', true, $select);
   }
   $getItem = $scorpions->obj($true);
@@ -313,22 +314,22 @@ elseif (isset($_GET['g']) && $_GET['g'] == 'songs') {
 
 <fieldset>
  <legend>Details</legend>
- <p><label><strong>Song Name:</strong></label> 
+ <p><label><strong>Song Name:</strong></label>
  <input name="song" class="input1" type="text" value="<?php echo $getItem->lyName; ?>"></p>
  <p><label><strong>Album:</strong></label> <select name="album" class="input1">
-<?php 
+<?php
  $select = "SELECT * FROM `$_ST[lyrics_albums]` ORDER BY `aName` ASC";
  $true = $scorpions->query($select);
  if($true == false) {
   echo "  <option>No Albums Available</option>\n";
  }
-	
+
  else {
   while($getCat = $scorpions->obj($true)) {
    $cats = explode('!', $getItem->aNiq);
    echo '  <option value="' . $getCat->aID . '"';
 	 if(in_array($getCat->aID, $cats)) {
-	  echo ' selected="selected"'; 
+	  echo ' selected="selected"';
    }
    echo '>' . $getCat->aName . "</option>\n";
   }
@@ -345,19 +346,19 @@ elseif (isset($_GET['g']) && $_GET['g'] == 'songs') {
 <fieldset>
  <legend>Listing</legend>
  <p><label><strong>Listing:</strong></label> <select name="listing" class="input1">
-<?php 
+<?php
  $select = "SELECT * FROM `$_ST[main]` ORDER BY `subject` ASC";
  $true = $scorpions->query($select);
  if($true == false) {
   echo "  <option>No Listings Available</option>\n";
  }
-	
+
  else {
   while($getCat = $scorpions->obj($true)) {
    $cats = explode('!', $getItem->fNiq);
    echo '  <option value="' . $getCat->id . '"';
 	 if(in_array($getCat->id, $cats)) {
-	  echo ' selected="selected"'; 
+	  echo ' selected="selected"';
    }
    echo '>' . $getCat->subject . "</option>\n";
   }
@@ -369,32 +370,32 @@ elseif (isset($_GET['g']) && $_GET['g'] == 'songs') {
 <fieldset>
  <legend>Submit</legend>
  <p class="tc">
-  <input name="action" class="input2" type="submit" value="Edit Song"> 
+  <input name="action" class="input2" type="submit" value="Edit Song">
   <input class="input2" type="reset" value="Reset Form">
  </p>
 </fieldset>
 </form>
-<?php 
+<?php
  }
- 
+
  elseif (isset($_GET['p']) && $_GET['p'] == 'erase') {
   $id = $tigers->cleanMys($_GET['d']);
   if(empty($id) || !is_numeric($id)) {
-   $tigers->displayError('Script Error', 'Your ID is empty. This means' . 
-	 ' you selected an incorrect song or you\'re trying to access something that' . 
+   $tigers->displayError('Script Error', 'Your ID is empty. This means' .
+	 ' you selected an incorrect song or you\'re trying to access something that' .
 	 ' doesn\'t exist. Go back and try again.', false);
-  } 
- 
+  }
+
   $select = "SELECT * FROM `$_ST[lyrics]` WHERE `lyID` = '$id' LIMIT 1";
   $true = $scorpions->query($select);
   if($true == false) {
-   $tigers->displayError('Database Error', 'The script was unable to select that' . 
+   $tigers->displayError('Database Error', 'The script was unable to select that' .
    ' specific song.', true, $select);
   }
   $getItem = $scorpions->obj($true);
 ?>
-<p>You are about to delete the <strong><?php echo $getItem->lyName; ?></strong> 
-song; please be aware that once you delete a song, it is gone forever. <em>This 
+<p>You are about to delete the <strong><?php echo $getItem->lyName; ?></strong>
+song; please be aware that once you delete a song, it is gone forever. <em>This
 cannot be undone!</em> To proceed, click the "Delete Song" button.</p>
 
 <form action="lyrics.php" method="post">
@@ -408,15 +409,15 @@ cannot be undone!</em> To proceed, click the "Delete Song" button.</p>
  </p>
 </fieldset>
 </form>
-<?php 
+<?php
  }
- 
+
  else {
-  $select = "SELECT * FROM `$_ST[lyrics]` ORDER BY `lyID` DESC LIMIT $start," . 
+  $select = "SELECT * FROM `$_ST[lyrics]` ORDER BY `lyID` DESC LIMIT $start," .
   " $per_page";
   $true = $scorpions->query($select);
   if($true == false) {
-   $tigers->displayError('Database Error', 'The script was unable to select the' . 
+   $tigers->displayError('Database Error', 'The script was unable to select the' .
    ' lyrics from the database.', true, $select);
   }
   $count = $scorpions->total($true);
@@ -432,7 +433,7 @@ cannot be undone!</em> To proceed, click the "Delete Song" button.</p>
  <th>Listing</th>
  <th>Action</th>
 </tr></thead>
-<?php 
+<?php
    while($getItem = $scorpions->obj($true)) {
 ?>
 <tbody><tr>
@@ -443,14 +444,14 @@ cannot be undone!</em> To proceed, click the "Delete Song" button.</p>
  <td class="floatIcons tc">
   <a href="lyrics.php?g=songs&#38;p=old&#38;d=<?php echo $getItem->lyID; ?>">
    <img src="img/icons/edit.png" alt="">
-  </a> 
+  </a>
   <a href="lyrics.php?g=songs&#38;p=erase&#38;d=<?php echo $getItem->lyID; ?>">
    <img src="img/icons/delete.png" alt="">
   </a>
  </td>
 </tr></tbody>
-<?php 
-   } 
+<?php
+   }
    echo "</table>\n\n<p id=\"pagination\">Pages: ";
    $total = is_countable($cheetahs->lyricsList()) ? count($cheetahs->lyricsList()) : 0;
    $pages = ceil($total / $per_page);
@@ -463,7 +464,7 @@ cannot be undone!</em> To proceed, click the "Delete Song" button.</p>
     }
    }
    echo "</p>\n";
-  } 
+  }
 
   else {
    echo "\n<p class=\"tc\">Currently no songs!</p>\n";
@@ -471,38 +472,38 @@ cannot be undone!</em> To proceed, click the "Delete Song" button.</p>
  }
 }
 
-/** 
- * Forms have been set, let's process! 
- */ 
+/**
+ * Forms have been set, let's process!
+ */
 elseif (isset($_POST['action'])) {
  if($_POST['action'] == 'Add Song') {
   $song = $tigers->cleanMys($_POST['song']);
   if(empty($song)) {
-   $tigers->displayError('Form Error', 'The <samp>song name</samp>' . 
+   $tigers->displayError('Form Error', 'The <samp>song name</samp>' .
 	 ' field is empty.', false);
   }
 	$album = $tigers->cleanMys($_POST['album']);
   if(!in_array($album, $cheetahs->lyricsList('', 'albums'))) {
-   $tigers->displayError('Form Error', 'The <samp>album</samp> field' . 
+   $tigers->displayError('Form Error', 'The <samp>album</samp> field' .
 	 ' is empty.', false);
   }
 	$lyrics = $tigers->cleanMys($_POST['lyrics']);
   if(empty($lyrics)) {
-   $tigers->displayError('Form Error', 'The <samp>lyrics</samp> field' . 
+   $tigers->displayError('Form Error', 'The <samp>lyrics</samp> field' .
 	 ' is empty.', false);
   }
 	$listing = $tigers->cleanMys($_POST['listing']);
   if(!in_array($listing, $wolves->listingsList())) {
-   $tigers->displayError('Form Error', 'The <samp>listing</samp> field' . 
+   $tigers->displayError('Form Error', 'The <samp>listing</samp> field' .
 	 ' is empty.', false);
   }
-	
-	$insert = "INSERT INTO `$_ST[lyrics]` (`fNiq`, `aNiq`, `lyName`, `lyText`)" . 
+
+	$insert = "INSERT INTO `$_ST[lyrics]` (`fNiq`, `aNiq`, `lyName`, `lyText`)" .
 	" VALUES ('$listing', '$album', '$song', '$lyrics')";
 	$scorpions->query("SET NAMES 'utf8';");
 	$true = $scorpions->query($insert);
   if($true == false) {
-   $tigers->displayError('Database Error', 'The script was unable to add' . 
+   $tigers->displayError('Database Error', 'The script was unable to add' .
 	 ' the song to the database.', true, $insert);
   } elseif ($true == true) {
    echo $tigers->displaySuccess('The song was added to the database!</p>');
@@ -510,41 +511,41 @@ elseif (isset($_POST['action'])) {
 	 echo $tigers->backLink('lyrics');
   }
  }
- 
+
  elseif ($_POST['action'] == 'Edit Song') {
   $id = $tigers->cleanMys($_POST['id']);
   if(empty($id) || !ctype_digit($id)) {
-   $tigers->displayError('Form Error', 'Your ID is empty. This means you' . 
-	 ' selected an incorrect song or you\'re trying to access something that' . 
+   $tigers->displayError('Form Error', 'Your ID is empty. This means you' .
+	 ' selected an incorrect song or you\'re trying to access something that' .
 	 ' doesn\'t exist. Go back and try again.', false);
-  } 
+  }
   $song = $tigers->cleanMys($_POST['song']);
   if(empty($song)) {
-   $tigers->displayError('Form Error', 'The <samp>song name</samp> field' . 
+   $tigers->displayError('Form Error', 'The <samp>song name</samp> field' .
 	 ' is empty.', false);
   }
 	$album = $tigers->cleanMys((int)$_POST['album']);
   if(!in_array($album, $cheetahs->lyricsList('', 'albums'))) {
-   $tigers->displayError('Form Error', 'The <samp>album</samp> field is' . 
+   $tigers->displayError('Form Error', 'The <samp>album</samp> field is' .
 	 ' empty.', false);
   }
 	$lyrics = $tigers->cleanMys($_POST['lyrics']);
   if(empty($lyrics)) {
-   $tigers->displayError('Form Error', 'The <samp>lyrics</samp> field' . 
+   $tigers->displayError('Form Error', 'The <samp>lyrics</samp> field' .
 	 ' is empty.', false);
   }
 	$listing = $tigers->cleanMys($_POST['listing']);
   if(!in_array($listing, $wolves->listingsList())) {
-   $tigers->displayError('Form Error', 'The <samp>listing</samp> field' . 
+   $tigers->displayError('Form Error', 'The <samp>listing</samp> field' .
 	 ' is empty.', false);
   }
-	
-	$update = "UPDATE `$_ST[lyrics]` SET `fNiq` = '$listing', `aNiq` = '$album'," . 
+
+	$update = "UPDATE `$_ST[lyrics]` SET `fNiq` = '$listing', `aNiq` = '$album'," .
 	" `lyName` = '$song', `lyText` = '$lyrics' WHERE `lyID` = '$id' LIMIT 1";
 	$scorpions->query("SET NAMES 'utf8';");
 	$true = $scorpions->query($update);
   if($true == false) {
-   $tigers->displayError('Database Error', 'The script was unable to edit the' . 
+   $tigers->displayError('Database Error', 'The script was unable to edit the' .
    ' song.', true, $update);
   } elseif ($true == true) {
    echo $tigers->displaySuccess('The song was edited!');
@@ -552,19 +553,19 @@ elseif (isset($_POST['action'])) {
 	 echo $tigers->backLink('lyrics');
   }
  }
- 
+
  elseif ($_POST['action'] == 'Delete Song') {
   $id = $tigers->cleanMys($_POST['id']);
   if(empty($id) || !is_numeric($id)) {
-   $tigers->displayError('Form Error', 'Your ID is empty. This means you' . 
-	 ' selected an incorrect song or you\'re trying to access something that' . 
+   $tigers->displayError('Form Error', 'Your ID is empty. This means you' .
+	 ' selected an incorrect song or you\'re trying to access something that' .
 	 ' doesn\'t exist. Go back and try again.', false);
-  } 
-	
+  }
+
 	$delete = "DELETE FROM `$_ST[lyrics]` WHERE `lyID` = '$id' LIMIT 1";
 	$true = $scorpions->query($delete);
   if($true == false) {
-   $tigers->displayError('Database Error', 'The script was unable to delete' . 
+   $tigers->displayError('Database Error', 'The script was unable to delete' .
 	 ' the song from the database.', true, $delete);
   } elseif ($true == true) {
    echo $tigers->displaySuccess('The song was deleted!');
@@ -572,17 +573,17 @@ elseif (isset($_POST['action'])) {
 	 echo $tigers->backLink('lyrics');
   }
  }
- 
+
  elseif ($_POST['action'] == 'Add Album') {
   $album = $tigers->cleanMys($_POST['album']);
   if(empty($album)) {
-   $tigers->displayError('Form Error', 'The <samp>album name</samp> field' . 
+   $tigers->displayError('Form Error', 'The <samp>album name</samp> field' .
 	 ' is empty.', false);
   }
 	$artist = $tigers->cleanMys($_POST['artist']);
 	$listing = $tigers->cleanMys($_POST['listing']);
   if(!in_array($listing, $wolves->listingsList())) {
-   $tigers->displayError('Form Error', 'The <samp>listing</samp> field' . 
+   $tigers->displayError('Form Error', 'The <samp>listing</samp> field' .
 	 ' is empty.', false);
   }
 	$year = $tigers->cleanMys($_POST['year']);
@@ -591,13 +592,13 @@ elseif (isset($_POST['action'])) {
   } else {
 	 $y = $year;
 	}
-	
-	$insert = "INSERT INTO `$_ST[lyrics_albums]` (`fNiq`, `aArtist`, `aName`," . 
+
+	$insert = "INSERT INTO `$_ST[lyrics_albums]` (`fNiq`, `aArtist`, `aName`," .
 	" `aYear`) VALUES ('$listing', '$artist', '$album', '$y')";
 	$scorpions->query("SET NAMES 'utf8';");
 	$true = $scorpions->query($insert);
   if($true == false) {
-   $tigers->displayError('Database Error', 'The script was unable to add' . 
+   $tigers->displayError('Database Error', 'The script was unable to add' .
 	 ' the album to the database.', true, $insert);
   } elseif ($true == true) {
    echo $tigers->displaySuccess('The album was added to the database!');
@@ -605,23 +606,23 @@ elseif (isset($_POST['action'])) {
 	 echo $tigers->backLink('lyrics');
   }
  }
- 
+
  elseif ($_POST['action'] == 'Edit Album') {
   $id = $tigers->cleanMys($_POST['id']);
   if(empty($id) || !is_numeric($id)) {
-   $tigers->displayError('Form Error', 'Your ID is empty. This means you' . 
-	 ' selected an incorrect album or you\'re trying to access something that' . 
+   $tigers->displayError('Form Error', 'Your ID is empty. This means you' .
+	 ' selected an incorrect album or you\'re trying to access something that' .
 	 ' doesn\'t exist. Go back and try again.', false);
-  } 
+  }
   $album = $tigers->cleanMys($_POST['album']);
   if(empty($album)) {
-   $tigers->displayError('Form Error', 'The <samp>album name</samp>' . 
+   $tigers->displayError('Form Error', 'The <samp>album name</samp>' .
 	 ' field is empty.', false);
   }
 	$artist = $tigers->cleanMys($_POST['artist']);
 	$listing = $tigers->cleanMys($_POST['listing']);
   if(!in_array($listing, $wolves->listingsList())) {
-   $tigers->displayError('Form Error', 'The <samp>listing</samp> field' . 
+   $tigers->displayError('Form Error', 'The <samp>listing</samp> field' .
 	 ' is empty.', false);
   }
 	$year = $tigers->cleanMys($_POST['year']);
@@ -630,13 +631,13 @@ elseif (isset($_POST['action'])) {
   } else {
 	 $y = $year;
 	}
-	
-	$update = "UPDATE `$_ST[lyrics_albums]` SET `fNiq` = '$listing', `aArtist` =" . 
+
+	$update = "UPDATE `$_ST[lyrics_albums]` SET `fNiq` = '$listing', `aArtist` =" .
 	" '$artist', `aName` = '$album', `aYear` = '$y' WHERE `aID` = '$id' LIMIT 1";
 	$scorpions->query("SET NAMES 'utf8';");
 	$true = $scorpions->query($update);
   if($true == false) {
-   $tigers->displayError('Database Error', 'The script was unable to edit' . 
+   $tigers->displayError('Database Error', 'The script was unable to edit' .
 	 ' the album.', true, $update);
   } elseif ($true == true) {
    echo $tigers->displaySuccess('The album was edited!');
@@ -644,19 +645,19 @@ elseif (isset($_POST['action'])) {
 	 echo $tigers->backLink('lyrics');
   }
  }
- 
+
  elseif ($_POST['action'] == 'Delete Song') {
   $id = $tigers->cleanMys($_POST['id']);
   if(empty($id) || !is_numeric($id)) {
-   $tigers->displayError('Form Error', 'Your ID is empty. This means you' . 
-	 ' selected an incorrect album or you\'re trying to access something that' . 
+   $tigers->displayError('Form Error', 'Your ID is empty. This means you' .
+	 ' selected an incorrect album or you\'re trying to access something that' .
 	 ' doesn\'t exist. Go back and try again.', false);
-  } 
-	
+  }
+
 	$delete = "DELETE FROM `$_ST[lyrics_albums]` WHERE `aID` = '$id' LIMIT 1";
 	$true = $scorpions->query($delete);
   if($true == false) {
-   $tigers->displayError('Database Error', 'The script was unable to' . 
+   $tigers->displayError('Database Error', 'The script was unable to' .
 	 ' delete the album from the database.', true, $delete);
   } elseif ($true == true) {
    echo $tigers->displaySuccess('The album was deleted!');
@@ -666,13 +667,13 @@ elseif (isset($_POST['action'])) {
  }
 }
 
-/** 
- * Main index for <lyrics.php> :D 
- */ 
+/**
+ * Main index for <lyrics.php> :D
+ */
 else {
 ?>
-<p>Welcome to <samp>lyrics.php</samp>, the outlet to adding, editing and 
-deleting your songs and albums. Albums and Songs have two different sections, 
+<p>Welcome to <samp>lyrics.php</samp>, the outlet to adding, editing and
+deleting your songs and albums. Albums and Songs have two different sections,
 which you can access below:</p>
 
 <table class="index">
@@ -681,16 +682,16 @@ which you can access below:</p>
  <td class="tc"><a href="lyrics.php?g=songs">Songs</a></td>
 </tr></tbody>
 </table>
-<?php 
+<?php
  }
 }
 
 else {
 ?>
-<p class="errorButton"><span class="error">ERROR:</span> You have turned off the 
-<samp>lyrics</samp> feature. To turn it on this feature, visit the 
+<p class="errorButton"><span class="error">ERROR:</span> You have turned off the
+<samp>lyrics</samp> feature. To turn it on this feature, visit the
 <a href="options.php">&#171; options page</a>!</p>
-<?php 
+<?php
 }
 
 require('footer.php');

@@ -1,16 +1,17 @@
 <?php
-/** 
- * @copyright  2007 
- * @license    GPL Version 3; BSD Modified 
- * @author     Tess <theirrenegadexxx@gmail.com> 
- * @file       <vars.inc.inc.php> 
- * @since      September 2nd, 2010 
- * @version    1.0   
- */ 
+/**
+ * @project          Listing Admin
+ * @copyright        2007
+ * @license          GPL Version 3; BSD Modified
+ * @author           Tess <theirrenegadexxx@gmail.com>
+ * @contributor      Ekaterina <scripts@robotess.net> http://scripts.robotess.net
+ * @contributor      Erin <dudethatserin@outlook.com> https://github.com/DudeThatsErin/listingadmin
+ * @version          Erin's Fork
+ */
 
-/** 
- * Grab user info automatically~ 
- */ 
+/**
+ * Grab user info automatically~
+ */
 $auserinfo = "|{$_SERVER['REMOTE_ADDR']}|{$_SERVER['HTTP_USER_AGENT']}|";
 if(!empty($_SERVER['HTTP_REFERER'])) {
  $auserinfo .= "{$_SERVER['HTTP_REFERER']}|";
@@ -103,9 +104,9 @@ $badheaders = '/(Indy|Blaiz|Java|libwww-perl|Python|OutfoxBot|User' .
     'ta|curl|Snoopy|PHPcrawl|id-search|WebAlta Crawler|Baiduspider+|Gaisbot|K' .
     'aloogaBot|Gigabot|Gaisbot|ia_archiver)/i';
 
-/** 
- * Month (date) array 
- */ 
+/**
+ * Month (date) array
+ */
 $get_date_array = array(
  '01' => 'January',
  '02' => 'February',
@@ -121,33 +122,33 @@ $get_date_array = array(
  '12' => 'December'
 );
 
-/** 
- * Get Regular 'ole Status Array 
- */ 
+/**
+ * Get Regular 'ole Status Array
+ */
 $get_status_array = array(
  '0' => 'Current',
  1 => 'Pending'
 );
 
-/** 
- * Get the yes/no array, often seen in the form P: 
- */ 
+/**
+ * Get the yes/no array, often seen in the form P:
+ */
 $get_yn_array = array(
  'y', 'n'
 );
 
-/** 
- * Grab markup array for options and listings 
- */ 
+/**
+ * Grab markup array for options and listings
+ */
 $get_markup_array = array(
  'html'  => 'HTML',
  'html5' => 'HTML5',
  'xhtml' => 'XHTML'
 );
 
-/** 
- * This goes for both member e-mails and KIM members e-mails :D 
- */  
+/**
+ * This goes for both member e-mails and KIM members e-mails :D
+ */
 $get_email_array = array(
  '0' => 'Show',
  1   => 'Hide'
@@ -158,14 +159,14 @@ $get_previouso_array = array(
  1   => 'Yes'
 );
 
-/** 
- * Grab options.php's arrays! \o/ 
- */ 
+/**
+ * Grab options.php's arrays! \o/
+ */
 $get_option_array = array(
- '2' => 'features', 
+ '2' => 'features',
  '3' => 'import',
- '4' => 'options', 
- '5' => 'plugins', 
+ '4' => 'options',
+ '5' => 'plugins',
  '6' => 'antispam'
 );
 
@@ -178,9 +179,9 @@ $get_option_nav_array = array(
  'antispam' => 'Plugins &#187; Antispam'
 );
 
-/** 
- * Set arrays for importing and exporting scripts \o/ 
- */ 
+/**
+ * Set arrays for importing and exporting scripts \o/
+ */
 $get_script_array = array(
  'bellabuffs'   => 'BellaBuffs',
  'codesort'     => 'CodeSort',
@@ -204,9 +205,9 @@ $get_export_cats_array = array(
  'members'    => 'Members'
 );
 
-/** 
- * Error message categories 
- */ 
+/**
+ * Error message categories
+ */
 $get_errors_array = array(
  'all'   => 'All',
  'forms' => 'Form Errors',
@@ -215,7 +216,7 @@ $get_errors_array = array(
 );
 
 /**
- * Get listing status array 
+ * Get listing status array
  */
 $get_listing_array = array(
  'curent'   => 'Current',
@@ -223,61 +224,61 @@ $get_listing_array = array(
  'pending'  => 'Pending'
 );
 
-/** 
- * Get status array (returns real IDs!) 
- */ 
+/**
+ * Get status array (returns real IDs!)
+ */
 $get_fulllist_array = array(
  'current'  => 0,
  'upcoming' => 1,
  'pending'  => 2
 );
 
-/** 
- * Member search array :D 
- */ 
+/**
+ * Member search array :D
+ */
 $get_type_id_array = array(
  'listingadmin' => array(
-  'email' => 'mEmail', 
-  'name' => 'mName', 
+  'email' => 'mEmail',
+  'name' => 'mName',
   'url' => 'mURL'
  ),
  'other' => array(
-  'email' => 'email', 
-  'name' => 'name', 
+  'email' => 'email',
+  'name' => 'name',
   'url' => 'url'
  )
 );
 
-/** 
- * Affiliate search array (Enthusiast and Listing Admin only) 
- */ 
+/**
+ * Affiliate search array (Enthusiast and Listing Admin only)
+ */
 $get_affsearch_array = array(
  'enth' => array(
-  'email' => 'email', 
-  'name' => 'subject', 
+  'email' => 'email',
+  'name' => 'subject',
   'url' => 'url'
- ), 
+ ),
  'listingadmin' => array(
-  'email' => 'aEmail', 
-  'name' => 'aSubject', 
+  'email' => 'aEmail',
+  'name' => 'aSubject',
   'url' => 'aURL'
  )
 );
 
-/** 
- * Affiliate/contact form reason options 
- */ 
+/**
+ * Affiliate/contact form reason options
+ */
 $get_reason_array = array(
- 'Affiliation', 
- 'Affiliation: Update', 
- 'Comments', 
- 'Contact', 
+ 'Affiliation',
+ 'Affiliation: Update',
+ 'Comments',
+ 'Contact',
  'Questions/Concerns'
 );
 
-/** 
- * Get array for wishlist types! 
- */ 
+/**
+ * Get array for wishlist types!
+ */
 $get_wishlist_array = array(
  'custom'  => 'Custom',
  'granted' => 'Granted',
@@ -285,9 +286,9 @@ $get_wishlist_array = array(
  'top'     => 'Top'
 );
 
-/** 
- * Get an array of all addons~ :D 
- */ 
+/**
+ * Get an array of all addons~ :D
+ */
 $get_addon_array = array(
  'codes' => 'Codes',
  'kim' => 'KIM List',
@@ -298,10 +299,10 @@ $get_addon_array = array(
 
 $notSupportedAddons = ['lyrics', 'quotes'];
 
-/** 
- * Journal server object :D 
- */ 
-$journals = (object) array( 
+/**
+ * Journal server object :D
+ */
+$journals = (object) array(
  'dw' => 'www.dreamwidth.org',
  'ij' => 'www.insanejournal.com',
  'lj' => 'www.livejournal.com'

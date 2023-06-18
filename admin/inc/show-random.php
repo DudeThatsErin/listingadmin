@@ -5,8 +5,8 @@
  * @license          GPL Version 3; BSD Modified
  * @author           Tess <theirrenegadexxx@gmail.com>
  * @contributor      Ekaterina <scripts@robotess.net> http://scripts.robotess.net
- * @file             <show-random.php>
- * @version          Robotess Fork
+ * @contributor      Erin <dudethatserin@outlook.com> https://github.com/DudeThatsErin/listingadmin
+ * @version          Erin's Fork
  */
 
 require('b.inc.php');

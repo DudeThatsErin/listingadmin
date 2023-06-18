@@ -5,7 +5,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <meta name="Author" content="Tess, Ekaterina (http://scripts.robotess.net)">
+    <meta name="Author" content="Tess, Ekaterina (http://scripts.robotess.net), Erin (https:;//github.com/DudeThatsErin/listingadmin)">
     <title> <?php echo $laoptions->version; ?> &#8212; <?php echo $leopards->isTitle($getTitle); ?> </title>
     <link href="style.css?v=2" rel="stylesheet" type="text/css">
 </head>
@@ -58,9 +58,9 @@
                     </li>
                     <li<?php echo $leopards->currently('codes-sizes'); ?>><a href="codes-sizes.php">Codes: Sizes</a>
                     </li>
-                    <li<?php echo $leopards->currently('lyrics'); ?>><a href="lyrics.php">Lyrics</a></li>
-                    <li<?php echo $leopards->currently('kim'); ?>><a href="kim.php">KIM</a></li>
-                    <li<?php echo $leopards->currently('quotes'); ?>><a href="quotes.php">Quotes</a></li>
+                    <li<?php echo $leopards->currently('lyrics', 'n'); ?>><a href="lyrics.php">Lyrics</a></li>
+                    <li<?php echo $leopards->currently('kim', 'n'); ?>><a href="kim.php">KIM</a></li>
+                    <li<?php echo $leopards->currently('quotes', 'n'); ?>><a href="quotes.php">Quotes</a></li>
                     <li<?php echo $leopards->currently('updates'); ?>><a href="updates.php">Updates</a></li>
                     <li<?php echo $leopards->currently('updates-comments', 1); ?>><a href="updates-comments.php">Updates:
                             Comments</a></li>

@@ -5,8 +5,8 @@
  * @license          GPL Version 3; BSD Modified
  * @author           Tess <theirrenegadexxx@gmail.com>
  * @contributor      Ekaterina <scripts@robotess.net> http://scripts.robotess.net
- * @file             <codes.php>
- * @version          Robotess Fork
+ * @contributor      Erin <dudethatserin@outlook.com> https://github.com/DudeThatsErin/listingadmin
+ * @version          Erin's Fork
  */
 
 error_reporting(E_ALL);
@@ -657,7 +657,7 @@ if ($count > 0) {
             }
             echo "</table>\n\n";
             } else {
-                echo "\n<p class=\"tc\">Currently no listings to list!</p>\n";
+                echo "\n<p class=\"tc\">Currently no listings to list! This displays if you don't own at least 1 fanlisting.</p>\n";
             }
             }
             }

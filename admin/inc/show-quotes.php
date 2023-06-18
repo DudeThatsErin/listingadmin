@@ -1,12 +1,13 @@
 <?php
-/** 
- * @copyright  2007 
- * @license    GPL Version 3; BSD Modified 
- * @author     Tess <theirrenegadexxx@gmail.com> 
- * @file       <show-quotes.php> 
- * @since      September 2nd, 2010 
- * @version    1.0   
- */ 
+/**
+ * @project          Listing Admin
+ * @copyright        2007
+ * @license          GPL Version 3; BSD Modified
+ * @author           Tess <theirrenegadexxx@gmail.com>
+ * @contributor      Ekaterina <scripts@robotess.net> http://scripts.robotess.net
+ * @contributor      Erin <dudethatserin@outlook.com> https://github.com/DudeThatsErin/listingadmin
+ * @version          Erin's Fork
+ */
 require('b.inc.php');
 require(MAINDIR . 'rats.inc.php');
 require_once('fun.inc.php');
@@ -16,9 +17,9 @@ require_once('fun-listings.inc.php');
 require_once('fun-members.inc.php');
 require_once('fun-misc.inc.php');
 
-/** 
- * Get variables and options! 
- */ 
+/**
+ * Get variables and options!
+ */
 $options = false;
 
 if(!isset($quote_number) || empty($quote_number)) {
@@ -28,7 +29,7 @@ if(!isset($quote_number) || empty($quote_number)) {
 }
 
 if(
- !isset($fKey) || 
+ !isset($fKey) ||
  ($fKey != '0' && $fKey != 0 && !in_array($fKey, $wolves->listingsList()))
 ) {
  $tigers->displayError('Script Error', 'The fanlisting ID is not set!', false);
@@ -37,13 +38,13 @@ if(
  $getItem            = $wolves->getListings($options->listingID, 'object');
 }
 
-/** 
- * Get quotes! 
- */ 
+/**
+ * Get quotes!
+ */
 $select = "SELECT * FROM `$_ST[quotes]` WHERE `fNiq` = '" . $options->listingID . "'";
 $true = $scorpions->query($select);
 if($true == false) {
- $tigers->displayError('Database Error', 'The script was unable to select the' . 
+ $tigers->displayError('Database Error', 'The script was unable to select the' .
  ' quotes from that specific listing.', false);
 }
 $count = $scorpions->total($true);

@@ -5,14 +5,15 @@
  * @license          GPL Version 3; BSD Modified
  * @author           Tess <theirrenegadexxx@gmail.com>
  * @contributor      Ekaterina <scripts@robotess.net> http://scripts.robotess.net
- * @file             <v.inc.php>
- * @version          Robotess Fork
+ * @contributor      Erin <dudethatserin@outlook.com> https://github.com/DudeThatsErin/listingadmin
+ * @file             <install.php>
+ * @version          Erin's Fork
  */
 
 $_ST = [];
 
 if (!defined('LAVERSION')) {
-    define('LAVERSION', '[Robotess Fork] 1.0.2');
+    define('LAVERSION', '[Erin\'s Fork] v1.1');
 }
 
 require_once(__DIR__ . DIRECTORY_SEPARATOR . 'inc' . DIRECTORY_SEPARATOR . 'Robotess' . DIRECTORY_SEPARATOR . 'autoloader.php');

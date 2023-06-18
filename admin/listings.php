@@ -5,8 +5,8 @@
  * @license          GPL Version 3; BSD Modified
  * @author           Tess <theirrenegadexxx@gmail.com>
  * @contributor      Ekaterina <scripts@robotess.net> http://scripts.robotess.net
- * @file             <listings.php>
- * @version          Robotess Fork
+ * @contributor      Erin <dudethatserin@outlook.com> https://github.com/DudeThatsErin/listingadmin
+ * @version          Erin's Fork
  */
 
 use Robotess\StringUtils;
@@ -20,7 +20,7 @@ require('header.php');
 
 $templatesExamples = new Templates();
 
-$sp = !isset($_GET['g']) 
+$sp = !isset($_GET['g'])
 || (isset($_GET['g']) && preg_match('/^(search)([A-Za-z]+)/', $_GET['g'])) ?
 '<span><a href="listings.php?g=new">Add Listing</a></span>' : '';
 echo "<h2>{$getTitle}$sp</h2>\n";
@@ -32,21 +32,21 @@ if(!isset($_GET['p']) || empty($_GET['p']) || !ctype_digit($_GET['p'])) {
 }
 $start = $scorpions->escape((($page * $per_page) - $per_page));
 
-/**  
- * Manage listing! 
- */ 
+/**
+ * Manage listing!
+ */
 if(isset($_GET['g']) && $_GET['g'] == 'manage') {
  $listingArray = $wolves->listingsList();
- if(isset($_GET['d']) && is_numeric($_GET['d']) && in_array($_GET['d'], $listingArray)) { 
+ if(isset($_GET['d']) && is_numeric($_GET['d']) && in_array($_GET['d'], $listingArray)) {
   $id = $tigers->cleanMys((int)$_GET['d']);
   $select = "SELECT * FROM `$_ST[main]` WHERE `id` = '$id' LIMIT 1";
   $true = $scorpions->query($select);
   if($true == false) {
-   $tigers->displayError('Database Error', 'The script was unable to' . 
-	 ' select the specified listing.|Make sure the ID is not empty and the' . 
+   $tigers->displayError('Database Error', 'The script was unable to' .
+	 ' select the specified listing.|Make sure the ID is not empty and the' .
 	 ' listings table exists.', true, $select);
   }
-  $getItem = $scorpions->obj($true, 0);
+  $getItem = $scorpions->obj($true);
 ?>
 <div id="menuRight">
 <h3 class="tr">Menu</h3>
@@ -65,7 +65,7 @@ if(isset($_GET['g']) && $_GET['g'] == 'manage') {
 </div>
 
 <div id="mainContent">
-<?php 
+<?php
   if(isset($_GET['o']) && $_GET['o'] == 'crosslist') {
 ?>
 <h3>Crosslist</h3>
@@ -84,7 +84,7 @@ be used on a as-needed basis!</ins></p>
 
 <fieldset>
  <legend>Database Variables</legend>
- <p><label><strong>Database Host:</strong></label> 
+ <p><label><strong>Database Host:</strong></label>
  <input name="dbhost" class="input1" type="text" value="<?php echo $getItem->dbhost; ?>"></p>
  <p><label><strong>Database Username:</strong></label>
  <input name="dbuser" class="input1" type="text" value="<?php echo $getItem->dbuser; ?>"></p>
@@ -96,15 +96,15 @@ be used on a as-needed basis!</ins></p>
 
 <fieldset>
 <legend>Miscellany</legend>
- <p><label><strong>Crosslisting?</strong><br> 
- Are we actually crosslisting to another script? (This includes other Listing 
+ <p><label><strong>Crosslisting?</strong><br>
+ Are we actually crosslisting to another script? (This includes other Listing
  Admin installs!)</label>
  <select name="crosslist" id="crosslist" class="input1">
  <option <?php if($getItem->dblist == '0' || $getItem->dblist == 0) { echo ' selected="selected"'; } ?> value="1">No</option>
  <option <?php if($getItem->dblist == 1) { echo ' selected="selected"'; } ?> value="2">Yes</option>
  </select></p>
  <p style="clear: both; margin: 0 0 1% 0;"></p>
- <p><label><strong>Script:</strong><br>Which script are we crosslisting to?</label> 
+ <p><label><strong>Script:</strong><br>Which script are we crosslisting to?</label>
  <select name="crosslist_script" class="input1">
   <option<?php if($getItem->dbtype == 'enth') { echo ' selected="selected"'; } ?> value="enth">Enthusiast</option>
 	<option<?php if($getItem->dbtype == 'fanbase') { echo ' selected="selected"'; } ?> value="fanbase">phpFanBase</option>
@@ -123,20 +123,20 @@ be used on a as-needed basis!</ins></p>
  The path to the affiliates image folder (e.g. <samp>/home/username/website/fanlisting/affiliates/</samp>)</label>
  <input name="affpaths" class="input1" type="text" value="<?php echo $getItem->dbpath; ?>"></p>
  <p style="clear: both; margin: 0 0 1% 0;"></p>
-<?php 
+<?php
 if($getItem->dblist == 1 && $getItem->dbtype != 'listingadmin') {
 ?>
 <div id="noCrosslistBlock" style="display: none;">
-<?php 
+<?php
 } elseif ($getItem->dblist == 1 && $getItem->dbtype == 'listingadmin') {
 ?>
 <div id="noCrosslistBlock" style="display: block;">
-<?php 
+<?php
 }
 ?>
  <p><label><strong>Listing ID:</strong><br>
  The ID to the listing you're crosslisting to in another Listing Admin install.</label>
- <input name="flid" class="input1" type="text" value="<?php echo $getItem->dbflid; ?>"></p>
+ <input name="flid" class="input1" type="text" value="<?php echo $id; ?>"></p>
 </div>
 </fieldset>
 
@@ -147,9 +147,9 @@ if($getItem->dblist == 1 && $getItem->dbtype != 'listingadmin') {
  </p>
 </fieldset>
 </form>
-<?php 
+<?php
   }
-	
+
   elseif (isset($_GET['o']) && $_GET['o'] == 'options') {
 ?>
 <h3>Options</h3>
@@ -181,7 +181,7 @@ if($getItem->dblist == 1 && $getItem->dbtype != 'listingadmin') {
  <p><label><strong>HTML Markup</strong><br>
  This option chooses what you want HTML mark-up you want for each listing.
  </label> <select name="markup" class="input1">
-<?php 
+<?php
  $markuparray = $get_markup_array;
  foreach($markuparray as $m => $a) {
   echo '  <option';
@@ -194,11 +194,11 @@ if($getItem->dblist == 1 && $getItem->dbtype != 'listingadmin') {
  </select></p>
  <p style="clear: both; margin: 0 0 1% 0;"></p>
  <p><label><strong>Show on</strong> <samp>show-owned.php</samp><strong>?</strong><br>
- This option chooses whether you'd like this particular fanlisting displayed on 
- your owned listings (for all status'). Please be aware if it's <em>not</em> 
+ This option chooses whether you'd like this particular fanlisting displayed on
+ your owned listings (for all status'). Please be aware if it's <em>not</em>
  displayed this will <ins>NOT</ins> be included in your initial listing count for
  your collective statistics.
- </label> 
+ </label>
  <select name="show_owned" class="input1">
   <option<?php if($getItem->show == '0') { echo ' selected="selected"'; } ?> value="0">Yes</option>
   <option<?php if($getItem->show == 1) { echo ' selected="selected"'; } ?> value="1">No</option>
@@ -207,15 +207,15 @@ if($getItem->dblist == 1 && $getItem->dbtype != 'listingadmin') {
 
 <fieldset>
  <legend>Image</legend>
-<?php 
+<?php
  $img = $seahorses->getOption('img_path') . $getItem->image;
- if(!empty($getItem->image) && file_exists($img)) { 
+ if(!empty($getItem->image) && file_exists($img)) {
 ?>
  <p class="tc"><img src="<?php echo $seahorses->getOption('img_http') . $getItem->image; ?>" alt=""></p>
-<?php 
- } 
+<?php
+ }
 ?>
- <p><label><strong>Changes:</strong></label> 
+ <p><label><strong>Changes:</strong></label>
  <input name="change" class="input3" type="radio" value="add"> Add
  <input name="change" class="input3" type="radio" value="edit"> Edit
  <input name="change" class="input3" type="radio" value="delete"> Delete
@@ -225,7 +225,7 @@ if($getItem->dblist == 1 && $getItem->dbtype != 'listingadmin') {
 
 <fieldset>
  <legend>Favourite Fields</legend>
- <p>Favourite fields &#8211; &aacute; la additional or optional fields &#8211; are 
+ <p>Favourite fields &#8211; &aacute; la additional or optional fields &#8211; are
  fields that can be applied to the join form and members list for members to fill out.
  They are by no means required, and the number of favourite fields allowed are
  unlimited.</p>
@@ -234,24 +234,24 @@ if($getItem->dblist == 1 && $getItem->dbtype != 'listingadmin') {
  a new favourite field, any unsaved changes made to the fields on this page will
  <ins>not</ins> be saved. To erase a field, simply erase the text from the field you
  would no longer wish to have.</p>
-<?php 
+<?php
 if(!empty($getItem->fave_fields)) {
  $fave_fields = explode('|', $getItem->fave_fields);
  $fave_fields = $tigers->emptyarray($fave_fields);
  $q3 = basename($_SERVER['PHP_SELF']) . '?g=manage&#38;d=' . $tigers->cleanMys($_GET['d']);
- if(isset($_GET['opt'])) { 
+ if(isset($_GET['opt'])) {
   $q3 .= '&#38;opt=' . $tigers->cleanMys($_GET['opt']) . '&#38;extend=1&' .
   '#38;count=' . ((is_countable($fave_fields) ? count($fave_fields) : 0) + 1) . '#fave';
- } 
+ }
 
  echo "<div id=\"fave\">\n";
  for($i = 0,$iMax = is_countable($fave_fields) ? count($fave_fields) : 0; $i < $iMax; $i++) {
 ?>
  <p><input name="numero[]" type="hidden" value="<?php echo $i; ?>">
  <label><strong>Favourite Field <?php echo $i; ?></strong></label>
- <input name="favefield[]" class="input1" type="text" 
+ <input name="favefield[]" class="input1" type="text"
  value="<?php echo $snakes->additional($fave_fields[$i], 'decode'); ?>"></p>
-<?php 
+<?php
  }
  if(!isset($_GET['extend'])) {
   echo '<p class="noteButton tc"><span class="note">Note:</span> Adding' .
@@ -270,7 +270,7 @@ else {if(!isset($_GET['extend']) && !isset($_GET['count']) && !isset($_POST['fav
 
 if(isset($_GET['extend']) && is_numeric($_GET['extend'])) {
  $c1 = (int)$tigers->cleanMys($_GET['count']) + 1;
- $q2 = basename($_SERVER['PHP_SELF']) . 
+ $q2 = basename($_SERVER['PHP_SELF']) .
  '?g=manage&#38;d=' . $tigers->cleanMys($_GET['d']) .
  '&#38;opt=' . $tigers->cleanMys($_GET['opt'] ?? "") .
  '&#38;extend=1&#38;count=' . $c1 . '#fave';
@@ -282,7 +282,7 @@ if(isset($_GET['extend']) && is_numeric($_GET['extend'])) {
  <p><input name="numero[]" type="hidden" value="<?php echo $n - 1; ?>">
  <label><strong>Favourite Field <?php echo $n; ?></strong></label>
  <input name="favefield[]" class="input1" type="text"></p>
-<?php 
+<?php
  }
  echo '<p class="noteButton tc"><span class="note">Note:</span> Adding' .
  ' another fave field will erase any data you may have entered in the field(s)' .
@@ -302,14 +302,14 @@ if(!empty($getItem->fave_fields) && (is_countable($fave_fields) ? count($fave_fi
 
 <fieldset>
  <legend>Previous Owners</legend>
- <p class="noteButton">You only should fill out these fields if your listing has 
+ <p class="noteButton">You only should fill out these fields if your listing has
  previous owners. :D</p>
- <p class="noteButton">If the URL field is left empty (with a name filled out), 
- the URL field will be filled with the current fanlisting's URL. <ins>Do not 
- change this.</ins> The script will read this as a no-link previous owner, and 
+ <p class="noteButton">If the URL field is left empty (with a name filled out),
+ the URL field will be filled with the current fanlisting's URL. <ins>Do not
+ change this.</ins> The script will read this as a no-link previous owner, and
  will only display the previous owner's name as text, instead of a link.</p>
  <div class="previous">
-<?php 
+<?php
  if(empty($getItem->previous)) {
   $a = [];
  } else {
@@ -322,20 +322,20 @@ if(!empty($getItem->fave_fields) && (is_countable($fave_fields) ? count($fave_fi
   foreach($a as $k => $v) {
 	 $num   = ((is_countable($a) ? count($a) : 0) + 1) == $pn ? ' <span class="add">[+]</span>' : '';
 	 $class = 'p' . $pn;
-	 $text .= "  <div class=\"owner\" id=\"$class\">\n   "  . 
-	 "<input name=\"pnumeric[]\" type=\"hidden\" value=\"$pn\">\n   " . 
+	 $text .= "  <div class=\"owner\" id=\"$class\">\n   "  .
+	 "<input name=\"pnumeric[]\" type=\"hidden\" value=\"$pn\">\n   " .
 	 '<p><label><strong>Name:</strong></label> <input name="pname[]"' .
-	 " class=\"input1\" type=\"text\" value=\"$v\"></p>\n   " . 
+	 " class=\"input1\" type=\"text\" value=\"$v\"></p>\n   " .
 	 '<p><label><strong>URL:</strong></label> <input name="purl[]"' .
 	 " class=\"input6\" type=\"url\" value=\"$k\">$num</ap>\n";
 	 $pn++;
 	}
 	echo str_replace('</ap>', " <span class=\"add\">[+]</span></p>\n  </div>", $text);
  } else {
-  echo "  <div class=\"owner\" id=\"p1\">\n   "  . 
-	"<input name=\"pnumeric[]\" type=\"hidden\" value=\"1\">\n   " . 
+  echo "  <div class=\"owner\" id=\"p1\">\n   "  .
+	"<input name=\"pnumeric[]\" type=\"hidden\" value=\"1\">\n   " .
 	'<p><label><strong>Name:</strong></label> <input name="pname[]"' .
-	" class=\"input1\" type=\"text\"></p>\n   " . 
+	" class=\"input1\" type=\"text\"></p>\n   " .
 	'<p><label><strong>URL:</strong></label> <input name="purl[]"' .
 	" class=\"input6\" type=\"url\"> <span class=\"add\">[+]</span></p>\n  </div>\n";
  }
@@ -345,43 +345,43 @@ if(!empty($getItem->fave_fields) && (is_countable($fave_fields) ? count($fave_fi
 
 <fieldset>
  <legend>Forms</legend>
- <p class="tc">These can be optional, as these forms can be set by variables at the fanlisting 
+ <p class="tc">These can be optional, as these forms can be set by variables at the fanlisting
  (see <a href="display_codes.php">Display Codes</a>).</p>
- <p><label><strong>Affiliates/Contact Form:</strong></label> 
+ <p><label><strong>Affiliates/Contact Form:</strong></label>
  <input name="form-form" class="input1" type="text" value="<?php echo $getItem->form_form; ?>"></p>
  <p><label><strong>Delete Form:</strong><br>
  Deletion forms can be used for members to delete themselves from any listing they are listed at
- (password and e-mail address required).</label> 
+ (password and e-mail address required).</label>
  <input name="form-delete" class="input1" type="text" value="<?php echo $getItem->form_delete; ?>"></p>
  <p style="clear: both; margin: 0 0 1% 0;"></p>
- <p><label><strong>Join Form:</strong></label> 
+ <p><label><strong>Join Form:</strong></label>
  <input name="form-join" class="input1" type="text" value="<?php echo $getItem->form_join; ?>"></p>
  <p><label><strong>Join Form: Rules:</strong></label>
  <textarea name="form-join_rules" cols="50" class="input1" rows="10" style="height: 200px; margin-right: 1%; width: 99%;">
 <?php echo $getItem->form_join_rules; ?>
  </textarea></p>
  <p><label><strong>Reset Form:</strong><br>
- Reset forms are for members to reset their passwords.</label> 
+ Reset forms are for members to reset their passwords.</label>
  <input name="form-reset" class="input1" type="text" value="<?php echo $getItem->form_reset; ?>"></p>
  <p style="clear: both; margin: 0 0 1% 0;"></p>
- <p><label><strong>Update Form:</strong></label> 
+ <p><label><strong>Update Form:</strong></label>
  <input name="form-update" class="input1" type="text" value="<?php echo $getItem->form_update; ?>"></p>
 </fieldset>
 
 <fieldset>
  <legend>Submit</legend>
  <p class="tc">
-  <input name="action" class="input2" type="submit" value="Manage Listing"> 
+  <input name="action" class="input2" type="submit" value="Manage Listing">
   <input class="input2" type="reset" value="Reset Form">
  </p>
 </fieldset>
 </form>
-<?php 
+<?php
   }
- 
+
   elseif (isset($_GET['o']) && $_GET['o'] == 'templates') {
 ?>
-<p>Although each template has a table of variables, you can also find a comprehensive sheet 
+<p>Although each template has a table of variables, you can also find a comprehensive sheet
 on the <a href="templates.php?g=templates">Templates page</a>.</p>
 
 <form action="listings.php" enctype="multipart/form-data" method="post">
@@ -393,7 +393,7 @@ on the <a href="templates.php?g=templates">Templates page</a>.</p>
 <fieldset>
  <legend>Date and Description</legend>
  <p><label><strong>Date Format:</strong><br>Check out
- <a href="http://php.net/" title="External Link: 'date' at php.net">the Date manual &#187;</a> 
+ <a href="http://php.net/" title="External Link: 'date' at php.net">the Date manual &#187;</a>
  for more formats.</label>
  <input name="dateformat" class="input1" type="text" value="<?php echo $getItem->date; ?>"></p>
  <p style="clear: both; margin: 0 0 1% 0;"></p>
@@ -402,7 +402,7 @@ on the <a href="templates.php?g=templates">Templates page</a>.</p>
 <?php echo $getItem->desc; ?></textarea></p>
 </fieldset>
 
-<fieldset> 
+<fieldset>
  <legend>Member Templates</legend>
  <table class="stats">
  <tbody><tr>
@@ -476,7 +476,7 @@ on the <a href="templates.php?g=templates">Templates page</a>.</p>
  <table class="stats">
  <tbody><tr>
   <td class="t">{image}</td>
-  <td class="d">Returns image location and <em>name</em>, not a 
+  <td class="d">Returns image location and <em>name</em>, not a
 	<samp>&#60;img&#62;</samp> tag</td>
  </tr></tbody>
  <tbody><tr>
@@ -512,9 +512,9 @@ on the <a href="templates.php?g=templates">Templates page</a>.</p>
 
 <fieldset>
  <legend>Wishlist: Granted</legend>
- <p class="noteButton"><span class="note">Note:</span> This description will 
- only be displayed if "Granted Wish?" is set to <em>Yes</em> in the 
- <a href="listings.php?g=manage&#38;d=2&#38;opt=options">Options</a> section and 
+ <p class="noteButton"><span class="note">Note:</span> This description will
+ only be displayed if "Granted Wish?" is set to <em>Yes</em> in the
+ <a href="listings.php?g=manage&#38;d=2&#38;opt=options">Options</a> section and
  you are displaying your granted wishes at your collective.</p>
  <p class="nb tc">
   <textarea name="wishlist" cols="50" rows="8" style="height: 150px; margin: 0 1% 0 0; width: 99%;">
@@ -532,8 +532,8 @@ on the <a href="templates.php?g=templates">Templates page</a>.</p>
  </tr></tbody>
  <tbody><tr>
   <td class="t">{comments}</td>
-  <td class="d">Returns the number of comments and "Add Comment" link, if enabled; if comments are 
-  disabled, it will return "Comments Disabled". Also returns journal links if crossposting was enabled 
+  <td class="d">Returns the number of comments and "Add Comment" link, if enabled; if comments are
+  disabled, it will return "Comments Disabled". Also returns journal links if crossposting was enabled
   with the entry.</td>
  </tr></tbody>
  <tbody><tr>
@@ -557,8 +557,8 @@ on the <a href="templates.php?g=templates">Templates page</a>.</p>
   <td class="d">Entry title</td>
  </tr></tbody>
  </table>
- <p class="noteButton"><span class="note">Note:</span> This template is used for 
- the updates feature &#8211; this template is not required to be edited unless 
+ <p class="noteButton"><span class="note">Note:</span> This template is used for
+ the updates feature &#8211; this template is not required to be edited unless
  your updates feature is turned on.</p>
  <p class="nb">
   <textarea name="updates" cols="50" rows="8" style="height: 150px; margin: 0 1% 0 0; width: 99%;">
@@ -574,10 +574,10 @@ on the <a href="templates.php?g=templates">Templates page</a>.</p>
  </p>
 </fieldset>
 </form>
-<?php 
+<?php
   }
-	
-  else { 
+
+  else {
 ?>
 <h3>Details</h3>
 <form action="listings.php" enctype="multipart/form-data" method="post">
@@ -588,22 +588,25 @@ on the <a href="templates.php?g=templates">Templates page</a>.</p>
 
 <fieldset>
  <legend>Details</legend>
- <p><label><strong>Title:</strong></label> 
+ <p><label><strong>Title:</strong></label>
  <input name="title" class="input1" type="text" value="<?php echo $getItem->title; ?>"></p>
- <p><label><strong>Subject:</strong></label> 
+ <p><label><strong>Subject:</strong></label>
  <input name="subject" class="input1" type="text" value="<?php echo $getItem->subject; ?>"></p>
- <p><label><strong>URI:</strong></label> 
+ <p><label><strong>URI:</strong></label>
  <input name="url" class="input1" type="url" value="<?php echo $getItem->url; ?>"></p>
+ <p><label><strong>Listing ID:</strong><br>
+ If you are upgrading from a previous install and need to update the ID, type it here.<br><strong>Note:</strong> Unless you know what you are doing DO NOT change this.</label>
+ <input name="fluid" class="input1" type="text" value="<?php echo $getItem->id; ?>"></p>
 </fieldset>
 
 <fieldset>
  <legend>Categories and Opened Date</legend>
- <p><label><strong>Categories:</strong></label> 
+ <p><label><strong>Categories:</strong></label>
  <select name="category[]" class="input1" multiple="multiple" size="10">
-<?php 
+<?php
  $select = "SELECT * FROM `$_ST[categories]` WHERE `parent` = '0' ORDER BY `catname` ASC";
  $true = $scorpions->query($select);
- if($true == false) { 
+ if($true == false) {
   echo "<option value=\"0\">No Categories Available</option>\n";
  }
 
@@ -611,23 +614,23 @@ on the <a href="templates.php?g=templates">Templates page</a>.</p>
   while($getCat = $scorpions->obj($true, 0)) {
    $catid = $getCat->catid;
    $cats = explode('!', $getItem->category);
-   echo '<option value="' . $getCat->catid . '"'; 
+   echo '<option value="' . $getCat->catid . '"';
 	 if(in_array($getCat->catid, $cats)) {
-	  echo ' selected="selected"'; 
+	  echo ' selected="selected"';
    }
 	 echo '>' . $getCat->catname . "</option>\n";
-	 $q2 = $scorpions->query("SELECT * FROM `$_ST[categories]` WHERE `parent` =" . 
+	 $q2 = $scorpions->query("SELECT * FROM `$_ST[categories]` WHERE `parent` =" .
    " '$catid' ORDER BY `catname` ASC");
 	 while($getCat2 = $scorpions->obj($q2, 0)) {
-    echo '<option value="' . $getCat2->catid . '"'; 
+    echo '<option value="' . $getCat2->catid . '"';
 	  if(in_array($getCat2->catid, $cats)) {
-	   echo ' selected="selected"'; 
+	   echo ' selected="selected"';
     }
 	  echo '>' . $lions->getCatName($getCat2->parent) . ' &#187; ' . $getCat2->catname .
     "</option>\n";
 	 }
   }
- } 
+ }
 ?>
  </select></p>
  <p><label><strong>Date Opened:</strong></label> <select name="month" class="input1" size="4">
@@ -636,50 +639,50 @@ on the <a href="templates.php?g=templates">Templates page</a>.</p>
  $dateNow1 = date('m', strtotime($getItem->since));
  foreach($dateArray as $dA => $dA2) {
   echo '  <option value="' . $dA . '"';
-  if($dA == $dateNow1) { 
+  if($dA == $dateNow1) {
    echo ' selected="selected"';
   }
   echo '>' . $dA2 . "</option>\n";
  }
 ?>
  </select></p>
- <p><label><strong>Day:</strong></label> 
+ <p><label><strong>Day:</strong></label>
  <input name="day" class="input1" type="number" value="<?php echo date('d', strtotime($getItem->since)); ?>" min="1" max="31"></p>
- <p><label><strong>Year:</strong></label> 
+ <p><label><strong>Year:</strong></label>
  <input name="year" class="input1" type="number" value="<?php echo date('Y', strtotime($getItem->since)); ?>"></p>
 </fieldset>
 
 <fieldset>
 <legend>Submit</legend>
  <p class="tc">
-  <input name="action" class="input2" type="submit" value="Manage Listing"> 
+  <input name="action" class="input2" type="submit" value="Manage Listing">
   <input class="input2" type="reset" value="Reset Form">
  </p>
 </fieldset>
 </form>
-<?php 
+<?php
   }
 ?>
 </div>
-<?php 
- } 
- 
+<?php
+ }
+
  else {
 ?>
-<p>Use the form below to choose a listing to manage. You can only manage 
+<p>Use the form below to choose a listing to manage. You can only manage
 <strong>one</strong> listing at a time.</p>
 
 <form action="listings.php" method="get">
 <p class="noMargin"><input name="g" type="hidden" value="manage"></p>
 
-<fieldset> 
+<fieldset>
  <legend>Choose Listing</legend>
  <p><label><strong>Listing:</strong></label> <select name="d" class="input1">
-<?php 
+<?php
  $select = "SELECT * FROM `$_ST[main]` ORDER BY `subject` ASC";
  $count = $scorpions->counts($select, 1);
  $true = $scorpions->query($select);
- if($true == false || $count->rows == 0) { 
+ if($true == false || $count->rows == 0) {
   echo "  <option>Listings Unavailable</option>\n";
  }
 
@@ -695,7 +698,7 @@ on the <a href="templates.php?g=templates">Templates page</a>.</p>
  </p>
 </fieldset>
 </form>
-<?php 
+<?php
  }
 }
 
@@ -703,23 +706,23 @@ elseif (isset($_POST['action']) && $_POST['action'] === 'Manage Listing') {
  $id = $tigers->cleanMys($_POST['id']);
  $idArray = $wolves->listingsList();
  if(empty($id) || !is_numeric($id) || !in_array($id, $idArray)) {
-  $tigers->displayError('Script Error', 'Your ID is empty, is not a number' . 
-	' or is not a listing. This means you selected an incorrect listing or you\'re' . 
+  $tigers->displayError('Script Error', 'Your ID is empty, is not a number' .
+	' or is not a listing. This means you selected an incorrect listing or you\'re' .
 	' trying to access something that doesn\'t exist. Go back and try again.', false);
  }
  $opt = $tigers->cleanMys($_POST['opt']);
  $optArray = ['1', '2', '3', '4'];
  $optValue = ['2' => 'crosslist', '3' => 'options', '4' => 'templates'];
  if(empty($opt) || !is_numeric($id) || !in_array($opt, $optArray)) {
-  $tigers->displayError('Script Error', 'You can only edit listing details,' . 
+  $tigers->displayError('Script Error', 'You can only edit listing details,' .
 	' crosslisting, options and templates!', false);
  }
  $getlisting = $wolves->getListings($id, 'object');
- 
- /* 
-  *  Start editing our listing options right harrrr~ The first will be our 
-  *  details (subject, title, et al.) 
-  */  
+
+ /*
+  *  Start editing our listing options right harrrr~ The first will be our
+  *  details (subject, title, et al.)
+  */
  if($opt == '1') {
   $title = $tigers->cleanMys($_POST['title']);
   if($seahorses->getVar($id, 'title') != $title) {
@@ -727,7 +730,7 @@ elseif (isset($_POST['action']) && $_POST['action'] === 'Manage Listing') {
   }
   $subject = $tigers->cleanMys($_POST['subject']);
   if(empty($subject)) {
-   $tigers->displayError('Form Error', 'Your <samp>subject</samp> field is' . 
+   $tigers->displayError('Form Error', 'Your <samp>subject</samp> field is' .
    ' empty.', false);
   }
   if($seahorses->getVar($id, 'subject') != $subject) {
@@ -738,16 +741,25 @@ if (!empty($url) && !StringUtils::instance()->isUrlValid($url)) {
     $tigers->displayError('Form Error', 'Your <samp>site URL</samp> is' .
         ' not valid. Please supply a valid site URL or empty the field.', false);
 }
-	
-	/** 
-	 * If a previous owner has been supplied for this fanlisting, change the 
-	 * previous owners with links to the fanlisting URL 
-	 */ 
+$fluid = $tigers->cleanMys($_POST['fluid']);
+  if(empty($fluid) && $crosslist == 2) {
+   $tigers->displayError('Form Error', 'If you are not crosslisting to a' .
+	 ' script, please supply a listing ID.', false);
+  }
+  if($seahorses->getVar($id, 'id') != $fluid) {
+   $seahorses->editListing($id, 'id', $fluid);
+  }
+
+
+	/**
+	 * If a previous owner has been supplied for this fanlisting, change the
+	 * previous owners with links to the fanlisting URL
+	 */
 	$previousnow = $seahorses->getVar($id, 'previous');
 	$previous    = unserialize($previousnow, ['allowed_classes' => true]);
 	$newprevious = new stdClass();
 	if(
-	 (!empty($url) && $url != '' && $url != '0') && 
+	 (!empty($url) && $url != '' && $url != '0') &&
 	 ($seahorses->getVar($id, 'url') != $url)
 	) {
 	 foreach($previous as $pk => $pv) {
@@ -764,7 +776,7 @@ if (!empty($url) && !StringUtils::instance()->isUrlValid($url)) {
 
   $category = $_POST['category'];
   if(empty($category)) {
-   $tigers->displayError('Form Error', 'Your <samp>category</samp> field' . 
+   $tigers->displayError('Form Error', 'Your <samp>category</samp> field' .
 	 ' is empty.', false);
   }
   $category = array_map([$tigers, 'cleanMys'], $category);
@@ -777,16 +789,16 @@ if (!empty($url) && !StringUtils::instance()->isUrlValid($url)) {
   $month = $tigers->cleanMys($_POST['month'], 'y', 'n', 'n');
   $day = $tigers->cleanMys($_POST['day'], 'y', 'n', 'n');
   if(empty($year) || empty($month) || empty($day)) {
-   $tigers->displayError('Form Error', 'The <samp>date</samp> field is' . 
+   $tigers->displayError('Form Error', 'The <samp>date</samp> field is' .
 	 ' empty.', false);
   } elseif (!is_numeric($year) || !is_numeric($month) || !is_numeric($day)) {
-   $tigers->displayError('Form Error', 'The <samp>date</samp> field is' . 
+   $tigers->displayError('Form Error', 'The <samp>date</samp> field is' .
 	 ' not digits.', false);
   } elseif (strlen($year) > 4) {
-   $tigers->displayError('Form Error', 'The <samp>year</samp> field' . 
+   $tigers->displayError('Form Error', 'The <samp>year</samp> field' .
 	 ' needs to be the length of 4 digits.', false);
   } elseif (strlen($month) > 2 || strlen($day) > 2) {
-   $tigers->displayError('Form Error', 'The <samp>month or day</samp>' . 
+   $tigers->displayError('Form Error', 'The <samp>month or day</samp>' .
 	 ' field needs to be the length of 2 digits.', false);
   } elseif(!checkdate($month, $day, $year)) {
   $tigers->displayError('Form Error', 'The combination of day, month and year is incorrect, please check the date you entered.', false);
@@ -797,9 +809,9 @@ if (!empty($url) && !StringUtils::instance()->isUrlValid($url)) {
   }
  }
 
- /* 
-  *  Now we're editing the crosslisting options :D 
-  */ 
+ /*
+  *  Now we're editing the crosslisting options :D
+  */
  elseif ($opt == '2') {
   $dbhost = $tigers->cleanMys($_POST['dbhost']);
   if($seahorses->getVar($id, 'dbhost') != $dbhost) {
@@ -819,7 +831,7 @@ if (!empty($url) && !StringUtils::instance()->isUrlValid($url)) {
   }
 	$crosslist = $tigers->cleanMys($_POST['crosslist']);
   if(empty($crosslist) || !in_array($crosslist, array(1, 2))) {
-   $tigers->displayError('Form Error', 'The <samp>crosslist</samp> field' . 
+   $tigers->displayError('Form Error', 'The <samp>crosslist</samp> field' .
 	 ' is invalid. Please enter "Yes" or "No".', false);
   }
 	$clist = $crosslist == 1 || $crosslist == '1' ? '0' : 1;
@@ -829,8 +841,8 @@ if (!empty($url) && !StringUtils::instance()->isUrlValid($url)) {
   $crosslist_script = $tigers->cleanMys($_POST['crosslist_script']);
   $crosslist_script_array = array('n', 'enth', 'fabbase', 'listingadmin');
   if(empty($crosslist_script) || !in_array($crosslist_script, $crosslist_script_array)) {
-   $tigers->displayError('Form Error', 'The <samp>crosslist script</samp>' . 
-	 ' field is invalid. If you are not crosslisting, simply leave it at default' . 
+   $tigers->displayError('Form Error', 'The <samp>crosslist script</samp>' .
+	 ' field is invalid. If you are not crosslisting, simply leave it at default' .
 	 ' (N/A).', false);
   }
   if($seahorses->getVar($id, 'dbtype') != $crosslist_script) {
@@ -838,7 +850,7 @@ if (!empty($url) && !StringUtils::instance()->isUrlValid($url)) {
   }
   $table = $tigers->cleanMys($_POST['table']);
   if(empty($table) && $crosslist == 2) {
-   $tigers->displayError('Form Error', 'If you are crosslisting to a' . 
+   $tigers->displayError('Form Error', 'If you are crosslisting to a' .
 	 ' script, please supply a table name.', false);
   }
   if($seahorses->getVar($id, 'dbtabl') != $table) {
@@ -855,7 +867,7 @@ if (!empty($url) && !StringUtils::instance()->isUrlValid($url)) {
 	  $tigers->displayError('Form Error', 'The affiliates image URL you' .
 	  ' provided is invalid!', false);
 	 } elseif (substr($affhttp, -1) != '/' || substr($affhttp, -1) != '/') {
-	  $tigers->displayError('Form Error', 'The affiliates images URL and/or' . 
+	  $tigers->displayError('Form Error', 'The affiliates images URL and/or' .
 	  ' affiliates images path do not have trailing slashes.', false);
 	 }
 	}
@@ -867,7 +879,7 @@ if (!empty($url) && !StringUtils::instance()->isUrlValid($url)) {
   }
 	$flid = $tigers->cleanMys($_POST['flid']);
   if(empty($flid) && $crosslist == 2) {
-   $tigers->displayError('Form Error', 'If you are not crosslisting to a' . 
+   $tigers->displayError('Form Error', 'If you are not crosslisting to a' .
 	 ' script, please supply a listing ID.', false);
   }
   if($seahorses->getVar($id, 'dbflid') != $flid) {
@@ -875,13 +887,13 @@ if (!empty($url) && !StringUtils::instance()->isUrlValid($url)) {
   }
  }
 
- /** 
-  * Regular ole options for Listings 8D 
-  */ 
+ /**
+  * Regular ole options for Listings 8D
+  */
  elseif ($opt == '3') {
   $status = $tigers->cleanMys($_POST['status']);
   if(!ctype_digit($status) || strlen($status) > 1 || $status > 3) {
-   $tigers->displayError('Form Error', 'Your <samp>status</samp> is' . 
+   $tigers->displayError('Form Error', 'Your <samp>status</samp> is' .
    ' invalid.', false);
   }
   if($seahorses->getVar($id, 'status') != $status) {
@@ -889,10 +901,10 @@ if (!empty($url) && !StringUtils::instance()->isUrlValid($url)) {
   }
   $granted = $tigers->cleanMys($_POST['granted']);
   if(!ctype_digit($granted)) {
-   $tigers->displayError('Form Error', 'Your <samp>granted</samp>' . 
+   $tigers->displayError('Form Error', 'Your <samp>granted</samp>' .
 	 ' field is not a number.', false);
   } elseif (strlen($granted) > 1) {
-   $tigers->displayError('Form Error', 'Your <samp>granted</samp>' . 
+   $tigers->displayError('Form Error', 'Your <samp>granted</samp>' .
 	 ' field must not exceed 1.', false);
   }
   if($seahorses->getVar($id, 'granted') != $granted) {
@@ -900,28 +912,28 @@ if (!empty($url) && !StringUtils::instance()->isUrlValid($url)) {
   }
   $show_owned = $tigers->cleanMys($_POST['show_owned']);
   if(!ctype_digit($granted) || strlen($granted) > 1) {
-   $tigers->displayError('Form Error', 'Your <samp>show on owned' . 
+   $tigers->displayError('Form Error', 'Your <samp>show on owned' .
 	 ' list</samp> field is invalid.', false);
-  } 
+  }
   if($seahorses->getVar($id, 'show') != $show_owned) {
    $seahorses->editListing($id, 'show', $show_owned);
   }
   $markup    = $tigers->cleanMys($_POST['markup']);
   $markupArr = array('html', 'html5', 'xhtml');
   if(empty($markup)) {
-   $tigers->displayError('Form Error', 'Your <samp>markup</samp>' . 
+   $tigers->displayError('Form Error', 'Your <samp>markup</samp>' .
 	 ' field is empty.', false);
   } elseif (!in_array($markup, $markupArr)) {
-   $tigers->displayError('Form Error', 'Your <samp>markup</samp>' . 
+   $tigers->displayError('Form Error', 'Your <samp>markup</samp>' .
 	 ' field needs to be XHTML, HTML5 or HTML.', false);
-  } 
+  }
   if($seahorses->getVar($id, 'markup') != $markup) {
    $seahorses->editListing($id, 'markup', $markup);
   }
   $change = $tigers->cleanMys($_POST['change']);
   $changeArray = array('add', 'edit', 'delete', 'none');
   if(!in_array($change, $changeArray)) {
-   $tigers->displayError('Form Error', 'You can only add, edit and delete' . 
+   $tigers->displayError('Form Error', 'You can only add, edit and delete' .
 	 ' an image.', false);
   }
   $image = $_FILES['image'];
@@ -930,8 +942,8 @@ if (!empty($url) && !StringUtils::instance()->isUrlValid($url)) {
 	 $imageinfo = getimagesize($_FILES['image']['tmp_name']);
 	 $imagetype = $imageinfo[2];
    if($imagetype != 1 && $imagetype != 2 && $imagetype != 3) {
-    $tigers->displayError('Form Error', 'Only <samp>.gif</samp>,' . 
-		' <samp>.jpg</samp> and <samp>.png</samp> extensions are allowed when' . 
+    $tigers->displayError('Form Error', 'Only <samp>.gif</samp>,' .
+		' <samp>.jpg</samp> and <samp>.png</samp> extensions are allowed when' .
 		' uploading an image.', false);
    }
   }
@@ -962,19 +974,19 @@ if (!empty($url) && !StringUtils::instance()->isUrlValid($url)) {
   }
   if(isset($delete, $success)) {
 	 if($delete && $success) {
-	  echo '<p class="successButton"><span class="success">SUCCESS!</span>' . 
+	  echo '<p class="successButton"><span class="success">SUCCESS!</span>' .
 	  " Your old image was deleted and replaced with a new one!</p>\n";
 	 }
   }
   elseif (isset($delete) && !isset($success)) {
 	 if($delete) {
-    echo '<p class="successButton"><span class="success">SUCCESS!</span> Your' . 
+    echo '<p class="successButton"><span class="success">SUCCESS!</span> Your' .
 		" old image was deleted!</p>\n";
 	 }
   }
-  elseif (!isset($delete) && isset($success)) { 
+  elseif (!isset($delete) && isset($success)) {
 	 if($success) {
-	  echo '<p class="successButton"><span class="success">SUCCESS!</span> Your' . 
+	  echo '<p class="successButton"><span class="success">SUCCESS!</span> Your' .
 		" image was uploaded!</p>\n";
    }
   }
@@ -993,15 +1005,15 @@ if (!empty($url) && !StringUtils::instance()->isUrlValid($url)) {
 		  }
 		  $true = $scorpions->query($update);
 	   }
-	  } 
+	  }
 	  else {
      $additional[] = $snakes->additional($_POST['favefield'][$field], 'encode');
 	  }
    }
   }
-  /**   
-   * This adds a favourite field to each member if adding a new field(s). :D 
-   */ 
+  /**
+   * This adds a favourite field to each member if adding a new field(s). :D
+   */
   $listingnow = $wolves->getListings($id, 'object');
   $favesfields = explode('|', $listingnow->fave_fields);
   $favesfields = $tigers->emptyarray($favesfields);
@@ -1027,17 +1039,17 @@ $favouritefields = '|' . trim($favouritefields, '|') . '|';
   if($seahorses->getVar($id, 'fave_fields') != $favouritefields) {
    $seahorses->editListing($id, 'fave_fields', $favouritefields);
   }
-	
-	/** 
-	 * Previous owners si-tu-a-tion! 
-	 */ 
+
+	/**
+	 * Previous owners si-tu-a-tion!
+	 */
 	$powners = array();
 	if(isset($_POST['pnumeric'])) {
    foreach($_POST['pnumeric'] as $field => $value) {
 	  $pname = trim($_POST['pname'][$field]);
-		$purl  = !empty($pname) && $pname != '' && $pname != '0' ? 
+		$purl  = !empty($pname) && $pname != '' && $pname != '0' ?
 		(
-		 empty($_POST['purl'][$field]) || $_POST['purl'][$field] == '' ? 
+		 empty($_POST['purl'][$field]) || $_POST['purl'][$field] == '' ?
 		 $getlisting->url : $tigers->cleanMys($_POST['purl'][$field])
 		) : '';
 	  if(
@@ -1057,10 +1069,10 @@ $favouritefields = '|' . trim($favouritefields, '|') . '|';
     $seahorses->editListing($id, 'previous', $previous);
    }
 	}
-	
-	/** 
-	 * Form URLs 
-	 */ 
+
+	/**
+	 * Form URLs
+	 */
   $form_delete = $tigers->cleanMys($_POST['form-delete']);
   $form_delete = $tigers->formDefault('delete', $form_delete);
   if($seahorses->getVar($id, 'form_delete') != $form_delete) {
@@ -1073,7 +1085,7 @@ $favouritefields = '|' . trim($favouritefields, '|') . '|';
   }
   $form_join = $tigers->cleanMys($_POST['form-join']);
   $form_join = $tigers->formDefault('join', $form_join);
-  if($seahorses->getVar($id, 'form_join') != $form_join) { 
+  if($seahorses->getVar($id, 'form_join') != $form_join) {
    $seahorses->editListing($id, 'form_join', $form_join);
   }
 	$form_join_rules = $tigers->cleanMys($_POST['form-join_rules'], 'n');
@@ -1092,9 +1104,9 @@ $favouritefields = '|' . trim($favouritefields, '|') . '|';
   }
  }
 
- /**  
-  * Aaaaaaaa-aaa-and templates! :D 
-  */ 
+ /**
+  * Aaaaaaaa-aaa-and templates! :D
+  */
  elseif ($opt == '4') {
   $dateformat = $tigers->cleanMys($_POST['dateformat']);
   if(empty($dateformat)) {
@@ -1106,7 +1118,7 @@ $favouritefields = '|' . trim($favouritefields, '|') . '|';
    $seahorses->editListing($id, 'date', $df);
   }
   $desc = trim(htmlentities($_POST['desc'], ENT_QUOTES));
-  if($seahorses->getVar($id, 'desc') != $desc) { 
+  if($seahorses->getVar($id, 'desc') != $desc) {
    $seahorses->editListing($id, 'desc', $desc);
   }
   $stats = trim(htmlentities($_POST['stats'], ENT_QUOTES));
@@ -1124,7 +1136,7 @@ $favouritefields = '|' . trim($favouritefields, '|') . '|';
   if(empty($affiliates)) {
    $affiliates = trim($templatesExamples->affiliates);
   }
-  if($seahorses->getVar($id, 'affiliates') != $affiliates) { 
+  if($seahorses->getVar($id, 'affiliates') != $affiliates) {
    $seahorses->editListing($id, 'affiliates', $affiliates);
   }
   $wishlist = trim(htmlentities($_POST['wishlist'], ENT_QUOTES));
@@ -1151,7 +1163,7 @@ $favouritefields = '|' . trim($favouritefields, '|') . '|';
   $member_header = trim(htmlentities($_POST['mem-head'], ENT_QUOTES));
   if(empty($member_header)) {
    $member_header = trim($templatesExamples->members_header);
-  } 
+  }
   if($seahorses->getVar($id, 'members_header') != $member_header) {
    $seahorses->editListing($id, 'members_header', $member_header);
   }
@@ -1171,7 +1183,7 @@ $favouritefields = '|' . trim($favouritefields, '|') . '|';
  echo $tigers->backLink('listings');
 }
 
-# -- Get New Listing ----------------------------------------------------------- 
+# -- Get New Listing -----------------------------------------------------------
 
 elseif (isset($_GET['g']) && $_GET['g'] == 'new') {
 ?>
@@ -1182,9 +1194,9 @@ elseif (isset($_GET['g']) && $_GET['g'] == 'new') {
  <p><label><strong>Subject:</strong></label> <input name="subject" class="input1" type="text" required></p>
  <p><label><strong><abbr title="Uniform Resource Indentifier">URI</abbr>:</strong>
  </label> <input name="url" class="input1" type="url"></p>
- <p><label><strong>Status:</strong></label> 
+ <p><label><strong>Status:</strong></label>
  <input name="status" checked="checked" class="input3" type="radio" value="0"> Current
- <input name="status" class="input3" type="radio" value="1"> Upcoming 
+ <input name="status" class="input3" type="radio" value="1"> Upcoming
  <input name="status" class="input3" type="radio" value="2"> Pending</p>
 </fieldset>
 
@@ -1196,7 +1208,7 @@ elseif (isset($_GET['g']) && $_GET['g'] == 'new') {
   <option selected="selected" value="0">No</option>
  </select></p>
  <p><label><strong>HTML Markup</strong><br>
- This option chooses what you want HTML mark-up you want for each listing.</label> 
+ This option chooses what you want HTML mark-up you want for each listing.</label>
  <select name="markup" class="input1">
   <option value="html">HTML</option>
   <option value="html5">HTML5</option>
@@ -1206,8 +1218,8 @@ elseif (isset($_GET['g']) && $_GET['g'] == 'new') {
 
 <fieldset>
  <legend>Description and Templates</legend>
- <p><label><strong>Date Format:</strong><br>The date format is 
- <samp>F j, Y</samp> by default; check out 
+ <p><label><strong>Date Format:</strong><br>The date format is
+ <samp>F j, Y</samp> by default; check out
  <a href="http://php.net/" title="External Link: 'date' at php.net">the Date manual &#187;</a>
  on the PHP.net website for more formats.</label>
  <input name="dateformat" class="input1" type="text" value="F j, Y"></p>
@@ -1220,12 +1232,12 @@ elseif (isset($_GET['g']) && $_GET['g'] == 'new') {
 
 <fieldset>
  <legend>Categories and Opened Date</legend>
- <p><label><strong>Categor(y|ies):</strong></label> 
+ <p><label><strong>Categor(y|ies):</strong></label>
  <select name="category[]" class="input1" multiple="multiple" size="10" required>
-<?php 
+<?php
  $select = "SELECT * FROM `$_ST[categories]` WHERE `parent` = '0' ORDER BY `catname` ASC";
  $true = $scorpions->query($select);
- if($true == false) { 
+ if($true == false) {
   echo "  <option value=\"0\">No Category Available</option>\n";
  }
 
@@ -1233,7 +1245,7 @@ elseif (isset($_GET['g']) && $_GET['g'] == 'new') {
   while($getItem = $scorpions->obj($true, 0)) {
    $catid = $getItem->catid;
    echo '  <option value="' . $getItem->catid . '">' . $getItem->catname . "</option>\n";
-	 $q2 = $scorpions->query("SELECT * FROM `$_ST[categories]` WHERE `parent` =" . 
+	 $q2 = $scorpions->query("SELECT * FROM `$_ST[categories]` WHERE `parent` =" .
    " '$catid' ORDER BY `catname` ASC");
 	 while($getItem2 = $scorpions->obj($q2, 0)) {
     echo '  <option value="' . $getItem2->catid . '">' .
@@ -1245,12 +1257,12 @@ elseif (isset($_GET['g']) && $_GET['g'] == 'new') {
 ?>
  </select></p>
  <p><label><strong>Date Opened *:</strong></label> <select name="month" class="input1" required>
-<?php 
+<?php
  $dateArray = $get_date_array;
  $dateNow1 = date('m');
  foreach($dateArray as $dA => $dA2) {
   echo '  <option value="' . $dA . '"';
-  if($dA == $dateNow1) { 
+  if($dA == $dateNow1) {
    echo ' selected="selected"';
   }
   echo '>' . $dA2 . "</option>\n";
@@ -1270,7 +1282,7 @@ elseif (isset($_GET['g']) && $_GET['g'] == 'new') {
  </p>
 </fieldset>
 </form>
-<?php 
+<?php
 }
 
 elseif (isset($_POST['action']) && $_POST['action'] == 'Add Listing') {
@@ -1290,22 +1302,22 @@ if (!empty($url) && !StringUtils::instance()->isUrlValid($url)) {
 	$imageinfo = getimagesize($_FILES['image']['tmp_name']);
 	$imagetype = $imageinfo[2];
   if($imagetype != 1 && $imagetype != 2 && $imagetype != 3) {
-   $tigers->displayError('FORM Error', 'Only <samp>.gif</samp>, <samp>.jpg' . 
+   $tigers->displayError('FORM Error', 'Only <samp>.gif</samp>, <samp>.jpg' .
    '</samp> and <samp>.png</samp> extensions allowed.', false);
   }
  }
 
  $category = $_POST['category'] ?? null;
  if(empty($category)) {
-  $tigers->displayError('Form Error', 'Your <samp>category</samp> field' . 
+  $tigers->displayError('Form Error', 'Your <samp>category</samp> field' .
 	' is empty.', false);
  }
  $category = array_map(array($tigers, 'cleanMys'), $category);
  $status = $tigers->cleanMys($_POST['status']);
  if(!is_numeric($status) || strlen($status) > 1 || $status > 3) {
-  $tigers->displayError('Form Error', 'Your <samp>status</samp> field' . 
+  $tigers->displayError('Form Error', 'Your <samp>status</samp> field' .
 	' is invalid.', false);
- } 
+ }
  $dateformat = $tigers->cleanMys($_POST['dateformat']);
  if(empty($dateformat)) {
   $df = 'F j, Y';
@@ -1322,10 +1334,10 @@ if (!empty($url) && !StringUtils::instance()->isUrlValid($url)) {
  } elseif (!is_numeric($year) || !is_numeric($month) || !is_numeric($day)) {
   $tigers->displayError('Form Error', 'The <samp>date</samp> field is not digits.', false);
  } elseif (strlen($year) > 4) {
-  $tigers->displayError('Form Error', 'The <samp>year</samp> field needs' . 
+  $tigers->displayError('Form Error', 'The <samp>year</samp> field needs' .
 	' to be the length of 4 digits.', false);
  } elseif (strlen($month) > 2 || strlen($day) > 2) {
-  $tigers->displayError('Form Error', 'The <samp>month or day</samp> field' . 
+  $tigers->displayError('Form Error', 'The <samp>month or day</samp> field' .
 	' needs to be the length of 2 digits.', false);
  } elseif(!checkdate($month, $day, $year)) {
   $tigers->displayError('Form Error', 'The combination of day, month and year is incorrect, please check the date you entered.', false);
@@ -1333,15 +1345,15 @@ if (!empty($url) && !StringUtils::instance()->isUrlValid($url)) {
  $date = $tigers->cleanMys($year . '-' . $month . '-' . $day, 'y', 'n');
  $granted = $tigers->cleanMys($_POST['granted']);
  if(!is_numeric($granted) || strlen($granted) > 1) {
-  $tigers->displayError('Script Error', 'Your <samp>granted</samp> field' . 
+  $tigers->displayError('Script Error', 'Your <samp>granted</samp> field' .
 	' is invalid.', false);
- } 
+ }
  $markup = $tigers->cleanMys($_POST['markup']);
  if(empty($markup) || !array_key_exists($markup, $get_markup_array)) {
-  $tigers->displayError('Script Error', 'Your <samp>markup</samp> field is' . 
+  $tigers->displayError('Script Error', 'Your <samp>markup</samp> field is' .
 	' invalid.', false);
  }
- 
+
  $img_path = $seahorses->getOption('img_path');
  if(!empty($img_path) && is_dir($img_path)) {
   $path = $seahorses->getOption('img_path');
@@ -1370,8 +1382,8 @@ if (!empty($url) && !StringUtils::instance()->isUrlValid($url)) {
  " '', '$df', '$date', '1970-01-01', '$granted', '$markup', '')";
  $true = $scorpions->insert($insert);
  if($true == false) {
-  $tigers->displayError('Database Error', 'The script was unable to add' . 
-	' the listing to the database.|Make sure your listings table exists.', 
+  $tigers->displayError('Database Error', 'The script was unable to add' .
+	' the listing to the database.|Make sure your listings table exists.',
 	true, $insert);
  } elseif ($true == true) {
   echo '<p class="successButton"><span class="success">Success!</span> Your' .
@@ -1384,7 +1396,7 @@ if (!empty($url) && !StringUtils::instance()->isUrlValid($url)) {
  }
 }
 
-# -- Now let's delete a listing, yeah~? ---------------------------------------- 
+# -- Now let's delete a listing, yeah~? ----------------------------------------
 
 elseif (isset($_GET['g']) && $_GET['g'] == 'erase') {
  if(empty($_GET['d']) || !isset($_GET['d'])) {
@@ -1392,14 +1404,14 @@ elseif (isset($_GET['g']) && $_GET['g'] == 'erase') {
 <form action="listings.php" method="get">
 <p class="noMargin"><input name="g" type="hidden" value="erase"></p>
 
-<fieldset> 
+<fieldset>
  <legend>Choose Listing</legend>
  <p><label><strong>Listing:</strong></label> <select name="d" class="input1" size="15">
-<?php 
+<?php
  $select = "SELECT * FROM `$_ST[main]` ORDER BY `subject` ASC";
  $count = $scorpions->counts($select, 1);
  $true = $scorpions->query($select);
- if($true == false || $count->rows == 0) { 
+ if($true == false || $count->rows == 0) {
   echo "  <option value=\"0\">No Listings Available</option>\n";
  }
 
@@ -1413,7 +1425,7 @@ elseif (isset($_GET['g']) && $_GET['g'] == 'erase') {
  <p class="tc"><input class="input2" type="submit" value="Delete Listing"></p>
 </fieldset>
 </form>
-<?php 
+<?php
  }
 
  if(!empty($_GET['d']) && is_numeric($_GET['d'])) {
@@ -1422,14 +1434,14 @@ elseif (isset($_GET['g']) && $_GET['g'] == 'erase') {
   $select = "SELECT * FROM `$_ST[main]` WHERE `id` = '$id' LIMIT 1";
   $true = $scorpions->query($select);
   if($true == false) {
-   $tigers->displayError('Database Error', 'The script was unable to select' . 
-	 ' that specific listing.|Make sure the ID is not empty and the listings table' . 
+   $tigers->displayError('Database Error', 'The script was unable to select' .
+	 ' that specific listing.|Make sure the ID is not empty and the listings table' .
 	 ' exists.', true, $select);
   }
   $getItem = $scorpions->obj($true, 0);
 ?>
-<p>You are about to delete the <strong><?php echo $getItem->subject; ?></strong> 
-listing; please be aware that once you delete a listing, it is gone forever. 
+<p>You are about to delete the <strong><?php echo $getItem->subject; ?></strong>
+listing; please be aware that once you delete a listing, it is gone forever.
 <em>This cannot be undone!</em> To proceed, click the "Delete Listing" button.</p>
 
 <form action="listings.php" method="post">
@@ -1437,23 +1449,23 @@ listing; please be aware that once you delete a listing, it is gone forever.
 
 <fieldset>
  <legend>Delete Listing</legend>
- <p class="tc">Deleting the <strong><?php echo $getItem->subject; ?></strong> 
+ <p class="tc">Deleting the <strong><?php echo $getItem->subject; ?></strong>
  fanlisting &#8211;</p>
  <p class="tc"><input name="action" class="input2" type="submit" value="Delete Listing"></p>
 </fieldset>
 </form>
-<?php 
- } 
+<?php
+ }
 }
 
 elseif (isset($_POST['action']) && $_POST['action'] == 'Delete Listing') {
  $id = $tigers->cleanMys($_POST['id']);
  if(empty($id) || !is_numeric($id)) {
-  $tigers->displayError('Script Error', 'Your ID is empty. This means' . 
-	' you selected an incorrect listing or you\'re trying to access something' . 
+  $tigers->displayError('Script Error', 'Your ID is empty. This means' .
+	' you selected an incorrect listing or you\'re trying to access something' .
 	' that doesn\'t exist. Go back and try again.', false);
  }
- 
+
  $sImage = $wolves->pullImage($id);
  $dImage = $seahorses->getOption('img_path') . $sImage;
  if(file_exists($dImage) && !empty($sImage)) {
@@ -1469,10 +1481,10 @@ elseif (isset($_POST['action']) && $_POST['action'] == 'Delete Listing') {
  $delete = "DELETE FROM `$_ST[main]` WHERE `id` = '$id' LIMIT 1";
  $true = $scorpions->query($delete);
  if($true == false) {
-  $tigers->displayError('Database Error', 'The script was unable to delete' . 
-  ' the listing.|Make sure your ID is not empty and your listings table exists.', 
+  $tigers->displayError('Database Error', 'The script was unable to delete' .
+  ' the listing.|Make sure your ID is not empty and your listings table exists.',
 	true, $delete);
- }  
+ }
 
  if($true == true) {
   echo '<p class="successButton"><span class="success">SUCCESS!</span> Your' .
@@ -1482,18 +1494,18 @@ elseif (isset($_POST['action']) && $_POST['action'] == 'Delete Listing') {
   echo '<p class="successButton"><span class="success">SUCCESS!</span> The' .
 	" members from the deleted listing were deleted!</p>\n";
  }
- 
+
  echo $tigers->backLink('listings');
 }
 
-/** 
- * Index 
- */ 
+/**
+ * Index
+ */
 else {
 ?>
-<p>Welcome to <samp>listings.php</samp>, where you'll be able to add a listing, 
-and edit and/or delete your current ones! Below is the list of your listings. 
-To edit or delete, click the "Edit" or "Delete" buttons by the appropriate 
+<p>Welcome to <samp>listings.php</samp>, where you'll be able to add a listing,
+and edit and/or delete your current ones! Below is the list of your listings.
+To edit or delete, click the "Edit" or "Delete" buttons by the appropriate
 listing.</p>
 
 <h3>Search Listings</h3>
@@ -1536,7 +1548,7 @@ listing.</p>
 </fieldset>
 </form>
 </div>
-<?php 
+<?php
  $select = "SELECT * FROM `$_ST[main]`";
  if(isset($_GET['g'])) {
 	if(isset($_GET['g']) && $_GET['g'] == 'searchCategories') {
@@ -1546,11 +1558,11 @@ listing.</p>
 	 $statusid = $tigers->cleanMys($_GET['s']) - 1;
 	 $select  .= " WHERE `status` = '$statusid'";
 	}
- } 
+ }
  $select .= " ORDER BY `subject` ASC LIMIT $start, $per_page";
  $true    = $scorpions->query($select);
  if($true == false) {
-  $tigers->displayError('Database Error', 'The script was unable to select' . 
+  $tigers->displayError('Database Error', 'The script was unable to select' .
 	' the listings from the database.|Make sure your table exists.', true, $select);
  }
  $count = $scorpions->total($true);
@@ -1567,9 +1579,9 @@ listing.</p>
  <th>Affiliate/Member Counts</th>
  <th>Action</th>
 </tr></thead>
-<?php 
+<?php
   while($getItem = $scorpions->obj($true, 0)) {
-   $imp = strpos($my_imagesh, '/') !== false ? $seahorses->getOption('img_http') . 
+   $imp = strpos($my_imagesh, '/') !== false ? $seahorses->getOption('img_http') .
    $getItem->image : $seahorses->getOption('img_http') . '/' . $getItem->image;
    $status  = $getItem->status;
    $subject = $getItem->subject;
@@ -1584,14 +1596,14 @@ listing.</p>
 	 }
 
    if(
-	  !empty($getItem->image) && 
+	  !empty($getItem->image) &&
 	  file_exists($seahorses->getOption('img_path') . $getItem->image)
 	 ) {
     $imgNow = '<img src="' . $imp . "\" alt=\"\">\n";
    } else {
     $imgNow = '';
    }
- 
+
    if($status == '0') {
     $statusSt = 'Current';
    } elseif ($status == 1) {
@@ -1601,8 +1613,8 @@ listing.</p>
    } else {
     $statusSt = 'Status Not Set';
    }
-	 
-	 $qw = isset($_GET['g']) ? ($_GET['g'] == 'searchCategories' ? '&#38;c=' . 
+
+	 $qw = isset($_GET['g']) ? ($_GET['g'] == 'searchCategories' ? '&#38;c=' .
 	 $catid : '&#38;s=' . $statusid) : '';
 ?>
 <tbody><tr>
@@ -1621,14 +1633,14 @@ listing.</p>
  <td class="floatIcons tc">
   <a href="listings.php?g=manage&#38;d=<?php echo $getItem->id . $qw; ?>">
 	 <img src="img/icons/edit.png" alt="">
-	</a> 
+	</a>
   <a href="listings.php?g=erase&#38;d=<?php echo $getItem->id; ?>">
 	 <img src="img/icons/delete.png" alt="">
 	</a>
  </td>
 </tr></tbody>
-<?php 
-  } 
+<?php
+  }
   echo "</table>\n\n";
 
   echo '<p id="pagination">';
@@ -1646,7 +1658,7 @@ listing.</p>
 	}
 	$total = is_countable($wolves->listingsList('subject', $s, $p)) ? count($wolves->listingsList('subject', $s, $p)) : 0;
   $pages = ceil($total/$per_page);
-	
+
 	$q = 'listings.php?';
 	if(isset($_GET['g'])) {
 	 if(isset($_GET['g']) && $_GET['g'] == 'searchCategories') {
@@ -1676,7 +1688,7 @@ listing.</p>
    echo 'Next &#187;';
   }
   echo "</p>\n";
- } 
+ }
 
  else {
   echo "\n<p class=\"tc\">Currently no listings!</p>\n";

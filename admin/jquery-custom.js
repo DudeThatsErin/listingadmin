@@ -5,6 +5,7 @@
  * @copyright jQuery Copyright (c) John Resig
  * @license   Dual Licenses MIT/GPL Version 2
  * @author    Tess <treibend@gmail.com>
+ * @contributor Erin <dudethatserin@outlook.com>
  */
 
 $(document).ready(function () {
@@ -236,10 +237,7 @@ $(document).ready(function () {
 
         let result = "";
 
-        $.ajax(RSS_URL, {
-            accepts: {
-                xml: "application/rss+xml"
-            },
+        $.ajax('https://dudethatserin.com/sitemap.xml', {
 
             dataType: "xml",
 
@@ -251,12 +249,13 @@ $(document).ready(function () {
                         const el = $(this);
 
                         const template = `
-          <li class="block"><strong>${el.find("title").text()}</strong> [${el.find("pubDate").text()}]<br>
-          <p>${el.find("description").text()}</p>
+          <li class="block"><strong>${el.find("title").text()}</strong> [${el.find("published").text()}]<br>
+          <p>${el.find("summary").text()}</p>
           <a href="${el.find("link").text()}" title="External Link: ${el.find("link").text()}" target="_blank">Read More &#187;</a></li>
         `;
 
                         result += template;
+                        console.log(data)
                     });
 
                 if (result !== '') {

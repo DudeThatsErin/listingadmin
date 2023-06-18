@@ -8,8 +8,9 @@
  * @license          GPL Version 3; BSD Modified
  * @author           Tess <theirrenegadexxx@gmail.com>
  * @contributor      Ekaterina <scripts@robotess.net> http://scripts.robotess.net
- * @file             <fun-external.inc.php>
- * @version          Robotess Fork
+ * @contributor      Erin <dudethatserin@outlook.com> https://github.com/DudeThatsErin/listingadmin
+ * @file             <install.php>
+ * @version          Erin's Fork
  */
 
 if (!class_exists('octopus')) {

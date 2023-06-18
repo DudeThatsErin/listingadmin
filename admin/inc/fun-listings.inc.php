@@ -6,8 +6,8 @@ declare(strict_types=1);
  * @license          GPL Version 3; BSD Modified
  * @author           Tess <theirrenegadexxx@gmail.com>
  * @contributor      Ekaterina <scripts@robotess.net> http://scripts.robotess.net
- * @file             <fun-listings.inc.php>
- * @version          Robotess Fork
+ * @contributor      Erin <dudethatserin@outlook.com> https://github.com/DudeThatsErin/listingadmin
+ * @version          Erin's Fork
  */
 
 if (!class_exists('wolves')) {
@@ -309,12 +309,8 @@ if (!class_exists('wolves')) {
 
 
             if (strpos($my_updates, 'index.php') !== false) {
-                //@todo is ?s= needed????
-                // $q = $myw . '?s=';
                 $q = $myw;
             } else {
-                //@todo is ?s= needed????
-                //$q = $my_updates . '?s=';
                 $q = $my_updates;
             }
 
@@ -413,36 +409,45 @@ if (!class_exists('wolves')) {
                 $tigers->displayError('Database Error', 'The script cannot select the' .
                     ' specified ID from the database.', false);
             }
-            $getItem = $scorpions->obj($true);
+            $getItem = $scorpions->obj($true); // is retrieved from DB just fine.
 
             if ($b != '' && preg_match('/([A-Za-z_]+)/i', $b)) {
                 $p = $scorpions->escape($b);
+                $tigers->console_log($p);
+                $tigers->console_log($b);
             } else {
-                $p = 'listings_template';
+                $p = 'listings_template'; // logs
             }
 
-            $template = $seahorses->getTemplate($p);
-            $approved = $snakes->getMemberCount($getItem->id, '0');
-            $pending = $snakes->getMemberCount($getItem->id, 1);
+            $template = $seahorses->getTemplate($p); // logs
+            $approved = $snakes->getMemberCount($i, '0');
+            //$tigers->console_log($approved); // 1; logs correctly
+            $pending = $snakes->getMemberCount($i, 1);
+            //$tigers->console_log($pending); // 0; logs correctly
             $updated = $snakes->getUpdated($getItem->id);
 
-            $format = html_entity_decode($template);
+            $format = html_entity_decode($template); // logs
             $format = str_replace('{i}', $f, $format);
             $format = str_replace('{id}', $getItem->id, $format);
-            $format = str_replace('{subject}', $getItem->subject, $format);
+            $format = str_replace('{subject}', $getItem->subject, $format); //logs
             $format = str_replace('{title}', $getItem->title, $format);
             $format = str_replace('{url}', $getItem->url, $format);
             $format = str_replace('{desc}', html_entity_decode($getItem->desc), $format);
             $format = str_replace(
                 ['{category}', '{categories}'], $lions->pullCatNames($getItem->category, '!'), $format
-            );
-            $format = str_replace('{image}', $seahorses->getOption('img_http') . $getItem->image, $format);
-            $format = str_replace('{approved}', $approved, $format);
-            $format = str_replace('{pending}', $pending, $format);
+            ); // logs
+            $format = str_replace('{image}', $seahorses->getOption('img_http') . $getItem->image, $format); // logs
             $format = str_replace('{since}', date($getItem->date, strtotime($getItem->since)), $format);
             $format = str_replace('{updated}', $updated, $format);
-
+            $tigers->console_log($approved);
+            $tigers->console_log($format);
+            $format = str_replace('{approved}', $approved, $format); // does not log
+            $tigers->console_log($approved);
+            $tigers->console_log($format);
+            $format = str_replace('{pending}', $pending, $format);
+            $tigers->console_log($format); // should log after members but member count (approved/pending) causes it to not display currently
             return $format;
+
         }
 
         /**

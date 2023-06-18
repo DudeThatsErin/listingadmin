@@ -1,12 +1,13 @@
 <?php
-/** 
- * @copyright  2007 
- * @license    GPL Version 3; BSD Modified 
- * @author     Tess <treibend@gmail.com> 
- * @file       <wishlist.php> 
- * @since      March 13th, 2011  
- * @version    2.3beta     
- */ 
+/**
+ * @project          Listing Admin
+ * @copyright        2007
+ * @license          GPL Version 3; BSD Modified
+ * @author           Tess <theirrenegadexxx@gmail.com>
+ * @contributor      Ekaterina <scripts@robotess.net> http://scripts.robotess.net
+ * @contributor      Erin <dudethatserin@outlook.com> https://github.com/DudeThatsErin/listingadmin
+ * @version          Erin's Fork
+ */
 $getTitle = 'Error Log';
 require('pro.inc.php');
 require('vars.inc.php');
@@ -23,10 +24,10 @@ $start = $scorpions->escape((($page * $per_page) - $per_page));
 
 if(isset($_POST['action']) && $_POST['action'] == 'View') {
  if(!isset($_POST['log']) || empty($_POST['log'])) {
-  $tigers->displayError('Script Error', 'You must select a log (or two,' . 
+  $tigers->displayError('Script Error', 'You must select a log (or two,' .
 	' three, etc.) to edit. :P', false);
  }
- 
+
  foreach($_POST['log'] as $log) {
   $o = $tigers->cleanMys($log);
 	if(is_numeric($o)) {
@@ -34,26 +35,26 @@ if(isset($_POST['action']) && $_POST['action'] == 'View') {
 <table id="noeditStatistics">
  <?php $seahorses->errorView($log); ?>
 </table>
-<?php 
+<?php
 	}
  }
 }
 
-/** 
- * Mass-delete error logs \o/ 
- */ 
+/**
+ * Mass-delete error logs \o/
+ */
 elseif (isset($_POST['action']) && $_POST['action'] == 'Delete') {
  if(empty($_POST['log'])) {
-  $tigers->displayError('Form Error', 'You need to select a log' . 
+  $tigers->displayError('Form Error', 'You need to select a log' .
 	' (or two, etc.) in order to delete them.', false);
  }
- 
+
  foreach($_POST['log'] as $pm) {
   $errorlog = $tigers->cleanMys($pm);
 	$delete   = "DELETE FROM `$_ST[errors]` WHERE `messID` = '$errorlog' LIMIT 1";
   $true     = $scorpions->query($delete);
 	if($true == false) {
-   $tigers->displayError('Database Error', 'The script was unable to delete' . 
+   $tigers->displayError('Database Error', 'The script was unable to delete' .
 	 ' the error log.', true, $delete);
   } elseif ($true == true) {
 	 echo $tigers->displaySuccess('The error log was deleted!');
@@ -62,23 +63,23 @@ elseif (isset($_POST['action']) && $_POST['action'] == 'Delete') {
  }
 }
 
-/** 
- * Index 
- */ 
+/**
+ * Index
+ */
 else {
 ?>
 <p>Welcome to <samp>errors.php</samp>, your error log! Here you'll be able to see
 the errors that Listing Admin logs, and view/delete those logs.</p>
-<?php  
- $select = "SELECT * FROM `$_ST[errors]` ORDER BY `messAdded` DESC LIMIT $start," . 
+<?php
+ $select = "SELECT * FROM `$_ST[errors]` ORDER BY `messAdded` DESC LIMIT $start," .
  " $per_page";
  $true = $scorpions->query($select);
  if($true == false) {
-  $tigers->displayError('Database Error', 'The script was unable to select the' . 
+  $tigers->displayError('Database Error', 'The script was unable to select the' .
   ' error logs from the database.', true, $select);
  }
  $count = $scorpions->counts($select, 1);
- 
+
  if($count->rows > 0) {
 ?>
 <form action="errors.php" method="post">
@@ -100,12 +101,12 @@ the errors that Listing Admin logs, and view/delete those logs.</p>
  <tr>
   <td class="tr" style="width: 100px;">Action</td>
   <td class="categories" colspan="4">
-   <input name="action" class="input5" type="submit" value="View"> 
+   <input name="action" class="input5" type="submit" value="View">
    <input name="action" class="input5" type="submit" value="Delete">
   </td>
  </tr>
 </tfoot>
-<?php  
+<?php
   while($getItem = $scorpions->obj($true, 0)) {
 	 $class = '';
 	 $details = '';
@@ -135,13 +136,13 @@ the errors that Listing Admin logs, and view/delete those logs.</p>
  <td class="tc"><?php echo $details; ?></td>
  <td class="tc"><?php echo date($seahorses->getTemplate('date_template'), strtotime($getItem->messAdded)); ?></td>
 </tr></tbody>
-<?php 
+<?php
 	}
 ?>
 </table>
 </form>
-<?php 
- } 
+<?php
+ }
 }
 
 require('footer.php');

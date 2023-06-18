@@ -1,14 +1,15 @@
 <div id="show-listings">
     <?php
-    /**
-     * @project          Listing Admin
-     * @copyright        2007
-     * @license          GPL Version 3; BSD Modified
-     * @author           Tess <theirrenegadexxx@gmail.com>
-     * @contributor      Ekaterina <scripts@robotess.net> http://scripts.robotess.net
-     * @file             <show-owned.php>
-     * @version          Robotess Fork
-     */
+/**
+ * @project          Listing Admin
+ * @copyright        2007
+ * @license          GPL Version 3; BSD Modified
+ * @author           Tess <theirrenegadexxx@gmail.com>
+ * @contributor      Ekaterina <scripts@robotess.net> http://scripts.robotess.net
+ * @contributor      Erin <dudethatserin@outlook.com> https://github.com/DudeThatsErin/listingadmin
+ * @file             <install.php>
+ * @version          Erin's Fork
+ */
     require('b.inc.php');
     require(MAINDIR . 'rats.inc.php');
     require_once('fun.inc.php');
@@ -108,17 +109,18 @@
                 'You chose an incorrect category!',
                 false
             );
-        }
+        } // ^^ works
+
 
         if ($sort_category == 'all') {
-            $flsInCategory = $wolves->listingsList('subject', $options->statusID, 'status', $options->statusID, 1);
-            $count = is_countable($flsInCategory) ? count($flsInCategory) : 0;
+            $flsInCategory = $wolves->listingsList('subject', $options->statusID, 'status', $options->statusID, 1); // Array
+            $count = is_countable($flsInCategory) ? count($flsInCategory) : 0; // works
 
             echo '<p class="tc">You are viewing all categories. There are currently ' .
                 "<strong>$count</strong> listings listed.</p>\n";
             echo "<div class=\"sep\">\n";
-            foreach ($flsInCategory as $getItemId) {
-                echo $wolves->getTemplate_Listings($getItemId);
+            foreach ($flsInCategory as $id) {
+                echo $wolves->getTemplate_Listings($id); // THIS is what is broken.
             }
             echo "</div>\n";
         } else {
@@ -170,6 +172,8 @@
                 echo "</div>\n";
             }
         }
+
+        // below works
         echo "<p class=\"showBack\"><a href=\"javascript:window.history.back();\">&#171; Go back?</p>\n";
     } /**
      * Get index of listings!

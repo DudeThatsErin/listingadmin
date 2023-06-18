@@ -5,8 +5,8 @@
  * @license          GPL Version 3; BSD Modified
  * @author           Tess <theirrenegadexxx@gmail.com>
  * @contributor      Ekaterina <scripts@robotess.net> http://scripts.robotess.net
- * @file             <class-antispam.inc.php>
- * @version          Robotess Fork
+ * @contributor      Erin <dudethatserin@outlook.com> https://github.com/DudeThatsErin/listingadmin
+ * @version          Erin's Fork
  */
 
 if (!class_exists('laantispam')) {
@@ -114,6 +114,8 @@ if (!class_exists('laantispam')) {
             $status = true;
             $antispam = true;
             $pointssys = true;
+            $s1 = 1; // were causing errors so I just added these. Gotta test them to make sure they work.
+            $s2 = 1;
 
             $ex = explode(' + ', $s2);
             $answer = $ex[0] + $ex[1];

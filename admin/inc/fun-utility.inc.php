@@ -1,34 +1,34 @@
-<?php  
-/* 
+<?php
+/*
  /////////////////////////////////////////////////////////////
- Listing Admin (c) 2007 
- ///////////////////////////////////////////////////////////// 
-*/ 
-/** 
- * @copyright  2007 
- * @license    GPL Version 3; BSD Modified 
- * @author     Tess <theirrenegadexxx@gmail.com> 
- * @file       <fun-utility.inc.php> 
- * @since      November 12th, 2011 
- * @version    2.3alpha  
- */ 
-
+ Listing Admin (c) 2007
+ /////////////////////////////////////////////////////////////
+*/
+/**
+ * @project          Listing Admin
+ * @copyright        2007
+ * @license          GPL Version 3; BSD Modified
+ * @author           Tess <theirrenegadexxx@gmail.com>
+ * @contributor      Ekaterina <scripts@robotess.net> http://scripts.robotess.net
+ * @contributor      Erin <dudethatserin@outlook.com> https://github.com/DudeThatsErin/listingadmin
+ * @version          Erin's Fork
+ */
 if(class_exists('frogs') == false) {
  class frogs {
- 
-  /** 
-   * Install a Listing Admin addon 
-   * 
-   * @function  $frogs->installAddon() 
-   * @param     $c, string; addon slug 
-   */ 
+
+  /**
+   * Install a Listing Admin addon
+   *
+   * @function  $frogs->installAddon()
+   * @param     $c, string; addon slug
+   */
   public function installAddon($c) {
    global $_ST, $get_addon_array, $notSupportedAddons, $scorpions;
    $get_addon_array_for_installation = array_diff_key($get_addon_array, array_flip($notSupportedAddons));
- 
-   /** 
-    * Setup our return object ahead of time! 
-    */ 
+
+   /**
+    * Setup our return object ahead of time!
+    */
    $return = (object) array(
     'message' => '',
     'query'   => '',
@@ -174,7 +174,7 @@ UNIQUE KEY `mName` (`fNiq`, `mEmail`)
  `fNiq` mediumint(6) unsigned NOT NULL,
  `qQuote` text NOT NULL,
  `qAuthor` varchar(255) NOT NULL,
- `qUpdated` datetime NOT NULL DEFAULT '1970-01-01 00:00:00', 
+ `qUpdated` datetime NOT NULL DEFAULT '1970-01-01 00:00:00',
  `qAdded` datetime NOT NULL,
  PRIMARY KEY (`qID`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;";
@@ -223,7 +223,7 @@ UNIQUE KEY `mName` (`fNiq`, `mEmail`)
  `cInfo` text NOT NULL,
  `cFlag` enum('legit', 'spam') NOT NULL DEFAULT 'legit',
  `cPending` tinyint(1) NOT NULL DEFAULT '0',
- `cAdded` datetime NOT NULL, 
+ `cAdded` datetime NOT NULL,
  PRIMARY KEY (`cID`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci";
       $true = $scorpions->query($create);
@@ -238,18 +238,18 @@ UNIQUE KEY `mName` (`fNiq`, `mEmail`)
    }
 
    return $return;
-  } 
+  }
 
-  /** 
-   * @function  $frogs->uninstallAddon() 
-   * @param     $c, string; addon slug 
-   */ 
+  /**
+   * @function  $frogs->uninstallAddon()
+   * @param     $c, string; addon slug
+   */
   public function uninstallAddon($c) {
    global $_ST, $scorpions;
 
-   /** 
-    * Setup our return object ahead of time! 
-    */ 
+   /**
+    * Setup our return object ahead of time!
+    */
    $return = (object) array(
     'message' => '',
     'query'   => '',
@@ -259,7 +259,7 @@ UNIQUE KEY `mName` (`fNiq`, `mEmail`)
    $delete = 'DROP TABLE';
    switch($c) {
     case 'codes':
-     $delete .= " `$_ST[codes]`, `$_ST[codes_categories]`, `$_ST[codes_donors]`," . 
+     $delete .= " `$_ST[codes]`, `$_ST[codes_categories]`, `$_ST[codes_donors]`," .
      " `$_ST[codes_sizes]`;";
     break;
     case 'kim':
@@ -286,160 +286,160 @@ UNIQUE KEY `mName` (`fNiq`, `mEmail`)
    return $return;
   }
 
-  /** 
-   * Install categories from TFL and TAFL 
-   * 
-   * @function  $frogs->installCategories() 
-   */ 
+  /**
+   * Install categories from TFL and TAFL
+   *
+   * @function  $frogs->installCategories()
+   */
   public function installCategories() {
    global $_ST, $scorpions;
 
    $category = array();
-   /** 
-    * Other dates: April 18th, 2008; September 18th, 2008 
-    * 
-    * @updated June 30th, 2008 
-    */  
-   $category[] = 'Academia'; 
-   $category[] = 'Actors'; 
+   /**
+    * Other dates: April 18th, 2008; September 18th, 2008
+    *
+    * @updated June 30th, 2008
+    */
+   $category[] = 'Academia';
+   $category[] = 'Actors';
    $category[] = 'Actresses';
-   $category[] = 'Adult'; 
+   $category[] = 'Adult';
    $category[] = 'Advertising/TV Channels';
-   $category[] = 'Albums'; 
-   $category[] = 'Animals'; 
+   $category[] = 'Albums';
+   $category[] = 'Animals';
    $category[] = 'Animation';
    $category[] = 'Anime/Manga';
    $category[] = 'Anime/Manga: Adult';
-   $category[] = 'Anime/Manga: Characters 0-M'; 
-   $category[] = 'Anime/Manga: Characters N-Z'; 
-   $category[] = 'Anime/Manga: Companies'; 
-   $category[] = 'Anime/Manga: Episodes'; 
+   $category[] = 'Anime/Manga: Characters 0-M';
+   $category[] = 'Anime/Manga: Characters N-Z';
+   $category[] = 'Anime/Manga: Companies';
+   $category[] = 'Anime/Manga: Episodes';
    $category[] = 'Anime/Manga: Fanstuff';
-   $category[] = 'Anime/Manga: General'; 
-   $category[] = 'Anime/Manga: Items/Locations'; 
+   $category[] = 'Anime/Manga: General';
+   $category[] = 'Anime/Manga: Items/Locations';
    $category[] = 'Anime/Manga: Magazines';
-   $category[] = 'Anime/Manga: Manga-ka/Directors'; 
+   $category[] = 'Anime/Manga: Manga-ka/Directors';
    $category[] = 'Anime/Manga: Movies/OVAs';
-   $category[] = 'Anime/Manga: Music'; 
-   $category[] = 'Anime/Manga: Relationships'; 
+   $category[] = 'Anime/Manga: Music';
+   $category[] = 'Anime/Manga: Relationships';
    $category[] = 'Anime/Manga: Rivalries';
-   $category[] = 'Anime/Manga: Series'; 
-   $category[] = 'Anime/Manga: Songs'; 
+   $category[] = 'Anime/Manga: Series';
+   $category[] = 'Anime/Manga: Songs';
    $category[] = 'Anime/Manga: Toys/Collectibles';
    $category[] = 'Anime/Manga: Websites';
-   $category[] = 'Arts and Design'; 
-   $category[] = 'Authors/Writers'; 
+   $category[] = 'Arts and Design';
+   $category[] = 'Authors/Writers';
    $category[] = 'Calendar Events';
-   $category[] = 'Characters: Book/Movie'; 
-   $category[] = 'Characters: TV'; 
-   $category[] = 'Comics'; 
+   $category[] = 'Characters: Book/Movie';
+   $category[] = 'Characters: TV';
+   $category[] = 'Comics';
    $category[] = 'Companies';
-   $category[] = 'Computer Miscellany and Internet'; 
-   $category[] = 'Directors/Producers'; 
-   $category[] = 'Episodes'; 
+   $category[] = 'Computer Miscellany and Internet';
+   $category[] = 'Directors/Producers';
+   $category[] = 'Episodes';
    $category[] = 'Fan Works';
-   $category[] = 'Fashion/Beauty'; 
-   $category[] = 'Food/Drinks'; 
-   $category[] = 'Games'; 
-   $category[] = 'History/Royalty'; 
+   $category[] = 'Fashion/Beauty';
+   $category[] = 'Food/Drinks';
+   $category[] = 'Games';
+   $category[] = 'History/Royalty';
    $category[] = 'Hobbies and Recreation';
-   $category[] = 'Literature'; 
-   $category[] = 'Magazines/Newspapers'; 
-   $category[] = 'Miscellaneous'; 
-   $category[] = 'Models'; 
+   $category[] = 'Literature';
+   $category[] = 'Magazines/Newspapers';
+   $category[] = 'Miscellaneous';
+   $category[] = 'Models';
    $category[] = 'Movies';
-   $category[] = 'Music Miscellany'; 
-   $category[] = 'Musicians: Bands/Groups'; 
-   $category[] = 'Musicians: Female'; 
+   $category[] = 'Music Miscellany';
+   $category[] = 'Musicians: Bands/Groups';
+   $category[] = 'Musicians: Female';
    $category[] = 'Musicians: Male';
-   $category[] = 'Mythology/Religion'; 
-   $category[] = 'Nature'; 
-   $category[] = 'Objects'; 
-   $category[] = 'People Miscellany'; 
+   $category[] = 'Mythology/Religion';
+   $category[] = 'Nature';
+   $category[] = 'Objects';
+   $category[] = 'People Miscellany';
    $category[] = 'Personalities';
-   $category[] = 'Places'; 
-   $category[] = 'Politics and Organisations'; 
+   $category[] = 'Places';
+   $category[] = 'Politics and Organisations';
    $category[] = 'Relationships: Book/Movie';
-   $category[] = 'Relationships: Real Life'; 
-   $category[] = 'Relationships: TV'; 
+   $category[] = 'Relationships: Real Life';
+   $category[] = 'Relationships: TV';
    $category[] = 'Songs: Bands/Groups 0-M';
-   $category[] = 'Songs: Bands/Groups N-Z'; 
-   $category[] = 'Songs: Female Solo'; 
-   $category[] = 'Songs: Male Solo'; 
+   $category[] = 'Songs: Bands/Groups N-Z';
+   $category[] = 'Songs: Female Solo';
+   $category[] = 'Songs: Male Solo';
    $category[] = 'Songs: Various';
    $category[] = 'Sports';
-   $category[] = 'Sports Entertainment'; 
-   $category[] = 'Stage/Theatre'; 
-   $category[] = 'Toys/Collectibles'; 
+   $category[] = 'Sports Entertainment';
+   $category[] = 'Stage/Theatre';
+   $category[] = 'Toys/Collectibles';
    $category[] = 'Transportation';
-   $category[] = 'TV Shows'; 
-   $category[] = 'TV/Movie/Book Miscellany'; 
-   $category[] = 'Webmasters'; 
+   $category[] = 'TV Shows';
+   $category[] = 'TV/Movie/Book Miscellany';
+   $category[] = 'Webmasters';
    $category[] = 'Websites';
 
    foreach($category as $cat) {
-    $insert = "INSERT INTO `$_ST[categories]` (`catname`, `parent`) VALUES" . 
+    $insert = "INSERT INTO `$_ST[categories]` (`catname`, `parent`) VALUES" .
     " ('$cat', '0')";
     $scorpions->query("SET NAMES 'utf8';");
     $true = $scorpions->query($insert);
     if($true == false) {
-     exit('<p class="errorButton"><span class="mysql">ERROR:</span> ' . $scorpions->error() . 
+     exit('<p class="errorButton"><span class="mysql">ERROR:</span> ' . $scorpions->error() .
      "<br />\n<em>" . $insert . "</em></p>\n");
     }
    }
   }
 
-  /** 
-   * @function  $frogs->showWelcome() 
-   */ 
+  /**
+   * @function  $frogs->showWelcome()
+   */
   public function showWelcome() {
 	 global $laoptions;
 ?>
 <h2>Install <?php echo $laoptions->version; ?></h2>
 <p>Welcome to the installation of <strong><?php echo $laoptions->version; ?></strong>!
-There is four steps in total to installing the script, and the script will guide 
-you through each step. <strong>Each step is required</strong>, so be sure to read 
+There is four steps in total to installing the script, and the script will guide
+you through each step. <strong>Each step is required</strong>, so be sure to read
 through each page!</p>
 <p class="nextStep"><a href="install.php?step=1">Start Installation &#187;</a></p>
-<?php 
+<?php
 	}
 
-  /** 
-   * @function  $frogs->installMain() 
-   */ 
+  /**
+   * @function  $frogs->installMain()
+   */
   public function installMain() {
 	 global $caoptions;
 ?>
 <h2>Step 1: Main Files</h2>
 <p>Once you hit "Install" the script will install the main tables, such as
-your listings, members, and options. Below is your details, and admin and image 
-paths for your collective; although it's recommend you edit these now, you can 
+your listings, members, and options. Below is your details, and admin and image
+paths for your collective; although it's recommend you edit these now, you can
 always edit them later.</p>
 <form action="install.php" method="post">
  <fieldset>
   <legend>Details</legend>
-  <p><label><strong>Collective Name:</strong></label> 
+  <p><label><strong>Collective Name:</strong></label>
   <input name="cname" class="input1" type="text"></p>
-  <p><label><strong>Name:</strong></label> 
+  <p><label><strong>Name:</strong></label>
   <input name="my_name" class="input1" type="text"></p>
-  <p><label><strong>E-Mail Address:</strong></label> 
+  <p><label><strong>E-Mail Address:</strong></label>
   <input name="my_email" class="input1" type="text" value="you@yourdomain.com"></p>
-  <p><label><strong>Website:</strong></label> 
+  <p><label><strong>Website:</strong></label>
   <input name="my_website" class="input1" type="text" value="http://"></p>
  </fieldset>
 
  <fieldset>
   <legend>Admin Path</legend>
-<?php 
+<?php
  $adminPath = $_SERVER['SCRIPT_FILENAME'];
  $adminPath = str_replace('install.php', '', $adminPath);
  $adminURI  = 'http://' . $_SERVER['SERVER_NAME'] . str_replace('install.php', '', $_SERVER['PHP_SELF']);
 ?>
   <p><label><strong>Admin Paths:</strong><br>
-   Admin paths are the path and <abbr title="Uniform Resource Identifier">URI</abbr> 
-   to your admin panel. All paths and URLs are already set for you, although 
+   Admin paths are the path and <abbr title="Uniform Resource Identifier">URI</abbr>
+   to your admin panel. All paths and URLs are already set for you, although
    they can be changed to the desired path.
-  </label> 
+  </label>
   <input name="adm_path" class="input1" type="text" value="<?php echo $adminPath; ?>"><br>
   <input name="adm_http" class="input1" type="text" value="<?php echo $adminURI; ?>"></p>
  </fieldset>
@@ -447,25 +447,25 @@ always edit them later.</p>
  <fieldset>
   <legend>Categories</legend>
   <p><label><strong>Install categories from TFL and TAFL?</strong><br>
-  This installs the categories listed at both TFL and TAFL networks; this is 
-  not required.</label> 
+  This installs the categories listed at both TFL and TAFL networks; this is
+  not required.</label>
   <input name="installcats" class="input3" type="checkbox" value="y"></p>
   <p class="clear"></p>
   <p class="tc"><input name="action" class="nextStep" type="submit" value="Install Main Functions"></p>
  </fieldset>
 </form>
-<?php 
+<?php
 	}
 
-  /** 
-   * @function  $frogs->installFeatures() 
-   */ 
+  /**
+   * @function  $frogs->installFeatures()
+   */
   public function installFeatures() {
 ?>
 <h2>Step 2: Features</h2>
-<p>We'll be installing the features of Listing Admin -- Joined, Affiliates 
+<p>We'll be installing the features of Listing Admin -- Joined, Affiliates
 and Wishlist -- with this portion of the installation. All you have to do is
-hit "Install Features" below; all options associated with these features can be 
+hit "Install Features" below; all options associated with these features can be
 edited later.</p>
 <form action="install.php" method="post">
  <fieldset>
@@ -473,62 +473,62 @@ edited later.</p>
   <p class="tc"><input name="action" class="nextStep" type="submit" value="Install Features"></p>
  </fieldset>
 </form>
-<?php 
+<?php
   }
 
-  /** 
-   * @function  $frogs->installAddons() 
-   */ 
+  /**
+   * @function  $frogs->installAddons()
+   */
   public function installAddons() {
    global $get_addon_array, $notSupportedAddons;
    $get_addon_array_for_installation = array_diff_key($get_addon_array, array_flip($notSupportedAddons));
 ?>
 <h2>Step 3: Addons</h2>
 <p>The Addons for Listing Admin include -- but aren't limited to! -- Updates,
-Codes and <abbr title="Keep In Mind">KIM</abbr>, with most controlling both 
-your listings and collective. Don't worry though -- you don't have to install 
+Codes and <abbr title="Keep In Mind">KIM</abbr>, with most controlling both
+your listings and collective. Don't worry though -- you don't have to install
 them all right away. You can install all of them here, a select few, or none
 at all.</p>
-<p class="noteButton">All addons can be installed and uninstalld inside the 
+<p class="noteButton">All addons can be installed and uninstalld inside the
 admin panel.</p>
 
 <form action="install.php" method="post">
  <fieldset>
   <legend>Install Addons</legend>
-<?php  
+<?php
  foreach($get_addon_array_for_installation as $k => $v) {
-  echo "<p><label><strong>$v:</strong></label> <input name=\"$k\" class=\"input3\"" . 
+  echo "<p><label><strong>$v:</strong></label> <input name=\"$k\" class=\"input3\"" .
   " type=\"checkbox\" value=\"y\"> Install!</p>\n";
  }
 ?>
   <p class="tc"><input name="action" class="nextStep" type="submit" value="Install Addons"></p>
  </fieldset>
 </form>
-<?php 
+<?php
   }
 
-  /** 
-   * @function  $frogs->showFinished() 
-   */ 
+  /**
+   * @function  $frogs->showFinished()
+   */
   public function showFinished() {
    global $get_addon_array;
 ?>
 <h2>Step 3: Addons</h2>
 <p>Last step, m'dear! Simply enter in the password of your choice, and the
-installation will be complete! (You can also leave the password blank, and 
+installation will be complete! (You can also leave the password blank, and
 one will be generated for you.)</p>
 
 <form action="install.php" method="post">
  <fieldset>
   <legend>Finished Installation</legend>
-  <p><label><strong>Password:</strong> 
+  <p><label><strong>Password:</strong>
   <input name="password" class="input1" type="password"></p>
   <p class="tc"><input name="action" class="nextStep" type="submit" value="Finish Installation"></p>
  </fieldset>
 </form>
-<?php 
+<?php
   }
- 
+
  }
 }
 

@@ -9,8 +9,9 @@
  * @license          GPL Version 3; BSD Modified
  * @author           Tess <theirrenegadexxx@gmail.com>
  * @contributor      Ekaterina <scripts@robotess.net> http://scripts.robotess.net
+ * @contributor      Erin <dudethatserin@outlook.com> https://dudethatserin.com
  * @file             <addons.php>
- * @version          Robotess Fork
+ * @version          Erin's Fork
  */
 require('pro.inc.php');
 
@@ -102,7 +103,7 @@ if (
                     fanlistings/your collective.</p>
                 <p><label><strong>Form URL</strong><br>
                         This can be a page (e.g. <samp>donate.php</samp>) or a URL (e.g.
-                        <samp>http://fan.wyngs.net/donate.php</samp>):</label>
+                        <samp>http://listings.dudethatserin.com/donate.php</samp>):</label>
                     <input name="codes_formurl_input" class="input1" type="text"
                            value="<?php echo $seahorses->getOption('codes_formurl'); ?>"></p>
                 <p class="clearBottom"></p>

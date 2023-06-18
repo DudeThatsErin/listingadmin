@@ -5,8 +5,8 @@
  * @license          GPL Version 3; BSD Modified
  * @author           Tess <theirrenegadexxx@gmail.com>
  * @contributor      Ekaterina <scripts@robotess.net> http://scripts.robotess.net
- * @file             <rats.sample.inc.php>
- * @version          Robotess Fork
+ * @contributor      Erin <dudethatserin@outlook.com> https://github.com/DudeThatsErin/listingadmin
+ * @version          Erin's Fork
  */
 
 if (basename($_SERVER['PHP_SELF']) === 'rats.inc.php') {
@@ -15,30 +15,30 @@ if (basename($_SERVER['PHP_SELF']) === 'rats.inc.php') {
 }
 require('v.inc.php');
 
-# ----------------------------------------------------------- 
-/* 
- * Database Variables  
- * 
- * $database_host - MySQL Host (usually localhost) 
- * $database_user - MySQL username  
- * $database_pass - MySQL password  
- * $database_name - MySQL name 
+# -----------------------------------------------------------
+/*
+ * Database Variables
+ *
+ * $database_host - MySQL Host (usually localhost)
+ * $database_user - MySQL username
+ * $database_pass - MySQL password
+ * $database_name - MySQL name
  */
-# ----------------------------------------------------------- 
+# -----------------------------------------------------------
 $database_host = 'localhost';
-$database_user = 'root';
-$database_pass = 'root';
-$database_name = 'bambino';
+$database_user = 'username';
+$database_pass = 'password';
+$database_name = 'databaseName';
 
-# ----------------------------------------------------------- 
-/* 
- * Table Prefix 
- * 
- * Table prefix before your table names. Beware that if you 
- * have installed Listing Admin prior to version 2.1.9, 
- * your prefix is most likely "trex_" 
+# -----------------------------------------------------------
+/*
+ * Table Prefix
+ *
+ * Table prefix before your table names. Beware that if you
+ * have installed Listing Admin prior to version 2.1.9,
+ * your prefix is most likely "trex_"
  */
-# ----------------------------------------------------------- 
+# -----------------------------------------------------------
 $_ST['prefix'] = 'trex_';
 
 # -----------------------------------------------------------
@@ -58,15 +58,15 @@ $_ST['prefix'] = 'trex_';
 $_ST['dbengine'] = 'mysqli';
 
 # -----------------------------------------------------------
-/* 
- * STOP EDITING HERE! 
- * 
- * Below this line are sensitive lines that should NOT be 
- * messed with unless you want the script to blow up, and 
- * an ugly "WARNING: SYNTAX ERROR, LOL YOU'RE AN IDIOT" 
- * error to appear (but no, really, don't do it, dudes). 
+/*
+ * STOP EDITING HERE!
+ *
+ * Below this line are sensitive lines that should NOT be
+ * messed with unless you want the script to blow up, and
+ * an ugly "WARNING: SYNTAX ERROR, LOL YOU'RE AN IDIOT"
+ * error to appear (but no, really, don't do it, dudes).
  */
-# ----------------------------------------------------------- 
+# -----------------------------------------------------------
 if ((!isset($_ST['prefix']) || empty($_ST['prefix']))
     || (strpos($_ST['prefix'], '_') === false)) {
     $prefix = 'listingadmin_';
@@ -74,8 +74,8 @@ if ((!isset($_ST['prefix']) || empty($_ST['prefix']))
     $prefix = $_ST['prefix'];
 }
 
-/* 
- *  Table varrrrriables 
+/*
+ *  Table varrrrriables
  */
 $_ST['affiliates'] = $prefix . 'affiliates';
 $_ST['categories'] = $prefix . 'categories';
@@ -114,7 +114,7 @@ $laoptions = (object)[
     'dbEngine' => $_ST['dbengine'],
     'saltPass' => date('F'),
     'version' => 'Listing Admin ' . LAVERSION,
-    'versionURI' => 'http://scripts.wyngs.net/scripts/listingadmin/',
+    'versionURI' => 'https://github.com/DudeThatsErin/listingadmin',
 ];
 
 /**

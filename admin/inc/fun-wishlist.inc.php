@@ -1,26 +1,27 @@
 <?php
-/** 
- * @copyright  2007 
- * @license    GPL Version 3; BSD Modified 
- * @author     Tess <treibend@gmail.com> 
- * @file       <fun-wishlist.inc.php> 
- * @since      September 2nd, 2010 
- * @version    2.3beta   
- */ 
+/**
+ * @project          Listing Admin
+ * @copyright        2007
+ * @license          GPL Version 3; BSD Modified
+ * @author           Tess <theirrenegadexxx@gmail.com>
+ * @contributor      Ekaterina <scripts@robotess.net> http://scripts.robotess.net
+ * @contributor      Erin <dudethatserin@outlook.com> https://github.com/DudeThatsErin/listingadmin
+ * @version          Erin's Fork
+ */
 
 if(class_exists('mermaids') == false) {
  class mermaids {
 
-  /** 
-   * @function  $mermaids->wishlistList() 
-   * @param     $b, string; sort by category or type; optional 
-   * @param     $c, string; category ID or wishlist type; optional 
-   */ 
+  /**
+   * @function  $mermaids->wishlistList()
+   * @param     $b, string; sort by category or type; optional
+   * @param     $c, string; category ID or wishlist type; optional
+   */
   public function wishlistList($b = 'id', $c = '') {
    global $_ST, $get_wishlist_array, $scorpions, $tigers;
 
    $select = "SELECT * FROM `$_ST[wishlist]`";
-   if($b == 'category' && ($c != '' && is_numeric($c))) {  
+   if($b == 'category' && ($c != '' && is_numeric($c))) {
     $select .= " WHERE `wCategory` LIKE '%!$c!%'";
    } elseif ($b == 'type' && ($c != '' && array_key_exists($c, $get_wishlist_array))) {
     $select .= " WHERE `wType` = '$c'";
@@ -28,7 +29,7 @@ if(class_exists('mermaids') == false) {
    $select .= ' ORDER BY `wID` ASC';
    $true = $scorpions->query($select);
    if($true == false) {
-    $tigers->displayError('Database Error', 'The script could not select' . 
+    $tigers->displayError('Database Error', 'The script could not select' .
     ' the wishes from the database.', true, $select);
    }
 
@@ -40,18 +41,18 @@ if(class_exists('mermaids') == false) {
    return $all;
   }
 
-	/** 
-   * @function  $mermaids->countWishes() 
-   * @param     $b, string; sort by category or type; optional 
-   * @param     $c, string; category ID or wishlist type; optional 
-   */ 
+	/**
+   * @function  $mermaids->countWishes()
+   * @param     $b, string; sort by category or type; optional
+   * @param     $c, string; category ID or wishlist type; optional
+   */
   public function countWishes() {
 	 global $_ST, $scorpions, $tigers;
 
 	 $select = "SELECT * FROM `$_ST[main]` WHERE `granted` = '1'";
 	 $true = $scorpions->query($select);
 	 if($true == false) {
-	  $tigers->displayError('Database Error', 'The script was unable to count the' . 
+	  $tigers->displayError('Database Error', 'The script was unable to count the' .
 		' wishes from the listing database.', false);
 	 }
 	 $count = $scorpions->total($true);
@@ -59,17 +60,17 @@ if(class_exists('mermaids') == false) {
 	 return $count;
 	}
 
-	/** 
-	 * @function  $mermaids->getWish() 
-	 * @param     $i, int; wishlist ID 
-	 */ 
+	/**
+	 * @function  $mermaids->getWish()
+	 * @param     $i, int; wishlist ID
+	 */
   public function getWish($i) {
    global $_ST, $scorpions, $tigers;
 
    $select = "SELECT * FROM `$_ST[wishlist]` WHERE `wID` = '$i' LIMIT 1";
    $true   = $scorpions->query($select);
    if($true == false) {
-    $tigers->displayError('Database Error', 'The script was unable to select' . 
+    $tigers->displayError('Database Error', 'The script was unable to select' .
 		' the wish from the specified ID.', false);
    }
    $getItem = $scorpions->obj($true);
@@ -77,17 +78,17 @@ if(class_exists('mermaids') == false) {
    return $getItem;
   }
 
-  /** 
-	 * @function  $mermaids->pullImage_Wishlist() 
-	 * @param     $i, int; wishlist ID 
-	 */ 
+  /**
+	 * @function  $mermaids->pullImage_Wishlist()
+	 * @param     $i, int; wishlist ID
+	 */
   public function pullImage_Wishlist($i) {
    global $_ST, $scorpions, $tigers;
 
    $select = "SELECT `wImage` FROM `$_ST[wishlist]` WHERE `wID` = '$i' LIMIT 1";
    $true   = $scorpions->query($select);
    if($true == false) {
-    $tigers->displayError('Database Error', 'The script was unable to select' . 
+    $tigers->displayError('Database Error', 'The script was unable to select' .
 		' the image from the specified wish ID.', false);
    }
    $getItem = $scorpions->obj($true);
@@ -95,11 +96,11 @@ if(class_exists('mermaids') == false) {
    return $getItem->wImage;
   }
 
-  /** 
-	 * @function  $mermaids->getTemplate_Wishlist() 
-	 * @param     $i, int; wishlist ID 
-	 * @param     $b, text; template slug 
-	 */ 
+  /**
+	 * @function  $mermaids->getTemplate_Wishlist()
+	 * @param     $i, int; wishlist ID
+	 * @param     $b, text; template slug
+	 */
   public function getTemplate_Wishlist($i, $b) {
    global $_ST, $_URL, $lions, $octopus, $scorpions, $seahorses, $tigers;
 
@@ -131,7 +132,7 @@ if(class_exists('mermaids') == false) {
    return $format;
   }
 
-  # End functions here~ 
+  # End functions here~
  }
 }
 

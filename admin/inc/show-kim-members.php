@@ -1,14 +1,14 @@
 <div id="show-kim-members">
     <?php
-    /**
-     * @project          Listing Admin
-     * @copyright        2007
-     * @license          GPL Version 3; BSD Modified
-     * @author           Tess <theirrenegadexxx@gmail.com>
-     * @contributor      Ekaterina <scripts@robotess.net> http://scripts.robotess.net
-     * @file             <show-kim-members.php>
-     * @version          Robotess Fork
-     */
+/**
+ * @project          Listing Admin
+ * @copyright        2007
+ * @license          GPL Version 3; BSD Modified
+ * @author           Tess <theirrenegadexxx@gmail.com>
+ * @contributor      Ekaterina <scripts@robotess.net> http://scripts.robotess.net
+ * @contributor      Erin <dudethatserin@outlook.com> https://github.com/DudeThatsErin/listingadmin
+ * @version          Erin's Fork
+ */
 
     require('b.inc.php');
     require(MAINDIR . 'rats.inc.php');

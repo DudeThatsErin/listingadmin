@@ -6,8 +6,9 @@ declare(strict_types=1);
  * @license          GPL Version 3; BSD Modified
  * @author           Tess <theirrenegadexxx@gmail.com>
  * @contributor      Ekaterina <scripts@robotess.net> http://scripts.robotess.net
+ * @contributor      Erin <dudethatserin@outlook.com> https://github.com/DudeThatsErin/listingadmin
  * @file             <install.php>
- * @version          Robotess Fork
+ * @version          Erin's Fork
  */
 
 if (!file_exists('rats.inc.php')) {
@@ -473,7 +474,7 @@ require('vars.inc.php');
                     elseif (isset($_POST['action']) && $_POST['action'] == 'Finish Installation') {
                         $password = isset($_POST['password']) && !empty($_POST['password']) ?
                             $tigers->cleanMys($_POST['password'], 'y', 'y', 'n') :
-                            substr(random_int(99999, 888888), 0, 4) . substr(sha1(date('YmdHis')), 0, 11);
+                            substr($string, random_int(99999, 888888), 4) . substr(sha1(date('YmdHis')), 0, 11);
                         $update = "UPDATE `$_ST[options]` SET `text` = MD5('$password') WHERE `name`" .
                             " = 'user_password' LIMIT 1";
                         $true = $scorpions->query($update);

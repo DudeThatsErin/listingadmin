@@ -1,13 +1,14 @@
 <?php
 /**
- * @copyright  2007
- * @license    GPL Version 3; BSD Modified
- * @author     Tess <treibend@gmail.com>
- * @file       <upgrade.php>
- * @since      November 19th, 2011
- * @version    2.3alpha
+ * @project          Listing Admin
+ * @copyright        2007
+ * @license          GPL Version 3; BSD Modified
+ * @author           Tess <theirrenegadexxx@gmail.com>
+ * @contributor      Ekaterina <scripts@robotess.net> http://scripts.robotess.net
+ * @contributor      Erin <dudethatserin@outlook.com> https://github.com/DudeThatsErin/listingadmin
+ * @file             <install.php>
+ * @version          Erin's Fork
  */
-
 require('rats.inc.php');
 
 die('Upgrade script is turned off for version ' . $laoptions->version);

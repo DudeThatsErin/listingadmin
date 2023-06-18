@@ -1,12 +1,13 @@
 <?php
-/** 
- * @copyright  2007 
- * @license    GPL Version 3; BSD Modified 
- * @author     Tess <treibend@gmail.com> 
- * @file       <show-stats.php> 
- * @since      September 2nd, 2010 
- * @version    1.0   
- */ 
+/**
+ * @project          Listing Admin
+ * @copyright        2007
+ * @license          GPL Version 3; BSD Modified
+ * @author           Tess <theirrenegadexxx@gmail.com>
+ * @contributor      Ekaterina <scripts@robotess.net> http://scripts.robotess.net
+ * @contributor      Erin <dudethatserin@outlook.com> https://github.com/DudeThatsErin/listingadmin
+ * @version          Erin's Fork
+ */
 require('b.inc.php');
 require(MAINDIR . 'rats.inc.php');
 require_once('fun.inc.php');
@@ -15,13 +16,13 @@ require_once('fun-external.inc.php');
 require_once('fun-listings.inc.php');
 require_once('fun-members.inc.php');
 
-/** 
- * Get variables and listing object before we start \o/ 
- */ 
+/**
+ * Get variables and listing object before we start \o/
+ */
 $options = (object) array();
 
 if(
- !isset($fKey) || 
+ !isset($fKey) ||
  ($fKey != '0' && $fKey != 0 && !in_array($fKey, $wolves->listingsList()))
 ) {
  $tigers->displayError('Script Error', 'The fanlisting ID is not set!', false);
@@ -36,9 +37,9 @@ if(isset($use_template) && in_array($use_template, array('y', 'n'))) {
  $options->useTemplate = true;
 }
 
-/** 
- * Get statistics depending on user's choice 
- */ 
+/**
+ * Get statistics depending on user's choice
+ */
 if($options->useTemplate) {
  $format = html_entity_decode($getItem->stats);
  $format = str_replace('{affiliates}', $rabbits->countAffiliates($options->listingID), $format);

@@ -1,12 +1,13 @@
 <?php
-/** 
- * @copyright 2007 
- * @license   GPL Version 3; BSD Modified 
- * @author    Tess <treibend@gmail.com> 
- * @file      <templates.php> 
- * @since     September 16th, 2010 
- * @version   1.0    
- */ 
+/**
+ * @project          Listing Admin
+ * @copyright        2007
+ * @license          GPL Version 3; BSD Modified
+ * @author           Tess <theirrenegadexxx@gmail.com>
+ * @contributor      Ekaterina <scripts@robotess.net> http://scripts.robotess.net
+ * @contributor      Erin <dudethatserin@outlook.com> https://github.com/DudeThatsErin/listingadmin
+ * @version          Erin's Fork
+ */
 $getTitle = 'Templates';
 require('pro.inc.php');
 require('vars.inc.php');
@@ -14,12 +15,12 @@ require('header.php');
 
 echo "<h2>{$getTitle}</h2>\n";
 
-/** 
- * Edit Template 
- */ 
+/**
+ * Edit Template
+ */
 if(isset($_GET['g']) && $_GET['g'] == 'old') {
  if(!isset($_GET['n']) || !in_array($_GET['n'], $seahorses->templatesList())) {
-  $tigers->displayError('Script Error', 'The template you\'ve chosen to edit' . 
+  $tigers->displayError('Script Error', 'The template you\'ve chosen to edit' .
   ' is invalid. Go back and try again? :D', false);
  }
 
@@ -27,7 +28,7 @@ if(isset($_GET['g']) && $_GET['g'] == 'old') {
  $getItem = $seahorses->getTemplate($name, 'object');
 ?>
 <h3><?php echo $getItem->title; ?></h3>
-<?php  
+<?php
  $seahorses->templates($getItem->name);
 ?>
 
@@ -37,9 +38,9 @@ if(isset($_GET['g']) && $_GET['g'] == 'old') {
 
 <fieldset>
  <legend>Edit Template</legend>
- <p><label><strong>Template Name:</strong></label> 
+ <p><label><strong>Template Name:</strong></label>
  <span style="padding: 0 1%; width: 48%"><samp><?php echo $getItem->name; ?></samp></span></p>
- <p><label><strong>Template Title:</strong></label> 
+ <p><label><strong>Template Title:</strong></label>
  <input name="title" class="input1" type="text" value="<?php echo $getItem->title; ?>"></p>
  <p class="tc"><strong>Template</strong><br>
   <textarea name="template" cols="50" rows="16" style="height: 150px; width: 100%;">
@@ -49,32 +50,32 @@ if(isset($_GET['g']) && $_GET['g'] == 'old') {
  <p class="tc"><input name="action" class="input2" type="submit" value="Edit Template"></p>
 </fieldset>
 </form>
-<?php 
+<?php
 }
 
 elseif (isset($_POST['action']) && $_POST['action'] == 'Edit Template') {
  $name = $tigers->cleanMys($_POST['name']);
  if(empty($name)) {
-  $tigers->displayError('Form Error', 'Your template name is empty. This' . 
-	' means you selected an incorrect template or you\'re trying to access something' . 
+  $tigers->displayError('Form Error', 'Your template name is empty. This' .
+	' means you selected an incorrect template or you\'re trying to access something' .
 	' that doesn\'t exist. Go back and try again.', false);
- } 
+ }
  $title = $tigers->cleanMys($_POST['title']);
  if(empty($title)) {
   $tigers->displayError('Form Error', 'Your <samp>template title</samp> is empty.', false);
- } 
+ }
  $template = $tigers->cleanMys($_POST['template'], 'n', 'y', 'n');
  if(empty($template)) {
   $tigers->displayError('Form Error', 'Your <samp>template</samp> is empty.', false);
  }
 
- $update = "UPDATE `$_ST[templates]` SET `title` = '$title', `template` =" . 
+ $update = "UPDATE `$_ST[templates]` SET `title` = '$title', `template` =" .
  " '$template' WHERE `name` = '$name' LIMIT 1";
  $scorpions->query("SET NAMES 'utf8';");
  $true = $scorpions->query($update);
 
  if($true == false) {
-  $tigers->displayError('Database Error', 'The script was unable to edit the' . 
+  $tigers->displayError('Database Error', 'The script was unable to edit the' .
   ' template.', true, $update);
  } elseif ($true == true) {
   echo '<p class="successButton"><span class="success">SUCCESS!</span> Your' .
@@ -83,15 +84,15 @@ elseif (isset($_POST['action']) && $_POST['action'] == 'Edit Template') {
  }
 }
 
-/* 
- *  @section   Index 
- */ 
+/*
+ *  @section   Index
+ */
 else {
 ?>
-<p>Welcome to <samp>templates.php</samp>, the outlet to editing your templates 
-for various aspects of the script. Currently, you are only able to edit the 
+<p>Welcome to <samp>templates.php</samp>, the outlet to editing your templates
+for various aspects of the script. Currently, you are only able to edit the
 current existing the templates.</p>
-<p class="noteButton">You can view the template variables for each template when 
+<p class="noteButton">You can view the template variables for each template when
 you edit a template. An example will be provided for each template as well.</p>
 
 <table class="index">
@@ -100,11 +101,11 @@ you edit a template. An example will be provided for each template as well.</p>
  <th>Title</th>
  <th>Action</th>
 </tr></thead>
-<?php 
+<?php
  $select = "SELECT * FROM `$_ST[templates]` ORDER BY `title` ASC";
  $true = $scorpions->query($select);
  if($true == false) {
-  $tigers->displayError('Database Error', 'The script was unable to select the' . 
+  $tigers->displayError('Database Error', 'The script was unable to select the' .
   ' templates from the database.', true, $select);
  }
 
@@ -116,14 +117,14 @@ you edit a template. An example will be provided for each template as well.</p>
  <td class="floatIcons tc">
   <a href="templates.php?g=old&amp;n=<?php echo $getItem->name; ?>">
    <img src="img/icons/edit.png" alt="">
-  </a> 
+  </a>
  </td>
 </tr></tbody>
-<?php 
+<?php
 }
 ?>
 </table>
-<?php 
+<?php
 }
 
 require('footer.php');

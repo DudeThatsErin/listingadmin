@@ -1,12 +1,13 @@
 <?php
-/** 
- * @copyright  2007 
- * @license    GPL Version 3; BSD Modified 
- * @author     Tess <theirrenegadexxx@gmail.com> 
- * @file       <templates.inc.php> 
- * @since      November 20th, 2011  
- * @version    1.0 
- */ 
+/**
+ * @project          Listing Admin
+ * @copyright        2007
+ * @license          GPL Version 3; BSD Modified
+ * @author           Tess <theirrenegadexxx@gmail.com>
+ * @contributor      Ekaterina <scripts@robotess.net> http://scripts.robotess.net
+ * @contributor      Erin <dudethatserin@outlook.com> https://github.com/DudeThatsErin/listingadmin
+ * @version          Erin's Fork
+ */
 
 $affa = $scorpions->escape('Hello,
 
@@ -42,7 +43,7 @@ If you need to change your information, you can do so here: <{kim_update}>. :D
 {collective_name} <{collective_url}>");
 $kimu = $scorpions->escape("Hello {name},
 
-This is a notice to let you know that you have been removed from the pending list at {collective_name}'s KIM list and your information has been updated at your request. Your information is below: 
+This is a notice to let you know that you have been removed from the pending list at {collective_name}'s KIM list and your information has been updated at your request. Your information is below:
 
 Name: {name}
 E-Mail Address: {email}
@@ -91,7 +92,7 @@ This is a notice to let you know that the {listing} listing has closed. If you c
 {listing} <{listing_url}>');
 $memu = $scorpions->escape('Hello {name},
 
-This is a notice to let you know that you have been removed from the pending list at the {listing} listing and your information has been updated at your request. Your information is below: 
+This is a notice to let you know that you have been removed from the pending list at the {listing} listing and your information has been updated at your request. Your information is below:
 
 Name: {name}
 E-Mail Address: {email}

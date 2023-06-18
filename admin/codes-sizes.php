@@ -1,12 +1,13 @@
 <?php
-/** 
- * @copyright  2007 
- * @license    GPL Version 3; BSD Modified 
- * @author     Tess <theirrenegadexxx@gmail.com> 
- * @file       <codes-sizes.php> 
- * @since      September 2nd, 2010 
- * @version    2.1.4 
- */ 
+/**
+ * @project          Listing Admin
+ * @copyright        2007
+ * @license          GPL Version 3; BSD Modified
+ * @author           Tess <theirrenegadexxx@gmail.com>
+ * @contributor      Ekaterina <scripts@robotess.net> http://scripts.robotess.net
+ * @contributor      Erin <dudethatserin@outlook.com> https://github.com/DudeThatsErin/listingadmin
+ * @version          Erin's Fork
+ */
 $getTitle = 'Codes: Sizes';
 require('pro.inc.php');
 require('vars.inc.php');
@@ -24,11 +25,11 @@ if(isset($_POST['action'])) {
   $name = $tigers->cleanMys($_POST['name']);
   if(empty($name)) {
    $error['add'] = '<p class="errorButton"><span class="error">ERROR:</span> The <samp>name</samp> is empty!</p>';
-  } 
-  $order = isset($_POST['order']) && is_numeric($_POST['order']) ? 
+  }
+  $order = isset($_POST['order']) && is_numeric($_POST['order']) ?
   $tigers->cleanMys((int)$_POST['order']) : 0;
 
-  $insert = "INSERT INTO `$_ST[codes_sizes]` (`sName`, `sOrder`) VALUES ('$name'," . 
+  $insert = "INSERT INTO `$_ST[codes_sizes]` (`sName`, `sOrder`) VALUES ('$name'," .
   " '$order')";
   $scorpions->query("SET NAMES 'utf8';");
   $true = $scorpions->query($insert);
@@ -46,19 +47,19 @@ if(isset($_POST['action'])) {
 	 $main = true;
   }
  }
- 
+
  elseif (isset($_POST['action']) && $_POST['action'] == 'Update') {
   $count = is_countable($_POST['id']) ? count($_POST['id']) : 0;
 	for($i = 0; $i < $count; $i++) {
 	 $id    = $tigers->cleanMys($_POST['id'][$i]);
 	 $order = $tigers->cleanMys($_POST['order'][$i]);
 	 $name  = $tigers->cleanMys($_POST['name'][$i]);
-	 
-	 $update = "UPDATE `$_ST[codes_sizes]` SET `sOrder` = '$order', `sName` =" . 
+
+	 $update = "UPDATE `$_ST[codes_sizes]` SET `sOrder` = '$order', `sName` =" .
    " '$name' WHERE `sID` = '$id' LIMIT 1";
 	 $true = $scorpions->query($update);
 	 if($true == true) {
-	  $success['update'] = $tigers->displaySuccess('The size(s) were edited!'); 
+	  $success['update'] = $tigers->displaySuccess('The size(s) were edited!');
 	 } else {
 	  $errors['add'] = '<p class="errorButton">The script was unable to edit the' .
     " code size.</p>\n";
@@ -70,16 +71,16 @@ if(isset($_POST['action'])) {
 	 }
 	}
  }
- 
+
  elseif (isset($_POST['action']) && $_POST['action'] == 'Delete') {
   $count = is_countable($_POST['delete']) ? count($_POST['delete']) : 0;
 	for($i = 0; $i < $count; $i++) {
 	 $id = $tigers->cleanMys($_POST['delete'][$i]);
-	
+
 	 $delete = "DELETE FROM `$_ST[codes_sizes]` WHERE `sID` = '$id' LIMIT 1";
 	 $true = $scorpions->query($delete);
 	 if($true == true) {
-	  $success['update'] = $tigers->displaySuccess('The size was deleted!'); 
+	  $success['update'] = $tigers->displaySuccess('The size was deleted!');
 	 } else {
 	  $errors['add'] = '<p class="errorButton">The script was unable to delete' .
     " the code size from the database.</p>\n";
@@ -95,12 +96,12 @@ if(isset($_POST['action'])) {
 ?>
 
 <div id="sizesFloatLeft">
-<?php 
+<?php
 if($main) {
 ?>
 <p>Welcome to <samp>codes-sizes.php</samp>, the page to add code sizes and edit or delete your current ones! Below
 is your list of sizes. To edit a size, edit the value in the input field; to delete a size, check the checkbox by the appropriate size.</p>
-<?php 
+<?php
  if(isset($success['update']) || isset($error['update'])) {
   if(isset($success['update'])) {
    echo "<h3>Success!</h3>\n";
@@ -126,11 +127,11 @@ is your list of sizes. To edit a size, edit the value in the input field; to del
 </tr></thead>
 <tfoot><tr>
  <td class="tc" colspan="3">
-  <input name="action" class="input2" type="submit" value="Update"> 
+  <input name="action" class="input2" type="submit" value="Update">
   <input name="action" class="input2" type="submit" value="Delete">
  </td>
 </tr></tfoot>
-<?php 
+<?php
   while($getItem = $scorpions->obj($true)) {
 ?>
 <tbody><tr>
@@ -142,7 +143,7 @@ is your list of sizes. To edit a size, edit the value in the input field; to del
  <td class="tc"><input name="delete[]" type="checkbox" value="<?php echo $getItem->sID; ?>"></td>
 </tr></tbody>
 <?php
-  } 
+  }
   echo "</table>\n</form>\n";
  } else {
   echo "<p class=\"tc\">Currently no sizes!</p>\n";
@@ -168,16 +169,16 @@ is your list of sizes. To edit a size, edit the value in the input field; to del
   }
  }
 ?>
- <p><label><strong>Name:</strong></label> 
+ <p><label><strong>Name:</strong></label>
  <input name="name" class="input1" type="text"></p>
- <p><label><strong>Order:</strong></label> 
+ <p><label><strong>Order:</strong></label>
  <input name="order" class="input1" type="text"></p>
  <p class="tc">
-  <input name="action" class="input2" type="submit" value="Add Size"> 
+  <input name="action" class="input2" type="submit" value="Add Size">
   <input class="input2" type="reset" value="Reset">
  </p>
 </fieldset>
 </form>
 </div>
-<?php 
+<?php
 require('footer.php');

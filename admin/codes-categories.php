@@ -1,12 +1,13 @@
 <?php
-/** 
- * @copyright  2007 
- * @license    GPL Version 3; BSD Modified 
- * @author     Tess <theirrenegadexxx@gmail.com> 
- * @file       <codes-categories.php> 
- * @since      September 2nd, 2010 
- * @version    2.1.4 
- */ 
+/**
+ * @project          Listing Admin
+ * @copyright        2007
+ * @license          GPL Version 3; BSD Modified
+ * @author           Tess <theirrenegadexxx@gmail.com>
+ * @contributor      Ekaterina <scripts@robotess.net> http://scripts.robotess.net
+ * @contributor      Erin <dudethatserin@outlook.com> https://github.com/DudeThatsErin/listingadmin
+ * @version          Erin's Fork
+ */
 $getTitle = 'Codes: Categories';
 require('pro.inc.php');
 require('vars.inc.php');
@@ -29,15 +30,15 @@ if(isset($_GET['g']) && $_GET['g'] == 'new') {
 
 <fieldset>
  <legend>Add Category</legend>
- <p><label><strong>Listing:</strong></label> 
+ <p><label><strong>Listing:</strong></label>
  <select name="listing[]" class="input1" multiple="multiple" size="10">
-<?php 
+<?php
  $select = "SELECT * FROM `$_ST[main]` ORDER BY `subject` ASC";
  $true = $scorpions->query($select);
  if($true == false) {
   echo "  <option>No Listings Available</option>\n";
  }
-	
+
  else {
   echo "  <option value=\"0\">&#187; Collective</option>\n";
   while($getItem = $scorpions->obj($true)) {
@@ -47,15 +48,15 @@ if(isset($_GET['g']) && $_GET['g'] == 'new') {
  }
 ?>
  </select></p>
- <p><label><strong>Category:</strong></label> 
+ <p><label><strong>Category:</strong></label>
  <input name="category" class="input1" type="text"></p>
- <p><label><strong>Parent Category:</strong></label> 
+ <p><label><strong>Parent Category:</strong></label>
  <select name="parent" class="input1">
-<?php 
+<?php
  $select = "SELECT * FROM `$_ST[codes_categories]` WHERE `catParent` = '0'" .
      ' ORDER BY `catName` ASC';
  $true = $scorpions->query($select);
- if($true == false) { 
+ if($true == false) {
   echo "  <option>No Categories Available</option>\n";
  }
 
@@ -69,12 +70,12 @@ if(isset($_GET['g']) && $_GET['g'] == 'new') {
 ?>
  </select></p>
  <p class="tc">
-  <input name="action" class="input2" type="submit" value="Add Category"> 
+  <input name="action" class="input2" type="submit" value="Add Category">
   <input class="input2" type="reset" value="Reset">
  </p>
 </fieldset>
 </form>
-<?php 
+<?php
 }
 
 elseif (isset($_POST['action']) && $_POST['action'] == 'Add Category') {
@@ -88,7 +89,7 @@ elseif (isset($_POST['action']) && $_POST['action'] == 'Add Category') {
  }
  $name = $tigers->cleanMys($_POST['category']);
  if(empty($name)) {
-  $tigers->displayError('Form Error', 'In order to create a category, you must' . 
+  $tigers->displayError('Form Error', 'In order to create a category, you must' .
   ' enter a name first. :P', false);
  }
  if(isset($_POST['parent']) && in_array($_POST['parent'], $cheetahs->categoryCodes())) {
@@ -97,13 +98,13 @@ elseif (isset($_POST['action']) && $_POST['action'] == 'Add Category') {
   $p = '0';
  }
 
- $insert = "INSERT INTO `$_ST[codes_categories]` (`fNiq`, `catName`, `catParent`)" . 
+ $insert = "INSERT INTO `$_ST[codes_categories]` (`fNiq`, `catName`, `catParent`)" .
  " VALUES ('$list', '$name', '$p')";
  $scorpions->query("SET NAMES 'utf8';");
  $true = $scorpions->query($insert);
 
  if($true == false) {
-  $tigers->displayError('Database Error', 'Unable to add the category to' . 
+  $tigers->displayError('Database Error', 'Unable to add the category to' .
 	' the database.|Make sure your category table exists.'. true, $insert);
  } elseif ($true == true) {
   echo $tigers->displaySuccess('Your codes category was added to the database!');
@@ -111,21 +112,21 @@ elseif (isset($_POST['action']) && $_POST['action'] == 'Add Category') {
  }
 }
 
-/** 
- * Edit 
- */ 
+/**
+ * Edit
+ */
 elseif (isset($_GET['g']) && $_GET['g'] == 'old') {
  $id = $tigers->cleanMys($_GET['d']);
  if(empty($id) || !is_numeric($id)) {
-  $tigers->displayError('Script Error', 'Your ID is empty. This means you' . 
-	' selected an incorrect code category or you\'re trying to access something' . 
+  $tigers->displayError('Script Error', 'Your ID is empty. This means you' .
+	' selected an incorrect code category or you\'re trying to access something' .
   ' that doesn\'t exist. Go back and try again.', false);
- } 
+ }
 
  $select = "SELECT * FROM `$_ST[codes_categories]` WHERE `catID` = '$id' LIMIT 1";
  $true   = $scorpions->query($select);
  if($true == false) {
-  $tigers->displayError('Database Error', 'The script was unable to select that' . 
+  $tigers->displayError('Database Error', 'The script was unable to select that' .
   ' specific code category.', true, $select);
  }
  $getItem = $scorpions->obj($true);
@@ -135,9 +136,9 @@ elseif (isset($_GET['g']) && $_GET['g'] == 'old') {
 
 <fieldset>
  <legend>Edit Category</legend>
- <p><label><strong>Listing:</strong></label> 
+ <p><label><strong>Listing:</strong></label>
  <select name="listing[]" class="input1" multiple="multiple" size="10">
-<?php 
+<?php
  $select = "SELECT * FROM `$_ST[main]` ORDER BY `subject` ASC";
  $true = $scorpions->query($select);
  if($true == false) {
@@ -150,22 +151,22 @@ elseif (isset($_GET['g']) && $_GET['g'] == 'old') {
    $cats = $tigers->emptyarray(explode('!', $getItem->fNiq));
    echo '  <option value="' . $getCat->id . '"';
 	 if(in_array($getCat->id, $cats)) {
-	  echo ' selected="selected"'; 
+	  echo ' selected="selected"';
 	 }
 	 echo '>' . $getCat->subject . "</option>\n";
   }
  }
 ?>
  </select></p>
- <p><label><strong>Category:</strong></label> 
+ <p><label><strong>Category:</strong></label>
  <input name="category" class="input1" type="text" value="<?php echo $getItem->catName; ?>"></p>
- <p><label><strong>Parent Category:</strong></label> 
+ <p><label><strong>Parent Category:</strong></label>
  <select name="parent" class="input1">
-<?php 
+<?php
  $select = "SELECT * FROM `$_ST[codes_categories]` WHERE `catParent` = '0'" .
      ' ORDER BY `catName` ASC';
  $true = $scorpions->query($select);
- if($true == false) { 
+ if($true == false) {
   echo "  <option>No Categories Available</option>\n";
  }
 
@@ -174,7 +175,7 @@ elseif (isset($_GET['g']) && $_GET['g'] == 'old') {
   while($getCat = $scorpions->obj($true)) {
    echo '  <option value="' . $getCat->catID . '"';
 	 if($getCat->catID == $getItem->catParent) {
-	  echo ' selected="selected"'; 
+	  echo ' selected="selected"';
 	 }
 	 echo '>' . $getCat->catName . "</option>\n";
   }
@@ -186,16 +187,16 @@ elseif (isset($_GET['g']) && $_GET['g'] == 'old') {
  </p>
 </fieldset>
 </form>
-<?php 
+<?php
 }
 
 elseif (isset($_POST['action']) && $_POST['action'] == 'Edit Category') {
  $id = $tigers->cleanMys($_POST['id']);
  if(empty($id) || !is_numeric($id)) {
-  $tigers->displayError('Script Error', 'Your ID is empty. This means you' . 
-	' selected an incorrect code category or you\'re trying to access something' . 
+  $tigers->displayError('Script Error', 'Your ID is empty. This means you' .
+	' selected an incorrect code category or you\'re trying to access something' .
   ' that doesn\'t exist. Go back and try again.', false);
- } 
+ }
  if($_POST['listing'] != 0) {
   $listing = $_POST['listing'];
   $listing = array_map(array($tigers, 'cleanMys'), $listing);
@@ -206,7 +207,7 @@ elseif (isset($_POST['action']) && $_POST['action'] == 'Edit Category') {
  }
  $name = $tigers->cleanMys($_POST['category']);
  if(empty($name)) {
-  $tigers->displayError('Form Error', 'In order to edit a category, you must' . 
+  $tigers->displayError('Form Error', 'In order to edit a category, you must' .
   ' enter a name first. :P', false);
  }
  if(isset($_POST['parent']) && in_array($_POST['parent'], $cheetahs->categoryCodes())) {
@@ -215,12 +216,12 @@ elseif (isset($_POST['action']) && $_POST['action'] == 'Edit Category') {
   $p = '0';
  }
 
- $update = "UPDATE `$_ST[codes_categories]` SET `fNiq` = '$list', `catName` =" . 
+ $update = "UPDATE `$_ST[codes_categories]` SET `fNiq` = '$list', `catName` =" .
  " '$name', `catParent` = '$p' WHERE `catID` = '$id' LIMIT 1";
  $scorpions->query("SET NAMES 'utf8';");
  $true = $scorpions->query($update);
  if($true == false) {
-  $tigers->displayError('Database Error', 'The script was unable to edit the' . 
+  $tigers->displayError('Database Error', 'The script was unable to edit the' .
   ' code category.', true, $update);
  } elseif ($true == true) {
   echo $tigers->displaySuccess('Your codes category was edited!');
@@ -229,27 +230,27 @@ elseif (isset($_POST['action']) && $_POST['action'] == 'Edit Category') {
  }
 }
 
-/** 
- * Delete 
- */ 
+/**
+ * Delete
+ */
 elseif (isset($_GET['g']) && $_GET['g'] == 'erase') {
  $id = $tigers->cleanMys($_GET['d']);
  if(empty($id) || !is_numeric($id)) {
-  $tigers->displayError('Script Error', 'Your ID is empty. This means you' . 
-	' selected an incorrect category or you\'re trying to access something that' . 
+  $tigers->displayError('Script Error', 'Your ID is empty. This means you' .
+	' selected an incorrect category or you\'re trying to access something that' .
 	' doesn\'t exist. Go back and try again.', false);
  }
- 
+
  $select = "SELECT * FROM `$_ST[codes_categories]` WHERE `catID` = '$id' LIMIT 1";
  $true = $scorpions->query($select);
  if($true == false) {
-  $tigers->displayError('Database Error', 'The script was unable to select that' . 
+  $tigers->displayError('Database Error', 'The script was unable to select that' .
   ' specific code category.', true, $select);
  }
  $getItem = $scorpions->obj($true);
 ?>
-<p>You are about to delete the <strong><?php echo $getItem->catName; ?></strong> 
-category; please be aware that once you delete a category, it is gone forever. 
+<p>You are about to delete the <strong><?php echo $getItem->catName; ?></strong>
+category; please be aware that once you delete a category, it is gone forever.
 <em>This cannot be undone!</em> To proceed, click the "Delete Category" button.</p>
 
 <form action="codes-categories.php" method="post">
@@ -263,7 +264,7 @@ category; please be aware that once you delete a category, it is gone forever.
  </p>
 </fieldset>
 </form>
-<?php 
+<?php
 }
 
 elseif (isset($_POST['action']) && $_POST['action'] == 'Delete Category') {
@@ -273,7 +274,7 @@ elseif (isset($_POST['action']) && $_POST['action'] == 'Delete Category') {
  $true = $scorpions->query($delete);
 
  if($true == false) {
-  $tigers->displayError('Database Error', 'The script was unable to delete the' . 
+  $tigers->displayError('Database Error', 'The script was unable to delete the' .
   ' code category.', true, $delete);
  } elseif ($true == true) {
   echo $tigers->displaySuccess('Your category was deleted!');
@@ -281,17 +282,17 @@ elseif (isset($_POST['action']) && $_POST['action'] == 'Delete Category') {
  }
 }
 
-/** 
- * Index 
- */ 
+/**
+ * Index
+ */
 else {
 ?>
-<p>Welcome to <samp>codes-categories.php</samp>, the page to add codes 
-categories and edit or delete your current ones! Below is your list of 
-categories. To edit or delete a current one, click "Edit" or "Delete" by the 
+<p>Welcome to <samp>codes-categories.php</samp>, the page to add codes
+categories and edit or delete your current ones! Below is your list of
+categories. To edit or delete a current one, click "Edit" or "Delete" by the
 appropriate category.</p>
-<?php 
- $select = "SELECT * FROM `$_ST[codes_categories]` WHERE `catParent` = '0'" . 
+<?php
+ $select = "SELECT * FROM `$_ST[codes_categories]` WHERE `catParent` = '0'" .
  " ORDER BY `catName` ASC LIMIT $start, $per_page";
  $true  = $scorpions->query($select);
  $count = $scorpions->total($true);
@@ -318,14 +319,14 @@ appropriate category.</p>
  <td class="floatIcons tc">
   <a href="codes-categories.php?g=old&#38;d=<?php echo $getItem->catID; ?>">
    <img src="img/icons/edit.png" alt="">
-  </a> 
+  </a>
   <a href="codes-categories.php?g=erase&#38;d=<?php echo $getItem->catID; ?>">
    <img src="img/icons/delete.png" alt="">
   </a>
  </td>
 </tr></tbody>
 <?php
-   $pull = $scorpions->query("SELECT * FROM `$_ST[codes_categories]` WHERE" . 
+   $pull = $scorpions->query("SELECT * FROM `$_ST[codes_categories]` WHERE" .
    " `catParent` = '$catid' ORDER BY `catName`");
    while($items = $scorpions->obj($pull)) {
 	  $pulllistingnow = $items->fNiq == '!0!' || $items->fNiq == '0' ?
@@ -339,15 +340,15 @@ appropriate category.</p>
  <td class="floatIcons tc">
   <a href="codes-categories.php?g=old&#38;d=<?php echo $items->catID; ?>">
    <img src="img/icons/edit.png" alt="">
-  </a> 
+  </a>
   <a href="codes-categories.php?g=erase&#38;d=<?php echo $items->catID; ?>">
    <img src="img/icons/delete.png" alt="">
   </a>
  </td>
 </tr></tbody>
-<?php 
+<?php
    }
-  } 
+  }
   echo "</table>\n";
   echo "\n<p id=\"pagination\">Pages: ";
 
@@ -357,13 +358,13 @@ appropriate category.</p>
   for($i = 1; $i <= $pages; $i++) {
    if($page == $i) {
     echo $i . ' ';
-   } else { 
+   } else {
     echo '<a href="codes-categories.php?p=' . $i . '">' . $i . '</a> ';
    }
   }
 
   echo "</p>\n";
- } 
+ }
 
  else {
   echo "<p class=\"tc\">Currently no categories!</p>\n";

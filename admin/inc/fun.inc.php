@@ -6,13 +6,27 @@ declare(strict_types=1);
  * @license          GPL Version 3; BSD Modified
  * @author           Tess <theirrenegadexxx@gmail.com>
  * @contributor      Ekaterina <scripts@robotess.net> http://scripts.robotess.net
- * @file             <fun.inc.php>
- * @version          Robotess Fork
+ * @contributor      Erin <dudethatserin@outlook.com> https://github.com/DudeThatsErin/listingadmin
+ * @version          Erin's Fork
  */
 
 if (!class_exists('tigers')) {
     class tigers
     {
+        /**
+         * @access public
+         * @function $tigers->console_log();
+         * @param mixed $output
+         * @param mixed $with_script_tags
+         */
+        function console_log($output, $with_script_tags = true) {
+            $js_code = 'console.log(' . json_encode($output, JSON_HEX_TAG) .
+        ');';
+            if ($with_script_tags) {
+                $js_code = '<script>' . $js_code . '</script>';
+            }
+            echo $js_code;
+        }
         /**
          * Clean and escape the text passed through the $post param.
          *

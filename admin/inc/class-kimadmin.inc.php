@@ -1,13 +1,12 @@
 <?php
 /**
  * @project          Listing Admin
- * @script  KIM Admin
  * @copyright        2007
  * @license          GPL Version 3; BSD Modified
  * @author           Tess <theirrenegadexxx@gmail.com>
  * @contributor      Ekaterina <scripts@robotess.net> http://scripts.robotess.net
- * @file             <class-kimadmin.inc.php>
- * @version          Robotess Fork
+ * @contributor      Erin <dudethatserin@outlook.com> https://github.com/DudeThatsErin/listingadmin
+ * @version          Erin's Fork
  */
 
 if (!class_exists('kimadmin')) {

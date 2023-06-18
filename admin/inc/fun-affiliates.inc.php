@@ -5,8 +5,8 @@
  * @license          GPL Version 3; BSD Modified
  * @author           Tess <theirrenegadexxx@gmail.com>
  * @contributor      Ekaterina <scripts@robotess.net> http://scripts.robotess.net
- * @file             <fun-affiliates.inc.php>
- * @version          Robotess Fork
+ * @contributor      Erin <dudethatserin@outlook.com> https://github.com/DudeThatsErin/listingadmin
+ * @version          Erin's Fork
  */
 
 if (!class_exists('rabbits')) {
@@ -185,7 +185,7 @@ if (!class_exists('rabbits')) {
                     $select .= ' ORDER BY `aAdd` DESC';
                 }
             } /*
-	  *  We're dealing with collective here, so we don't need our $listing-> object 
+	  *  We're dealing with collective here, so we don't need our $listing-> object
 	  */
             else {
                 $q = '';
@@ -291,7 +291,7 @@ if (!class_exists('rabbits')) {
                 }
                 $select .= ' LIMIT 1';
             } /*
-	  *  Whole collective jazz~! 
+	  *  Whole collective jazz~!
 	  */
             else {
                 $select = "SELECT * FROM `$_ST[affiliates]`";

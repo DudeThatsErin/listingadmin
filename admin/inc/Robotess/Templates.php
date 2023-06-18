@@ -20,6 +20,7 @@ final class Templates
     public string $wishlist = '';
     public string $members = '<li>{name}<br />
 {email} &middot; {url}{fave_field}</li>';
+
     public string $members_header = '<ol>';
     public string $members_footer = '</ol>';
     public string $updates = '<div class="entry_listingadmin">

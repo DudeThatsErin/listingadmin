@@ -5,8 +5,8 @@
  * @license          GPL Version 3; BSD Modified
  * @author           Tess <theirrenegadexxx@gmail.com>
  * @contributor      Ekaterina <scripts@robotess.net> http://scripts.robotess.net
- * @file             <fun-members.inc.php>
- * @version          Robotess Fork
+ * @contributor      Erin <dudethatserin@outlook.com> https://github.com/DudeThatsErin/listingadmin
+ * @version          Erin's Fork
  */
 
 if (!class_exists('snakes')) {
@@ -126,7 +126,7 @@ public function membersList($i = 'n', $p = 1, $b = '', $s = '')
 
 /**
  * @function    $snakes->allMembers()
- * @returns     $snakes->membersList()
+ * @return     $snakes->membersList()
  * @deprecated  2.3beta
  */
 public function allMembers($i = 'n', $p = 1)
@@ -156,6 +156,7 @@ public function sortMembers($i, $s = '', $a = array())
     if (!empty($listing->dbhost) && !empty($listing->dbuser) && !empty($listing->dbname)) {
         $scorpions->scorpions($listing->dbhost, $listing->dbuser, $listing->dbpass,
             $listing->dbname);
+
     }
 
     /**
@@ -562,13 +563,14 @@ case 'head':
         {
             global $_ST, $scorpions, $tigers, $wolves;
 
-            $listing = $wolves->getListings($i, 'object');
+            $listing = $wolves->getListings($i, 'object'); // logs
+            //$tigers->console_log($listing);
             if (!empty($listing->dbhost) && !empty($listing->dbuser) && !empty($listing->dbname)) {
                 $scorpions->scorpions($listing->dbhost, $listing->dbuser, $listing->dbpass,
                     $listing->dbname);
             }
 
-            if ($listing->dblist == 1) {
+            if ($listing->dblist == 1) { // is it being cross listed? 1 = yes; 0 = no
                 $dbtable = $listing->dbtabl;
                 if ($listing->dbtype == 'enth') {
                     $select = "SELECT * FROM `$dbtable`";
@@ -598,7 +600,7 @@ case 'head':
                         }
                     }
                 }
-            } else {
+            } else { // since none of mine are crosslisted it defaults to this... logs good
                 $select = "SELECT * FROM `$_ST[members]` WHERE `fNiq` = '$i'";
                 if ($s != '') {
                     if ($s == '0') {
@@ -614,7 +616,7 @@ case 'head':
                 $tigers->displayError('Database Error', 'The script cannot select the' .
                     ' specified listing from the database.', false);
             }
-            $count = $true->rows;
+            $count = $true->rows; // logs successfully... so this works, wtf...
 
             if ($listing->dblist == 1) {
                 $scorpions->breach(0);
@@ -637,6 +639,7 @@ case 'head':
             }
 
             $listing = $wolves->getListings($i, 'object');
+            $tigers->console_log($listing);
             if (!empty($listing->dbhost) && !empty($listing->dbuser) && !empty($listing->dbname)) {
                 $scorpions->scorpions($listing->dbhost, $listing->dbuser, $listing->dbpass,
                     $listing->dbname);
