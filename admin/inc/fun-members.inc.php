@@ -616,7 +616,7 @@ case 'head':
                 $tigers->displayError('Database Error', 'The script cannot select the' .
                     ' specified listing from the database.', false);
             }
-            $count = $true->rows; // logs successfully... so this works, wtf...
+            $count = $true->rows;
 
             if ($listing->dblist == 1) {
                 $scorpions->breach(0);

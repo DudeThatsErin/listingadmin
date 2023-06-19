@@ -109,8 +109,7 @@
                 'You chose an incorrect category!',
                 false
             );
-        } // ^^ works
-
+        }
 
         if ($sort_category == 'all') {
             $flsInCategory = $wolves->listingsList('subject', $options->statusID, 'status', $options->statusID, 1); // Array
@@ -163,7 +162,6 @@
                     echo "\n<h3>Listings</h3>\n";
                 }
             }
-
             if ($count > 0) {
                 echo "<div class=\"sep\">\n";
                 foreach ($flsInCategory as $id) {
