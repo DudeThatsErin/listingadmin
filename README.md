@@ -13,7 +13,19 @@ These are the instructions you will want to follow when you are installing LA fo
 
 ## Step 1 - Download an archive.
 
-COMING SOON!
+To download an archive, you can do that 1 of 2 ways.  You will want to download these to your desktop or somewhere you can easily find them.
+
+### First Way - Code > Download Zip
+This will download a zip. You can see below what I am referring to. You can see the green "code" button above. Click that and click on "download zip".
+<img width="389" alt="pLrKZvz3FV" src="https://github.com/DudeThatsErin/listingadmin/assets/2681022/24c1b732-9aff-4fce-89d5-cc942478c994">
+
+### Second Way - Releases > Download "la-x.x.x.zip"
+The second way you can download an archive is by clicking on releases on the right sidebar...
+<img width="244" alt="firefox_eZXuqbcl7f" src="https://github.com/DudeThatsErin/listingadmin/assets/2681022/f181aa9e-25d5-4415-b406-eee5445dc4af">
+
+Then viewing the "Assets" and downloading the file that says `la-x.x.x.zip`
+<img width="898" alt="bLLgVrtods" src="https://github.com/DudeThatsErin/listingadmin/assets/2681022/feb8be7e-47b6-432c-a0d1-4896959b370e">
+
 
 ## Step 2 - Upload all files to your collective.
 
@@ -51,7 +63,18 @@ Also, take note of your database information (I refer to as *variables*) in all 
 
 ## Step 2 - Download an archive.
 
-COMING SOON!
+To download an archive, you can do that 1 of 2 ways.  You will want to download these to your desktop or somewhere you can easily find them.
+
+### First Way - Code > Download Zip
+This will download a zip. You can see below what I am referring to. You can see the green "code" button above. Click that and click on "download zip".
+<img width="389" alt="pLrKZvz3FV" src="https://github.com/DudeThatsErin/listingadmin/assets/2681022/24c1b732-9aff-4fce-89d5-cc942478c994">
+
+### Second Way - Releases > Download "la-x.x.x.zip"
+The second way you can download an archive is by clicking on releases on the right sidebar...
+<img width="244" alt="firefox_eZXuqbcl7f" src="https://github.com/DudeThatsErin/listingadmin/assets/2681022/f181aa9e-25d5-4415-b406-eee5445dc4af">
+
+Then viewing the "Assets" and downloading the file that says `la-x.x.x.zip`
+<img width="898" alt="bLLgVrtods" src="https://github.com/DudeThatsErin/listingadmin/assets/2681022/feb8be7e-47b6-432c-a0d1-4896959b370e">
 
 ## Step 3 - Replace your current files with the new files
 Replace the files inside your `admin/` directory (folder) with the `public/admin/` files from this repository. Make sure that you have all files from the folder uploaded.
