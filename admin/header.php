@@ -8,6 +8,9 @@
     <meta name="Author" content="Tess, Ekaterina (http://scripts.robotess.net), Erin (https:;//github.com/DudeThatsErin/listingadmin)">
     <title> <?php echo $laoptions->version; ?> &#8212; <?php echo $leopards->isTitle($getTitle); ?> </title>
     <link href="style.css?v=2" rel="stylesheet" type="text/css">
+    <script src="js.js?v=2" type="text/javascript"></script>
+<script src="jquery.js" type="text/javascript"></script>
+<script src="jquery-custom.js?v=4" type="text/javascript"></script>
 </head>
 
 <body>

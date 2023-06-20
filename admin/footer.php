@@ -1,17 +1,19 @@
-<script>
-    const RSS_URL = `https://dudethatserin.com/sitemap.xml`;
-</script>
 <div id="feeds">
     <div id="lafeeds">
         <h4>
             <ins><?= $laoptions->version ?></ins>
             Feed
         </h4>
-        <menu>
-            Please wait until the feed loads via JavaScript or <a href="https://dudethatserin.com/category/la/feed/atom" target="_blank">check manually</a>.
-        </menu>
+        <script>
+            const feedUrl = `https://dudethatserin.com/category/la/feed`;
+        showRss(`${feedUrl}?date=<?=date('Y-m-d');?>`);
+        console.log(feedUrl);
+    </script>
+        <div id="rss-feed">
+            Nothing here yet. Please check <a href="https://dudethatserin.com/category/la/feed" target="_blank">feed</a> manually.
+        </div>
     </div>
-    <section class="clear"></section>
+
 </div>
 </section>
 
@@ -30,9 +32,7 @@
 
 </div>
 
-<script src="js.js?v=2" type="text/javascript"></script>
-<script src="jquery.js" type="text/javascript"></script>
-<script src="jquery-custom.js?v=3" type="text/javascript"></script>
+
 
 </body>
 </html>
