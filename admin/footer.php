@@ -5,12 +5,12 @@
             Feed
         </h4>
         <script>
-            const feedUrl = `https://dudethatserin.com/category/la/feed`;
+            const feedUrl = `https://blog.dudethatserin.com/category/la/feed`;
         showRss(`${feedUrl}?date=<?=date('Y-m-d');?>`);
         console.log(feedUrl);
     </script>
         <div id="rss-feed">
-            Nothing here yet. Please check <a href="https://dudethatserin.com/category/la/feed" target="_blank">feed</a> manually.
+            Nothing here yet. Please check <a href="https://blog.dudethatserin.com/category/la/feed" target="_blank">feed</a> manually.
         </div>
     </div>
 

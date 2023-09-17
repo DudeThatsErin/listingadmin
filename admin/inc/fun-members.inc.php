@@ -720,6 +720,19 @@ case 'head':
         }
 
         /**
+         * Pulls update dates from listings table and stores the listings that haven't been updated in over 90 days in an array for the inactive column on the index page.
+         * @function $snakes->getInactive()
+         */
+        public function getInactive($i) {
+            global $_ST, $scorpions;
+
+            $inactive = "SELECT `updated` FROM `$_ST[main]` WHERE updated < DATE_SUB(NOW(), INTERVAL 90 DAY) AND `id` = '$i'";
+            $getInactive = $scorpions->fetch($inactive, 'updated');
+
+            return $getInactive;
+        }
+
+        /**
          * Pulls update dates from members, affiliates and
          * listing table, and picks the most recent date.
          *

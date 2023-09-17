@@ -48,7 +48,7 @@ if($options->useTemplate) {
  $format = str_replace('{pending}', $snakes->getMemberCount($options->listingID, 1), $format);
  $format = str_replace('{previous}', $snakes->formatPrevious($options->listingID), $format);
  $format = str_replace('{since}', date($getItem->date, strtotime($getItem->since)), $format);
- $format = str_replace('{updated}', $snakes->getUpdated($options->listingID), $format);
+ $format = str_replace('{updated}', date($getItem->date, strtotime($getItem->updated)), $format);
  echo $format;
 } else {
  $la_aff_count  = $rabbits->countAffiliates($options->listingID);
@@ -57,5 +57,5 @@ if($options->useTemplate) {
  $la_pending    = $snakes->getMemberCount($options->listingID, 1);
  $la_previous   = $snakes->formatPrevious($options->listingID);
  $la_fl_opened  = date($getItem->date, strtotime($getItem->since));
- $la_fl_updated = $snakes->getUpdated($options->listingID);
+ $la_fl_updated  = date($getItem->date, strtotime($getItem->updated));
 }

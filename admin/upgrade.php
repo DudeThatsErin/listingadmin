@@ -38,18 +38,14 @@ $getTitle = 'Upgrade';
         <h1><?php echo $laoptions->version; ?></h1>
     </header>
 
-    <section id="install"><span class="mysql">Notice:</span> please note that there's no active support for FRESH
-        installations. You might try to install a script, but there's no guarantee it will be working.
-        <ins>If you wish to install a script, you can use original Tess' version.</ins>
-    </section>
-
     <section id="install">
         <?php
         $versionarray = array(
             '2.1.9' => '2.1.9',
             '2.2' => '2.2',
             '2.3beta' => '2.3 Beta',
-            '2.3alpha' => '2.3 Alpha'
+            '2.3alpha' => '2.3 Alpha',
+            '2.4' => '2.4'
         );
 
         if (isset($_POST['action']) && $_POST['action'] == 'Upgrade') {
@@ -57,6 +53,15 @@ $getTitle = 'Upgrade';
             if (empty($version) || !array_key_exists($version, $versionarray)) {
                 $tigers->displayError('Form Error', 'In order to upgrade, you must choose a' .
                     ' valid version to upgrade from, m\'love.', false);
+            }
+
+            if($version == '2.4') {
+                /* DELETE ALL ROWS IN SUCCESS TABLE CAUSE THEY STORED PW PLAIN TEXT */
+                $alter = "TRUNCATE TABLE `$_ST[success]";
+                $true = $scorpions->query($alter);
+                if($true == false) {
+                    exit('<p class="mysqlButton"><span class="mysql">Error:</span> ' . $scorpions->error() . ' <em>' . $alter . '</em></p>');
+                }
             }
 
             if ($version == '2.3beta') {

@@ -113,12 +113,11 @@ if (!class_exists('wolves')) {
                 $p = $this->getListings($i, 'object');
                 if ($b == 1) {
                     if (
-                        $snakes->getUpdated($p->id, 'raw') <= date('Y-m-d', strtotime('-2 months')) ||
-                        $snakes->getUpdated($p->id, 'raw') <= date('Y-m-d', strtotime('-60 days'))
+                        $snakes->getInactive($p->id)
                     ) {
                         $a[] = $i;
                     }
-                } elseif ($p->since <= date("Y-m-d", strtotime("-1 month"))) {
+                } elseif ($p->updated <= date("Y-m-d", strtotime("+1 month"))) {
                     $a[] = $i;
                 }
             }
@@ -436,7 +435,7 @@ if (!class_exists('wolves')) {
             ); // logs
             $format = str_replace('{image}', $seahorses->getOption('img_http') . $getItem->image, $format);
             $format = str_replace('{since}', date($getItem->date, strtotime($getItem->since)), $format);
-            $format = str_replace('{updated}', $updated, $format);
+            $format = str_replace('{updated}', date($getItem->date, strtotime($getItem->updated)), $format);
             $format = str_replace('{approved}', "{$approved}", $format);
             $format = str_replace('{pending}', "{$pending}", $format);
             return $format;

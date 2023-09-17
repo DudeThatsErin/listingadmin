@@ -653,6 +653,28 @@ on the <a href="templates.php?g=templates">Templates page</a>.</p>
 </fieldset>
 
 <fieldset>
+ <legend>Last Updated Date</legend>
+ <p>You can use this to easily update the date of the last update so you don't have to do anything convoluted like add and delete a member. Just update the date here (if you don't have any pending members) and it will update the date on your fanlisting.</p>
+ <p><label><strong>Last Updated Date</strong></label> <select name="month" class="input1" size="4">
+<?php
+ $dateArray = $get_date_array;
+ $dateNow1 = date('m', strtotime($getItem->updated));
+ foreach($dateArray as $dA => $dA2) {
+  echo '  <option value="' . $dA . '"';
+  if($dA == $dateNow1) {
+   echo ' selected="selected"';
+  }
+  echo '>' . $dA2 . "</option>\n";
+ }
+?>
+ </select></p>
+ <p><label><strong>Day:</strong></label>
+ <input name="day" class="input1" type="number" value="<?php echo date('d', strtotime($getItem->updated)); ?>" min="1" max="31"></p>
+ <p><label><strong>Year:</strong></label>
+ <input name="year" class="input1" type="number" value="<?php echo date('Y', strtotime($getItem->updated)); ?>"></p>
+</fieldset>
+
+<fieldset>
 <legend>Submit</legend>
  <p class="tc">
   <input name="action" class="input2" type="submit" value="Manage Listing">

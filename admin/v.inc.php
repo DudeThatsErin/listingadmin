@@ -13,7 +13,7 @@
 $_ST = [];
 
 if (!defined('LAVERSION')) {
-    define('LAVERSION', '[Erin\'s Fork] v1.1');
+    define('LAVERSION', '[Erin\'s Fork] v2.4');
 }
 
 require_once(__DIR__ . DIRECTORY_SEPARATOR . 'inc' . DIRECTORY_SEPARATOR . 'Robotess' . DIRECTORY_SEPARATOR . 'autoloader.php');
