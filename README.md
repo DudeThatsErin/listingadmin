@@ -1,4 +1,7 @@
 # Listing Admin for PHP7 or 8 [Erin's Fork]
+
+UPDATE 2/15/24- NO LONGER SUPPORTED BY ME. If anyone wants to take it over that's fine, go ahead and fork it. I don't have the time or energy to support this. I thought I would but I do not.
+
 This is the main repo for Listing Admin 1.1 for PHP8.
 
 The original author is Tess (website is not online anymore). Tess' ReadMe can be found [here](https://github.com/DudeThatsErin/listingadmin/blob/main/old-readmes/Tess-Readme.md).
